@@ -101,10 +101,10 @@ export default defineConfig({
           label: "Features",
           autogenerate: { directory: "features" },
         },
-        {
-          label: "Guides",
-          autogenerate: { directory: "guides" },
-        },
+        // {
+        //   label: "Guides",
+        //   autogenerate: { directory: "guides" },
+        // },
         {
           label: "Troubleshooting",
           autogenerate: { directory: "troubleshooting" },
