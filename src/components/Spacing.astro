@@ -1,0 +1,16 @@
+---
+interface Props {
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
+}
+const { size = "sm" } = Astro.props;
+
+const heightMap = {
+  xs: "h-2",
+  sm: "h-4",
+  md: "h-6",
+  lg: "h-8",
+  xl: "h-12",
+};
+---
+
+<div class={`w-full m-0 ${heightMap[size]}`}></div>

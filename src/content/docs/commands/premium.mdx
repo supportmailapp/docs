@@ -1,0 +1,29 @@
+---
+title: Premium Command
+description: How to use the /premium command
+sidebar:
+  order: 4
+---
+
+The `/premium` command allows you to check the premium status of the current server.
+
+## Response
+
+The response of the command depends on whether the server has premium and whether the command executor is the customer who purchased the premium subscription.
+
+| Server Has Premium | Is Customer | Response                                                                                             |
+| ------------------ | ----------- | ---------------------------------------------------------------------------------------------------- |
+| No                 | No          | This server does not have premium. [Get Premium](https://ticketon.app/dash/?next=/premium)           |
+| No                 | Yes         | This server does not have premium. View your billing page [here](https://ticketon.app/dash/billing). |
+| Yes                | No          | This server has premium but you are not the customer.                                                |
+| Yes                | Yes         | This server has premium. You can manage the subscription in the dashboard                            |
+
+If you need further assistance, feel free to join our [Discord Support Server](https://ticketon.app/discord) or visit our [Website](https://ticketon.app).
+
+import { LinkCard } from "@astrojs/starlight/components";
+
+<LinkCard
+  title="Explore Unlimited"
+  description="Discover the Unlimited Plan"
+  href="/unlimited"
+/>

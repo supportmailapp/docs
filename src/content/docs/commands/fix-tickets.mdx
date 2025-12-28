@@ -1,0 +1,23 @@
+---
+title: Fix Tickets Command
+description: How to use the /fix-tickets command
+sidebar:
+  order: 10
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+The `/fix-tickets` command is designed to help server managers resolve inconsistencies with tickets stored in the database.
+
+When using the command you can currently only choose to fix **tickets with incorrect status**. This will check all tickets in the database which have been updated in the last 14 days and verify if their status matches the actual state of the ticket in Discord.
+
+For example, if a ticket channel has been deleted but the ticket is still marked as "open" in the database, the command will update the ticket's status to "deleted".
+
+After running the command, you will receive a summary of tickets affected and the actions taken.
+
+This command is available to members with the **Manage Server** permission by default.
+
+<Aside type="note">
+  The option choice **Missing thread notification messages** is planned for a
+  future update.
+</Aside>

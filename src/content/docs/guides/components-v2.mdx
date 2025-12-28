@@ -1,0 +1,94 @@
+---
+title: Components V2
+description: A comprehensive guide to using Discord's V2 message components.
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+Discord's Message Components V2 allow you to build rich, interactive messages with complex layouts. This guide provides a quick reference for all available components.
+
+**Ticketon exclusively uses Components V2 for its messages.**
+
+## Layout Components
+
+Layout components help you organize and structure your message content.
+
+<CardGrid>
+  <Card title="Action Row" icon="list-format">
+    A container for a row of interactive components. It can hold up to **5
+    buttons** or a **single select menu**.
+  </Card>
+  <Card title="Section" icon="comment-alt">
+    Displays text content alongside an "accessory" component (a button or
+    thumbnail).
+  </Card>
+  <Card title="Container" icon="document">
+    Visually groups a set of components together, with an optional colored
+    accent bar on the side. It basically looks like an embed, but doesn't have
+    the same fields. It can also be spoilered.
+  </Card>
+  <Card title="Separator" icon="bars">
+    Adds vertical spacing and an optional visual divider line between other
+    components.
+  </Card>
+</CardGrid>
+
+## Content Components
+
+Content components are used to display static information like text, images, and files.
+
+<CardGrid stagger>
+  <Card title="Text Display" icon="seti:default">
+    Displays **Markdown-formatted text**, similar to a standard message.
+  </Card>
+  <Card title="Media Gallery" icon="pnpm">
+    Displays a gallery of **1-10 images** or other media items in an organized
+    grid. Media items can be spoilered.
+  </Card>
+  <Card title="Thumbnail" icon="seti:image">
+    A **small image**, used as an accessory in a `Section` component. It can be
+    spoilered.
+  </Card>
+</CardGrid>
+
+## Interactive Components
+
+These components allow users to interact with the bot. With the exception of buttons used as a section accessory, all interactive components must be placed within an `Action Row`.
+
+### Buttons
+
+Buttons trigger actions when clicked. They must be placed in an `Action Row` or used as an accessory in a `Section`.
+
+Buttons in Ticketon can have different actions:
+
+1. **Link**: Opens a URL in the user's browser.
+2. **Create Ticket**: Starts the ticket creation process for the configured category.
+3. **Close Ticket**: Closes the ticket (only usable in a ticket channel).
+4. **Reopen Ticket**: Reopens a closed ticket (only usable in a closed ticket channel).
+5. **Delete Ticket**: Deletes the ticket channel and marks the ticket as deleted (only usable in a closed ticket channel).
+
+### Category Selection Menu
+
+A Category Selection Menu is a special type of Select Menu, that holds a list of ticket categories to choose from.
+When a user selects a category, it starts the ticket creation process for that category.
+
+---
+
+## FAQ
+
+<details>
+<summary>Can I mix and match components from V1 and V2?</summary>
+
+No. Ticketon exclusively uses Components V2 for its messages. Additionally, Discord does not allow mixing V1 and V2 components in the same message.
+It's either **embeds + action rows** or **components V2 only**.
+
+</details>
+
+<details>
+<summary>Where can I find more information about Discord's Message Components V2?</summary>
+
+You can refer to the official Discord documentation on [Message Components](https://discord.com/developers/docs/interactions/message-components) for detailed information about each component type, their properties, and usage guidelines.
+
+However, this is a developer-focused resource, and may not be very user-friendly for non-developers.
+
+</details>

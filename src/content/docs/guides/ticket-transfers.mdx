@@ -1,0 +1,50 @@
+---
+title: Transferring Tickets
+description: A guide on how to transfer tickets between categories with Ticketon
+---
+
+import ImageWrapper from "../../../components/ImageWrapper.astro";
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+## Overview
+
+Transferring tickets between categories in Ticketon is a straightforward process that can be accomplished using either the
+ticket controls or the `/transfer ticket` command. This guide will walk you through the steps to transfer tickets effectively.
+
+The process if pretty much the same in both cases, with some differences noted below.
+
+<ImageWrapper size="lg">
+  {/* This is a flowchart illustrating the ticket transfer process */}
+  ![](../../../assets/docs/ticket-transfer-flow-20251216.png)
+</ImageWrapper>
+
+## Using Ticket Controls
+
+1. In the ticket you want to transfer, go all the way up to the ticket controls at the top of the channel.
+2. From the select menu, choose **Transfer Ticket**. A modal (form) will appear.
+3. In the modal, select the new category you want to transfer the ticket to, as well as a comment (optional) and the **With Form** option.
+   Click **Submit** to finish
+4. If you selected the **With Form** option and the new category has a form, the bot will send a message to the ticket channel
+   with a button that the user can click to fill out the form. If you did not select this option, the ticket will be transferred immediately.
+
+## Using the `/transfer ticket` Command
+
+1. In the ticket you want to transfer, use the `/transfer ticket` command. Use the command's options to specify the new category,
+   a comment (optional) and whether you want to use the **With Form** option.
+2. If you selected the **With Form** option and the new category has a form, the bot will send a message to the ticket channel
+   with a button that the user can click to fill out the form. If you did not select this option, the ticket will be transferred immediately.
+
+## Additional Information
+
+- By default, the user will **not** be asked to fill out the form (when there is one). You need to explicitly select the **With Form** option
+  in order to have the user fill out the form before transferring.
+- If the ticket author is asked to fill out the form, they are not forced to do so. They can choose to ignore it and the ticket will remain
+  in the original category. Maybe an option for this will be added in the future.
+
+## Filling out the form for the new category
+
+When the ticket author clicks the button to fill out the form for the new category, they will be presented with the form
+like when they would when creating a new ticket. Once they submit the form, the ticket will be transferred to the new category.
+
+The message asking the user to fill out the form will be edited to a "Ticket transferred" message once the form is submitted and
+the starter message of the new category will be sent in the ticket channel.

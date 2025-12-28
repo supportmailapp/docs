@@ -1,0 +1,45 @@
+---
+title: Open Ticket For Another User
+description: How to use the /open-ticket-for command
+sidebar:
+  order: 8
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import ImageWrapper from "../../../components/ImageWrapper.astro";
+
+The `/open-ticket-for` command allows moderators to open a ticket on behalf of another user.
+This can be useful in scenarios where mods need to talk to the user privately and not in a public channel.
+
+This command is available to members with the **Moderate Members** permission by default.
+
+## Options
+
+- **User** (required): The user for whom the ticket will be created.
+- **Category** (required): The ticket category for which the ticket will be created.
+- **Custom Starter Message** (optional): Specify a custom message that will be sent in the ticket when it's created.
+  If not provided, the starter message depends on the configuration of the selected category.
+
+The behavior of this command may vary based on the configuration of the selected category.
+
+| Custom Message Provided | Category has Form | Category has Starter Message | Result                     |
+| ----------------------- | ----------------- | ---------------------------- | -------------------------- |
+| No                      | No                | No                           | Default starter message    |
+| No                      | No                | Yes                          | Configured starter message |
+| No                      | Yes               | No                           | Default starter message    |
+| No                      | Yes               | Yes                          | Default starter message    |
+| Yes                     | No                | No                           | Custom message             |
+| Yes                     | No                | Yes                          | Custom message             |
+| Yes                     | Yes               | No                           | Custom message             |
+| Yes                     | Yes               | Yes                          | Custom message             |
+
+<Aside type="note">
+
+In short: A custom message always takes precedence. If no custom message is provided, the default starter message is used if the category has a form, otherwise the configured starter message is used.
+
+</Aside>
+
+#### Blacklisted Users
+
+It is still possbible to open tickets for users who are blacklisted from creating tickets themselves.
+This can be useful if a moderator needs to open a ticket for a blacklisted user to discuss their behavior.

@@ -1,0 +1,35 @@
+---
+title: Create Ticket Command
+description: How to use the /create-ticket command
+sidebar:
+  order: 3
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import ImageWrapper from "../../../components/ImageWrapper.astro";
+
+The `/create-ticket` command allows users to create a new support ticket in the server without the need to use buttons/select menus.
+
+This command is available to all members by default and does not require any special permissions.
+
+When a user executes the `/create-ticket` command, the bot handles it like the user interacted with a panel message, either by opening a modal form (if configured) or directly creating the ticket.
+
+<Aside type="note">
+  This command doesn't work for categories with the **Use Threads** option
+  enabled.
+</Aside>
+
+## How to disable the command
+
+To disable the `/create-ticket` command usage, you have to go in the **Server Settings** > **Integrations** > **Ticketon** > `/create-ticket` and disallow the usage for `@everyone`.
+
+<ImageWrapper size="md">
+  ![Disable Create Ticket
+  Command](../../../assets/docs/disable-command-for-everyone.png)
+</ImageWrapper>
+
+<Aside type="tip">You can manage every command you want this way.</Aside>
+
+## Using Threads
+
+This command is not usable when the category has the **Use Threads** option enabled.

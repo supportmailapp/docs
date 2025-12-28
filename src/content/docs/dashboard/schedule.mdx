@@ -1,0 +1,122 @@
+---
+title: Support Schedule
+description: Manage a server's support schedule
+sidebar:
+  order: 9
+---
+
+import { Aside, Steps } from "@astrojs/starlight/components";
+import UnlimitedBanner from "../../../components/UnlimitedBanner.astro";
+import ImageWrapper from "../../../components/ImageWrapper.astro";
+
+<UnlimitedBanner />
+
+A server's support schedule determines when your team is available to handle support requests.
+Configure your support schedule to match your team's working hours, ensuring that tickets are only created during active support periods.
+This helps manage user expectations and prevents ticket overflow during off-hours.
+
+## How does a support schedule work?
+
+Each server can have one active schedule. When no schedule is configured or the schedule is disabled, the server operates 24/7 and accepts support requests at any time.
+
+### Weekly structure
+
+A support schedule contains daily schedules for each day of the week (Monday through Sunday). The week always starts on Monday for consistency across the platform.
+Each day can be configured independently with its own time slots, allowing you to create flexible schedules that accommodate different staffing patterns throughout the week.
+
+### Time slots
+
+Each day supports up to 3 separate time slots, enabling you to handle split shifts or breaks in coverage. For example, you might configure morning hours (9:00-12:00), afternoon hours (13:00-17:00), and evening hours (18:00-20:00) as three distinct time slots.
+
+A time slot consists of:
+
+- **Start time**: When support becomes available
+- **End time**: When support coverage ends
+
+<Aside type="caution" title="Important">
+  If no time slots are defined for a day, that day is treated as a day off. The
+  server will not accept new support requests on days without configured time
+  slots.
+</Aside>
+
+### Timezone handling
+
+Configure your schedule's UTC offset to ensure time slots are interpreted correctly in your local timezone. For example, if your team operates in Central European Time (CET), set the UTC offset to `+1`. Note, that when you are one of the poor souls with **Daylight Saving Time**, you will need to **manually adjust** your schedule when the time changes.
+
+## User experience during off-hours
+
+When a user attempts to create a ticket outside of your configured support schedule, the system:
+
+1. Checks the current time against all defined time slots for the current day
+2. Determines if the current time falls within an active support period
+3. If outside support hours, calculates the next available time slot
+4. Displays a message informing the user when they can next create a ticket
+
+This prevents ticket creation during off-hours while clearly communicating availability to your users.
+
+## Configuring the support schedule
+
+To configure your server's support schedule:
+
+<Steps>
+
+1. Navigate to your server's settings page
+2. Click on the **Schedule** tab
+3. Toggle the schedule on or off using the enable/disable switch
+4. Set your timezone's UTC offset (e.g., UTC+1 for Central European Time)
+5. Configure each day of the week individually
+
+</Steps>
+
+### Adding time slots
+
+For each day you want to configure:
+
+<Steps>
+
+1. Select the day from the weekly view
+2. Click the **Add Time Slot** button (up to 3 time slots per day)
+3. Define the start and end times for the time slot
+4. Save your changes
+
+</Steps>
+
+### Best practices
+
+- **Align with team availability**: Configure your schedule to match when support staff are actually available
+- **Consider buffer time**: Add 5-10 minutes of buffer before and after shifts to accommodate urgent handoffs
+- **Plan for breaks**: Use multiple time slots to exclude lunch breaks or team meetings
+- **Communicate clearly**: Ensure your schedule is documented and visible to users through announcements or info channels
+- **Regular reviews**: Revisit your schedule quarterly to ensure it still matches your team's capacity and user demand
+
+## Example configurations
+
+**Standard business hours** (Monday-Friday, 9:00-17:00):
+
+- Set one time slot per weekday from 09:00 to 17:00
+- Leave Saturday and Sunday without time slots (days off)
+
+<ImageWrapper>
+  ![Standard business hours schedule
+  example](../../../assets/docs/schedule-examples/image1.png)
+</ImageWrapper>
+
+**Split shift coverage** (Morning and evening support):
+
+- Time slot 1: 08:00-12:00
+- Time slot 2: 18:00-22:00
+
+<ImageWrapper>
+  ![Split shift schedule
+  example](../../../assets/docs/schedule-examples/image2.png)
+</ImageWrapper>
+
+**24/5 support** (Round-the-clock weekday coverage):
+
+- Monday-Friday: 00:00-23:59
+- Saturday-Sunday: No time slots
+
+<ImageWrapper>
+  ![24/5 support schedule
+  example](../../../assets/docs/schedule-examples/image3.png)
+</ImageWrapper>

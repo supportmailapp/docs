@@ -1,0 +1,37 @@
+---
+title: Audit Log
+description: View a server's audit log
+sidebar:
+  order: 8
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+The audit log provides a detailed record of all actions taken within the server.
+
+## Audit Log Events
+
+| Event                    | Description                   |
+| ------------------------ | ----------------------------- |
+| `ticket.create`          | A ticket was created.         |
+| `ticket.close`           | A ticket was closed.          |
+| `ticket.delete`          | A ticket was deleted.         |
+| `config.message.create`  | A custom message was created. |
+| `config.message.edit`    | A custom message was edited.  |
+| `config.message.delete`  | A custom message was deleted. |
+| `config.form.create`     | A form was created.           |
+| `config.form.edit`       | A form was edited.            |
+| `config.form.delete`     | A form was deleted.           |
+| `config.category.create` | A category was created.       |
+| `config.category.edit`   | A category was edited.        |
+| `config.category.delete` | A category was deleted.       |
+
+If you want to add more events, please make a suggestion on [Discord](https://discord.com/channels/461533332979843083/1421301141504786452).
+
+<Aside type="note">
+  Audit Log entries are stored for 30 days. After that, they are automatically
+  deleted.
+
+Why? Simply to prevent the database from becoming Nikocado Avocado.
+
+</Aside>

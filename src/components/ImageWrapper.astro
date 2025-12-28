@@ -1,0 +1,24 @@
+---
+interface Props {
+  size?: "sm" | "md" | "lg" | "xl" | "full";
+  class?: string;
+}
+
+const { size = "md", class: customClasses = "" } = Astro.props; // Default width for optimization
+
+const sizeClasses = (_size: Props["size"] = "md") =>
+  ({
+    sm: "max-w-sm",
+    md: "max-w-md",
+    lg: "max-w-lg",
+    xl: "max-w-xl",
+    full: "max-w-full",
+  })[_size];
+---
+
+<div
+  class={`mx-auto overflow-clip image-wrapper ${sizeClasses(size)} ${customClasses}`.trim()}
+  data-type="image-wrapper"
+>
+  <slot />
+</div>

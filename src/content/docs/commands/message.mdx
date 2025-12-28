@@ -1,0 +1,25 @@
+---
+title: Message Command
+description: How to use the /message command
+sidebar:
+  order: 5
+---
+
+The `/message` command allows you to send a custom message into a channel. If no channel is specified, the message will be sent in the channel where the command is executed.
+
+It is recommended to restrict the usage of this command to trusted personnel only - by default it requires the `Manage Messages` permission.
+
+## Usage
+
+| Option  | Description                                | Required | Default |
+| ------- | ------------------------------------------ | -------- | ------- |
+| name    | The name of the message to be sent         | Yes      | -       |
+| channel | The channel where the message will be sent | No       | Current |
+
+import { LinkCard } from "@astrojs/starlight/components";
+
+<LinkCard
+  title="Custom Messages"
+  description="Learn how to create and manage custom messages"
+  href="/dashboard/messages"
+/>

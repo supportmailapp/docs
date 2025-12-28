@@ -1,0 +1,57 @@
+---
+title: Blacklist Command
+description: How to use the /blacklist command
+sidebar:
+  order: 9
+---
+
+The `/blacklist` command allows moderators to prevent users from creating tickets in the server.
+This can be useful for managing users who have abused the ticketing system or for temporarily restricting access to support tickets.
+
+This command is available to members with the **Moderate Members** permission by default.
+
+## Subcommands
+
+| Subcommand | Description                                |
+| ---------- | ------------------------------------------ |
+| `add`      | Add a user to the server blacklist         |
+| `remove`   | Remove a user from the server blacklist    |
+| `check`    | Check if a user is in the server blacklist |
+
+## Usage
+
+### Add a User to the Blacklist
+
+To add a user to the server blacklist, use the following command:
+
+```
+/blacklist add user:@user reason:Spamming
+```
+
+This will prevent the specified user from creating new tickets in the server.
+
+### Remove a User from the Blacklist
+
+To remove a user from the server blacklist, use the following command:
+
+```
+/blacklist remove user:@user
+```
+
+This will allow the specified user to create tickets again.
+
+### Check if a User is Blacklisted
+
+To check if a user is in the server blacklist, use the following command:
+
+```
+/blacklist check user:@user
+```
+
+This will return whether the specified user is currently blacklisted from creating tickets.
+
+## Notes
+
+- Blacklisted users will still be able to view and interact with existing tickets they have created prior to being blacklisted.
+- Moderators can still open tickets for blacklisted users if necessary. See [Opening Tickets for Other Users](/commands/open-ticket-for) for more information.
+- The blacklist is server-specific and does not affect the user's ability to create tickets in other servers using Ticketon.
