@@ -1,0 +1,23 @@
+---
+import { LinkCard } from "@astrojs/starlight/components";
+
+interface Props {
+  header: string;
+  href: string;
+  cta?: string;
+}
+
+const { header, href, cta } = Astro.props;
+
+let title = cta ?? `Use ${header}`;
+---
+
+<h3>{header}</h3>
+<div class="grid grid-cols-2 gap-x-12">
+  <div>
+    <slot />
+  </div>
+  <div class="mt-0! self-center">
+    <LinkCard title={title} href={href} />
+  </div>
+</div>

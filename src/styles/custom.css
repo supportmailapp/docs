@@ -1,0 +1,93 @@
+@layer base, starlight, theme, components, utilities, rapide;
+
+@import "@astrojs/starlight-tailwind";
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* Dark mode colors. */
+:root {
+  --sl-content-width: 60rem;
+  --sl-text-5xl: 4rem;
+
+  --sl-color-accent-low: #131e4f;
+  --sl-color-accent: #3447ff;
+  --sl-color-accent-high: #6991ff;
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #eceef2;
+  --sl-color-gray-2: #c6c8ce;
+  --sl-color-gray-3: #a0a4ae;
+  --sl-color-gray-4: #545861;
+  --sl-color-gray-5: #353841;
+  --sl-color-gray-6: #24272f;
+  --sl-color-black: #17181c;
+}
+/* Light mode colors. */
+:root[data-theme="light"] {
+  --sl-color-accent-low: #c7d6ff;
+  --sl-color-accent: #2827e9;
+  --sl-color-accent-high: #182775;
+  --sl-color-white: #17181c;
+  --sl-color-gray-1: #24272f;
+  --sl-color-gray-2: #353841;
+  --sl-color-gray-3: #545861;
+  --sl-color-gray-4: #888b96;
+  --sl-color-gray-5: #c0c2c7;
+  --sl-color-gray-6: #eceef2;
+  --sl-color-gray-7: #f5f6f8;
+  --sl-color-black: #ffffff;
+}
+
+@theme {
+  /* Your preferred text font. Starlight uses a system font stack by default. */
+  --font-sans: "Atkinson Hyperlegible";
+  /* Your preferred code font. Starlight uses system monospace fonts by default. */
+  --font-mono: "IBM Plex Mono";
+  /* Generated accent color palettes. */
+  --color-accent-200: #b3c7ff;
+  --color-accent-600: #2827e9;
+  --color-accent-900: #182775;
+  --color-accent-950: #131e4f;
+  /* Generated gray color palettes. */
+  --color-gray-100: #f5f6f8;
+  --color-gray-200: #eceef2;
+  --color-gray-300: #c0c2c7;
+  --color-gray-400: #888b96;
+  --color-gray-500: #545861;
+  --color-gray-700: #353841;
+  --color-gray-800: #24272f;
+  --color-gray-900: #17181c;
+}
+
+.inline-block {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+hr {
+  border-bottom-color: color-mix(in oklab, var(--sl-color-accent) 70%, transparent);
+}
+
+small {
+  opacity: 0.8;
+}
+
+table thead th {
+  border-bottom: 1px solid color-mix(in oklab, var(--sl-color-accent) 60%, transparent);
+}
+
+code[dir="auto"]:hover {
+  background-color: color-mix(in oklab, white 20%, var(--sl-color-bg-inline-code));
+  cursor: pointer;
+}
+
+/* This needs to be in here because it somehow doesn't apply when in the component */
+div[data-type="image-wrapper"] img {
+  border-radius: 0.5rem;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}

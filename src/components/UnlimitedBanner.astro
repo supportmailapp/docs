@@ -1,0 +1,30 @@
+---
+import { Aside } from "@astrojs/starlight/components";
+
+const { partial = false } = Astro.props;
+
+const title = partial ? "Partially Paid Feature" : "Paid Feature";
+---
+
+<Aside type="tip" {title}>
+  {
+    partial ? (
+      <p class="inline-block">
+        Parts of this feature are a part of the
+        <a href="/unlimited" class="hover:underline">
+          Unlimited Plan
+        </a>
+        .
+      </p>
+    ) : (
+      <p class="inline-block">
+        This feature is a part of the
+        <a href="/unlimited" class="hover:underline">
+          Unlimited Plan
+        </a>
+        .
+      </p>
+    )
+  }
+  <slot />
+</Aside>

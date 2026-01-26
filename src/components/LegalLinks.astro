@@ -1,0 +1,38 @@
+---
+interface Props {
+  exclude?: "privacy" | "terms" | "notice" | "licenses" | "withdrawal";
+}
+
+const { exclude } = Astro.props;
+
+const allLinks = [
+  { href: "/legal/terms", text: "Terms of Service", key: "terms" },
+  { href: "/legal/privacy", text: "Privacy Policy", key: "privacy" },
+  {
+    href: "/legal/right-of-withdrawal",
+    text: "Right of Withdrawal",
+    key: "withdrawal",
+  },
+  { href: "/legal/licenses", text: "Licenses", key: "licenses" },
+  { href: "/legal/legal-notice", text: "Legal Notice", key: "notice" },
+];
+
+const links = exclude
+  ? allLinks.filter((link) => link.key !== exclude)
+  : allLinks;
+---
+
+<ul class="my-4">
+  {
+    links.map((link) => (
+      <li>
+        <a
+          class="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+          href={link.href}
+        >
+          {link.text}
+        </a>
+      </li>
+    ))
+  }
+</ul>
