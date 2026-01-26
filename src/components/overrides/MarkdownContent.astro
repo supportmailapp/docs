@@ -19,10 +19,7 @@ import ImageZoom from "starlight-image-zoom/components/ImageZoom.astro";
   }
 
   /* Headings after non-headings have more spacing. */
-  .sl-markdown-content
-    :global(
-      :not(.heading-wrapper) + :is(.heading-wrapper):not(:where(.not-content *))
-    ) {
+  .sl-markdown-content :global(:not(.heading-wrapper) + :is(.heading-wrapper):not(:where(.not-content *))) {
     margin-top: 1.5em;
   }
 

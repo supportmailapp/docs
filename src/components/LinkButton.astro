@@ -10,13 +10,7 @@ interface Props extends Omit<HTMLAttributes<"a">, "href"> {
   variant?: "primary" | "secondary" | "minimal";
 }
 
-const {
-  class: className,
-  icon,
-  iconPlacement = "end",
-  variant = "primary",
-  ...attrs
-} = Astro.props;
+const { class: className, icon, iconPlacement = "end", variant = "primary", ...attrs } = Astro.props;
 ---
 
 <a class:list={["sl-link-button not-content", variant, className]} {...attrs}>

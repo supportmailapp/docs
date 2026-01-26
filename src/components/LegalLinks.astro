@@ -17,9 +17,7 @@ const allLinks = [
   { href: "/legal/legal-notice", text: "Legal Notice", key: "notice" },
 ];
 
-const links = exclude
-  ? allLinks.filter((link) => link.key !== exclude)
-  : allLinks;
+const links = exclude ? allLinks.filter((link) => link.key !== exclude) : allLinks;
 ---
 
 <ul class="my-4">
