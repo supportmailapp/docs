@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import cloudflare from "@astrojs/cloudflare";
 
 import starlight from "@astrojs/starlight";
 import sitemap from "@astrojs/sitemap";
@@ -9,6 +10,8 @@ import starlightContextualMenu from "starlight-contextual-menu";
 
 // https://astro.build/config
 export default defineConfig({
+  output: "static",
+  adapter: cloudflare(),
   site: "https://docs.supportmail.dev",
   trailingSlash: "ignore",
   integrations: [
