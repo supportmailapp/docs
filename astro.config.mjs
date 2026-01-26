@@ -7,6 +7,7 @@ import sitemap from "@astrojs/sitemap";
 import starlightThemeRapide from "starlight-theme-rapide";
 import starlightImageZoomPlugin from "starlight-image-zoom";
 import starlightContextualMenu from "starlight-contextual-menu";
+import svelte from "@astrojs/svelte";
 
 export default defineConfig({
   output: "static",
@@ -14,6 +15,7 @@ export default defineConfig({
   site: "https://docs.supportmail.dev",
   trailingSlash: "ignore",
   integrations: [
+    svelte({ extensions: [".svelte"] }),
     starlight({
       plugins: [
         starlightThemeRapide(),
