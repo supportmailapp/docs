@@ -8,12 +8,6 @@
   "plugins": ["prettier-plugin-astro"],
   "overrides": [
     {
-      "files": [".*", "*.json", "*.md", "*.toml", "*.yml"],
-      "options": {
-        "useTabs": false
-      }
-    },
-    {
       "files": ["*.md", "*.mdx"],
       "options": {
         "printWidth": 100
