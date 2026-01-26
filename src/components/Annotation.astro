@@ -1,4 +1,6 @@
 ---
+// While this component is simple, replicating bits-ui's "keep in view" behavior is too complicated to integrate here.
+
 interface Props {
   /**
    * The annotation text to display on hover.
@@ -45,10 +47,14 @@ const { annotate } = Astro.props;
     transition: opacity 0.3s ease;
     z-index: 1000;
     font-size: 14px;
-    text-align: start;
-    max-width: 200px;
-    text-wrap: normal;
+    max-width: 300px;
+    width: max-content;
+    white-space: normal;
     word-wrap: break-word;
+    text-align: left;
+    height: auto;
+    /* Prevent overflow clipping */
+    overflow: visible;
   }
 
   .annotation-tooltip::after {
