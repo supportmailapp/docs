@@ -1,12 +1,57 @@
 ---
 title: Preferences
-description: User preferences and customization for ticket notifications and behavior.
+description: User preferences and what they do.
 sidebar:
   order: 2
 ---
 
-## Preferences
+import { Aside } from "@astrojs/starlight/components";
 
-Describe how users can set and change preferences (notifications, privacy, etc.).
+Preferences are settings that only apply to your discord user account. They allow you to customize your experience with SupportMail on a per-user basis.
 
-> TODO: Document commands, UI options, and examples.
+## Available Preferences
+
+| Preference             | Description                                                                                                                                                      |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Language**           | Choose the language SupportMail uses to communicate with you.                                                                                                    |
+| **Automatic Redirect** | If enabled and you have 1 or more open chats with servers, new messages you send to the bot's DM will automatically be sent to your most recently active server. |
+
+## Changing Preferences
+
+You can change your preferences using the `/preferences` command.
+
+## Language
+
+All available languages are: English, German, French
+
+### Change Language
+
+Use `/preferences language` to change the language SupportMail uses to communicate with you.
+
+### How language is determined
+
+#### Your language preference will be used in the following cases:
+
+- You DM the bot and the bot responds to you.
+- A serverteam replies back to you after you sent a message and the bot forwards this message to your DMs.[^1]
+- You report a message or user and the report acknowledgment is sent to you.[^1]
+
+#### Your language preference will NOT be used in the following cases:
+
+- You interact with the bot via
+  - Slash commands
+  - Context menu commands
+  - Buttons/Select menus
+  - Modal (Form) submissions
+
+## Automatic Redirect
+
+When enabled, this preference will make SupportMail automatically redirect new messages you send to the bot in DMs to your most recently active server chat if you have 1 or more open chats.
+This is useful if you frequently need to contact serverteams using SupportMail, as you don't need to confirm sending the message to the correct server each time.
+
+<Aside variant="danger" icon="warning">
+  If you have an open chat with a server and you want to send a message to a different server, you
+  **need** use the command `/create-ticket` to create a new chat with that server.
+</Aside>
+
+[^1]: If the server has a language set, that language will be used if you don't have a language preference set.
