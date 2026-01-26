@@ -5,6 +5,7 @@ description: A short overview of SupportMail and what to expect in the docs.
 ---
 
 import Annotation from "../../components/Annotation.astro";
+import { LinkButton } from "@astrojs/starlight/components";
 
 Welcome to the SupportMail documentation!
 
@@ -23,5 +24,24 @@ The bot acts as a bridge between the user and the serverteam, forwarding message
 
 ### Reports
 
-Users can report messages in the server using <Annotation annotate="Slash commands start with a forward slash (/) and let you trigger bot functions directly. You can browse them by clicking the little + icon on the left side in the chat bar for easy access.">
-slash commands</Annotation> or context menu commands.
+Users can report messages in the server using <Annotation annotate="Slash commands start with a forward slash [/] and let you trigger bot functions directly. You can browse them by clicking the little + icon on the left side in the chat bar for easy access.">
+slash commands</Annotation>
+or <Annotation annotate="Context commands appear when you right-click a user or message and hovering over Apps, offering specific actions related to that context (user/message)">
+context menu commands</Annotation>.
+
+#### Report metadata
+
+Users reporting messages or users can or have to provide additional information depending on the type of report:
+
+| Command                    | Reason       | Comment  | Attachments |
+| -------------------------- | ------------ | -------- | ----------- |
+| `/report message`          | Optional     | Optional | --          |
+| `Report Message` (Context) | Optional     | Optional | --          |
+| `/report user`             | **Required** | Optional | Optional    |
+| `Report User` (Context)    | **Required** | Optional | Optional    |
+
+## How to get help with the Bot
+
+<LinkButton href="https://help.supportmail.dev" icon="external">
+  Join the Support Server
+</LinkButton>
