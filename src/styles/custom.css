@@ -120,10 +120,18 @@ a[href="#footnote-label"] svg {
     width: 100%;
   }
 
+  /* col 1, align text right */
   &.c1-right {
-    /* col 1, align text right */
     th:nth-child(1),
     td:nth-child(1) {
+      text-align: end;
+    }
+  }
+
+  /* col 2, align text right */
+  &.c2-right {
+    th:nth-child(2),
+    td:nth-child(2) {
       text-align: end;
     }
   }
