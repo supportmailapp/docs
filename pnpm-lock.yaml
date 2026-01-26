@@ -14,6 +14,9 @@ importers:
       '@astrojs/starlight':
         specifier: ^0.37.4
         version: 0.37.4(astro@5.16.15(rollup@4.56.0)(typescript@5.9.3))
+      '@astrojs/starlight-tailwind':
+        specifier: ^4.0.2
+        version: 4.0.2(@astrojs/starlight@0.37.4(astro@5.16.15(rollup@4.56.0)(typescript@5.9.3)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.15
         version: 5.16.15(rollup@4.56.0)(typescript@5.9.3)
@@ -33,9 +36,6 @@ importers:
         specifier: ^4.1.18
         version: 4.1.18
     devDependencies:
-      '@astrojs/starlight-tailwind':
-        specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.4(astro@5.16.15(rollup@4.56.0)(typescript@5.9.3)))(tailwindcss@4.1.18)
       prettier:
         specifier: ^3.8.1
         version: 3.8.1

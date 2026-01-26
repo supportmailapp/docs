@@ -13,6 +13,7 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
     "@astrojs/starlight": "^0.37.4",
+    "@astrojs/starlight-tailwind": "^4.0.2",
     "astro": "^5.16.15",
     "sharp": "^0.34.5",
     "starlight-contextual-menu": "^0.1.5",
@@ -21,7 +22,6 @@
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
-    "@astrojs/starlight-tailwind": "^4.0.2",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1"
   },
