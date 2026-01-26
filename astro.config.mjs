@@ -24,6 +24,10 @@ export default defineConfig({
       ],
       title: "SupportMail",
       description: "Documentation for SupportMail, the feature-rich modmail bot for Discord.",
+      editLink: {
+        baseUrl: "https://github.com/supportmailapp/docs/tree/main",
+      },
+      pagefind: true,
       logo: {
         src: "/src/assets/logo.png",
         alt: "SupportMail Logo",
