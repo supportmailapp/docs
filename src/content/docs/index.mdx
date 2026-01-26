@@ -15,19 +15,20 @@ next: true
 
 import { Card, CardGrid } from "@astrojs/starlight/components";
 
-## Next steps
+## Who are you?
 
 <CardGrid stagger>
-  <Card title="Update content" icon="pencil">
-    Edit `src/content/docs/index.mdx` to see this page change.
+  <Card title="An Admin" icon="pencil">
+    See [Getting Started](/getting-started) to set up SupportMail in your server.
   </Card>
-  <Card title="Change page layout" icon="document">
-    Delete `template: splash` in `src/content/docs/index.mdx` to display a sidebar on this page.
+  <Card title="A moderator or supporter" icon="document">
+    Check out [Managing Support](/managing-support/handling-tickets) to learn how to handle tickets.
   </Card>
-  <Card title="Add new content" icon="add-document">
-    Add Markdown or MDX files to `src/content/docs` to create new pages.
+  <Card title="Just a user" icon="add-document">
+    Learn how to [contact support](/getting-support/contacting-support) in servers using
+    SupportMail.
   </Card>
-  <Card title="Configure your site" icon="setting">
+  {/* <Card title="Configure your site" icon="setting">
     Edit your `sidebar` and other config in `astro.config.mjs`.
   </Card>
   <Card title="Read the docs" icon="open-book">
@@ -39,5 +40,5 @@ import { Card, CardGrid } from "@astrojs/starlight/components";
     Support](/managing-support/handling-tickets), [Configuring the
     Bot](/configuring-bot/dashboard-overview), [Troubleshooting](/troubleshooting/common-issues),
     [Changelogs](/changelogs/overview).
-  </Card>
+  </Card> */}
 </CardGrid>
