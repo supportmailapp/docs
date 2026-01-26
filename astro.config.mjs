@@ -11,7 +11,7 @@ import starlightContextualMenu from "starlight-contextual-menu";
 // https://astro.build/config
 export default defineConfig({
   output: "static",
-  adapter: cloudflare(),
+  adapter: cloudflare({ imageService: "compile" }),
   site: "https://docs.supportmail.dev",
   trailingSlash: "ignore",
   integrations: [
