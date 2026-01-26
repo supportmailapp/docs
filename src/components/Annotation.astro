@@ -1,0 +1,68 @@
+---
+interface Props {
+  /**
+   * The annotation text to display on hover.
+   */
+  annotate: string;
+}
+
+const { annotate } = Astro.props;
+---
+
+<span class="annotation-wrapper">
+  <span class="annotation-trigger">
+    <slot />
+  </span>
+  <span class="annotation-tooltip">
+    {annotate}
+  </span>
+</span>
+
+<style>
+  .annotation-wrapper {
+    position: relative;
+    display: inline;
+  }
+
+  .annotation-trigger {
+    display: inline-block;
+    cursor: help;
+    text-decoration: underline dotted;
+  }
+
+  .annotation-tooltip {
+    opacity: 0;
+    background-color: var(--sl-color-blue-low);
+    border: 1px solid var(--sl-color-blue);
+    color: var(--sl-color-blue-high);
+    padding: 4px 12px;
+    border-radius: 4px;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+    font-size: 14px;
+    text-align: start;
+    max-width: 200px;
+    text-wrap: normal;
+    word-wrap: break-word;
+  }
+
+  .annotation-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border: 5px solid transparent;
+    border-top-color: var(--sl-color-blue);
+  }
+
+  .annotation-wrapper:hover .annotation-tooltip {
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>
