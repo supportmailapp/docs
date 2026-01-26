@@ -8,7 +8,6 @@ import starlightThemeRapide from "starlight-theme-rapide";
 import starlightImageZoomPlugin from "starlight-image-zoom";
 import starlightContextualMenu from "starlight-contextual-menu";
 
-// https://astro.build/config
 export default defineConfig({
   output: "static",
   adapter: cloudflare({ imageService: "compile" }),
