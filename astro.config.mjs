@@ -47,7 +47,7 @@ export default defineConfig({
           tag: "meta",
           attrs: {
             property: "og:image",
-            content: "https://docs.supportmail.dev/logo.png",
+            content: "https://new-docs.supportmail.dev/logo.png",
           },
         },
         {
