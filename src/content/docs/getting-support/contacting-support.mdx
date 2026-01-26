@@ -1,0 +1,36 @@
+---
+title: Contacting Support
+description: How to contact support staff of a server.
+sidebar:
+  order: 1
+banner:
+  content: |
+    "Tickets" as a concept are in the process of changing. I'm sorry for any confusion this may cause
+    in the transition period.<br>In the future, tickets will be a backend concept for server staff only.
+    Users will experience support mostly as one continuous thread, rather than managing separate tickets.
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+There are multiple way you can send messages to a sserver to contact support staff:
+
+1. [Sending a DM to the Bot](#with-a-dm)
+2. [Using a Panel](#with-a-panel)
+3. [Using the `/create-ticket` command in a server](#with-a-command)
+
+Note that you need to authorize SupportMail to access your Discord account to create tickets.
+This is so that the bot can identify you from DMs and access your member information in servers more easily.
+
+## With a DM
+
+You can send a direct message to the bot to create a ticket. The bot will guide you through the whole process.
+
+## With a Panel
+
+Server Managers can set up a Panel in their server that users can interact with to create tickets.
+The bot will then send you a DM which you can respond to in order to create the ticket in the server.
+
+## With a Command
+
+You can use the `/create-ticket` command to create a ticket. It is available in both DMs and servers.
+When used in a server, the ticket will be created in that server. When used in DMs, you need to select the server you want to create the ticket in.

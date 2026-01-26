@@ -6,8 +6,44 @@ sidebar:
   order: 1
 ---
 
-## Getting Started
+import { Steps, LinkButton } from "@astrojs/starlight/components";
 
-This page contains quick steps to get SupportMail up and running for new users and server owners.
+This page contains quick steps to get SupportMail up and running for new users and server admins.
 
-> TODO: Add prerequisites, installation steps, and first-run checklist.
+## What is SupportMail?
+
+SupportMail is powerful Discord Modmail bot. It allows server staff to manage support tickets from users via Discord DMs rather than through channels in the server visible for the user.
+
+## Main Features
+
+- Modern commands and interactions: Slash and Context Menu Commands, Buttons, Modals, Select Menus
+- Localization support for multiple languages
+- Custom Tags (Snippets)
+- [Dashboard](https://dash.supportmail.dev) for easy configuration
+- 800+ servers which are relying on SupportMail for their support needs
+
+## Terminology
+
+| Term         | Description                                                                       |
+| ------------ | --------------------------------------------------------------------------------- |
+| Ticket\*     | A support conversation between a user and server staff                            |
+| Panel        | A message with a button in a server for users to create tickets                   |
+| Ticket Forum | A forum channel in a server where tickets are created as threads for server staff |
+
+\* Tickets are in the process of changing. In the future, tickets will be a backend concept for server staff only.
+Users will experience support mostly as one continuous thread, rather than managing separate tickets.
+
+## Getting Started (Finally!)
+
+### 1. Add the bot to your server
+
+<LinkButton href="https://supportmail.dev/invite" icon="external">
+  Invite Bot
+</LinkButton>
+
+### 2. Set up your server
+
+Make sure your server has [Community Enabled](https://support.discord.com/hc/en-us/articles/360047132851-Enabling-Your-Community-Server).
+This is needed because SupportMail needs to create a forum channel, which is only available in Community servers.
+
+Make sure you have at least one role for staff members who will be handling support tickets.
