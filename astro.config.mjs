@@ -76,18 +76,32 @@ export default defineConfig({
           label: "Welcome",
           items: [
             { label: "Getting Started", slug: "getting-started" },
-          ]
-        },
-        {
-          label: "Guides",
-          items: [
-            // Each item here is one entry in the navigation menu.
-            { label: "Example Guide", slug: "guides/example" },
+            { label: "Overview", slug: "overview" },
           ],
         },
         {
-          label: "Reference",
-          autogenerate: { directory: "reference" },
+          label: "Getting Support",
+          autogenerate: { directory: "getting-support" },
+        },
+        {
+          label: "Managing Support",
+          autogenerate: { directory: "managing-support" },
+        },
+        {
+          label: "Configuration",
+          autogenerate: { directory: "configuration" },
+        },
+        {
+          label: "Guides",
+          autogenerate: { directory: "guides" },
+        },
+        {
+          label: "Troubleshooting",
+          autogenerate: { directory: "troubleshooting" },
+        },
+        {
+          label: "Changelogs",
+          autogenerate: { directory: "changelogs" },
         },
       ],
     }),
