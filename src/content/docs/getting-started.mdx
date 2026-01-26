@@ -47,3 +47,41 @@ Make sure your server has [Community Enabled](https://support.discord.com/hc/en-
 This is needed because SupportMail needs to create a forum channel, which is only available in Community servers.
 
 Make sure you have at least one role for staff members who will be handling support tickets.
+
+### 3. Setup the Ticket Forum
+
+Go to the [dashboard](https://dash.supportmail.dev?next=/ticket-settings?setup=true) and follow the steps to create your Ticket Forum.
+
+Alternatively, you can also use the `/setup tickets` command in your server to set it up via Discord.
+However this does not provide the full setup experience and only minimal configuration options.
+
+After the bot set up the forum, you can add custom roles for staff members who will be handling tickets. This is done directly in Discord.
+The bot's permissions in the Ticket Forum are managed by the bot and **shall not be changed manually**.
+
+### 4. Make a Panel (optional)
+
+The idea of modmail is, to reduce clutter in your server by removing public support
+channels where users can see their tickets and a channel where they can create tickets.
+
+However you might notice, that users might not know how to create tickets in the first place if your users are not the most "discord-savvy".
+
+To solve this, you can create a Panel in your server. A Panel is a message with a button that users can click to create a ticket.
+
+Currently, you can only create a Panel by using the `/config panel` command in your server.
+This will be moved to the dashboard in the future with more options, providing a better user experience.
+
+## Best Practices
+
+- Make sure to inform your users about the new support system and how to create tickets.
+- Set up ping roles and users for ticket notifications (Dashboard -> Ticket Settings -> Notifications).
+- Briefly train your staff on how to use SupportMail effectively. The **Managing Support** category is a good reference.
+  This is important if your staff is not familiar with modmail systems and/or Discord bots in general.
+
+### Next Steps
+
+- It is highly recommended to go through the rest of the configuration options in the [dashboard](https://dash.supportmail.dev).
+- Read the [documentation](https://docs.supportmail.dev) to learn more about advanced features and configuration options.
+- Test it out! You should try creating a ticket by sending a DM to the bot or using the Panel you created to ensure,
+  that everything is working as expected and all permissions are set up correctly.
+
+- Join the [SupportMail Discord Server](https://help.supportmail.dev) if you need help or want to give feedback.
