@@ -5,8 +5,120 @@ sidebar:
   order: 3
 ---
 
-## Understanding Time Strings
+import { Tabs, TabItem, Aside } from "@astrojs/starlight/components";
 
-Explain time string formats used in messages (relative times, timezones, formats) and how users interpret them.
+<Aside type="caution" title="How languages are handled - Please read!">
+  The language in which the input is eventually processed is derived from the language of the
+  client. In other words, it is the language that the user has set in their Discord app. English is
+  always used by default if the language is not included in the supported languages.
+</Aside>
 
-> TODO: Add examples and conversion tips.
+<Tabs>
+<TabItem label="English">
+
+### Usable time units
+
+<div class="table-wrapper c1-right">
+
+| Time Unit    | Usable key terms                       |
+| ------------ | -------------------------------------- |
+| Milliseconds | `ms, milli, millisecond, milliseconds` |
+| Seconds      | `s, sec, secs, second, seconds`        |
+| Minutes      | `m, min, mins, minute, minutes`        |
+| Hours        | `h, hr, hrs, hour, hours`              |
+| Days         | `d, day, days`                         |
+| Weeks        | `w, week, weeks`                       |
+| Months       | `mon, mth, mths, month, months`        |
+| Years        | `y, yr, yrs, year, years`              |
+
+</div>
+
+### Usage
+
+Just type it in.
+
+`1 day` = **in 1 day**
+
+`1h 30mins` = **in 1 hours and 30 minutes**
+
+`2 hR 38sec` = **in 2 hours and 38 seconds**
+
+`2h 30 minute` = **in 2 hours and 30 minutes**
+
+<Aside type="tip">
+It doesn't matter if you use upper or lower case, or if you include spaces.
+</Aside>
+</TabItem>
+
+<TabItem label="Deutsch">
+
+### Nutzbare Zeiteinheiten
+
+<div class="table-wrapper c1-right">
+
+| Zeiteinheit   | Mögliche Schlüsselbegriffe               |
+| ------------- | ---------------------------------------- |
+| Millisekunden | `ms, milli, millisekunde, millisekunden` |
+| Sekunden      | `s, sek, sekunde, sekunden`              |
+| Minuten       | `m, min, mins, minute, minuten`          |
+| Stunden       | `h, st, stund, stunden`                  |
+| Tage          | `d, t, tag, tage`                        |
+| Wochen        | `w, woche, wochen`                       |
+| Monate        | `mon, mth, mons, monat, monate`          |
+| Jahre         | `y, j, jh, jahr, jahre`                  |
+
+</div>
+
+### Nutzung
+
+Einfach eintippen.
+
+`1 tag` = **in 1 Tag**
+
+`1st 30min` = **in 1 Stunde und 30 Minuten**
+
+`23 mInUTeN 38sEc` = **in 23 Minuten and 38 Sekunden**
+
+`2s 30 minute` = **in 2 Stunden and 30 Minuten**
+
+<Aside type="tip">
+Dabei spielt es keine Rolle, ob Groß- oder Kleinbuchstaben verwendet werden oder ob Leerzeichen enthalten sind.
+</Aside>
+</TabItem>
+
+<TabItem label="Français">
+
+### Unités de temps utilisables
+
+<div class="table-wrapper c1-right">
+
+| Unité de temps | Termes clés utilisables                  |
+| -------------- | ---------------------------------------- |
+| Millisecondes  | `ms, milli, milliseconde, millisecondes` |
+| Secondes       | `s, sec, secs, seconde, secondes`        |
+| Minutes        | `m, min, mins, minute, minutes`          |
+| Heures         | `h, hr, hrs, heure, heures`              |
+| Jours          | `d, j, jour, jours`                      |
+| Semaines       | `w, sem, semaine, semaines`              |
+| Mois           | `mon, mois`                              |
+| Années         | `y, a, an, ans, année, années`           |
+
+</div>
+
+### Utilisation
+
+Il vous suffit de l'écrire.
+
+`1 jour` = **en 1 jour**
+
+`1h 30minute` = **en 1 heure et 30 minutes**
+
+`2 H 38sec` = **en 2 heures et 38 secondes**
+
+`2h 30 minute` = **en 2 heures et 30 minutes**
+
+<Aside type="tip">
+Peu importe que vous utilisiez des majuscules ou des minuscules, ou que vous incluiez des espaces.
+</Aside>
+</TabItem>
+</Tabs>

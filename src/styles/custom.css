@@ -75,6 +75,9 @@ small {
 table thead th {
   border-bottom: 1px solid color-mix(in oklab, var(--sl-color-accent) 60%, transparent);
 }
+td {
+  padding-inline: 0.5rem;
+}
 
 code[dir="auto"]:hover {
   background-color: color-mix(in oklab, white 20%, var(--sl-color-bg-inline-code));
@@ -98,4 +101,30 @@ a[href="#footnote-label"]::after,
 a[href="#footnote-label"] svg {
   content: none;
   display: none;
+}
+
+.table-wrapper {
+  display: flex;
+  overflow-x: auto;
+  width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: var(--sl-color-accent) var(--sl-color-gray-2);
+
+  table {
+    display: table;
+  }
+
+  table,
+  thead,
+  tbody {
+    width: 100%;
+  }
+
+  &.c1-right {
+    /* col 1, align text right */
+    th:nth-child(1),
+    td:nth-child(1) {
+      text-align: end;
+    }
+  }
 }
