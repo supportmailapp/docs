@@ -92,3 +92,10 @@ div[data-type="image-wrapper"] img {
   object-fit: cover;
   transition: transform 0.3s ease;
 }
+
+/* Footnote labels have that stupid hover-link appearance */
+a[href="#footnote-label"]::after,
+a[href="#footnote-label"] svg {
+  content: none;
+  display: none;
+}
