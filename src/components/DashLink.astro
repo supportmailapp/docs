@@ -1,0 +1,15 @@
+---
+interface Props {
+  /**
+   * The route to append after the `DASHBOARD_URL` base URL.
+   */
+  route?: string;
+}
+const { route }: Record<string, any> = Astro.props;
+
+import { PUBLIC_DASHBOARD_URL } from "astro:env/client";
+
+const href = `${PUBLIC_DASHBOARD_URL}/${route?.replace(/^\/+/, "") || ""}`;
+---
+
+<a href={href} target="_blank" rel="noopener"><slot /></a>

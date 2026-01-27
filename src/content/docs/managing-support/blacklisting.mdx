@@ -1,0 +1,99 @@
+---
+title: Blacklisting
+description: Learn how to prevent users from creating tickets and reports and sending tags.
+sidebar:
+  order: 4
+banner:
+  content: See <a href="/getting-started#terminology">Terminology</a> for definitions of key terms used in this document.
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
+import Spacing from "../../../components/Spacing.astro";
+
+## Commands
+
+You can use the following commands to manage blacklists.
+
+| Command             | Description                       |
+| ------------------- | --------------------------------- |
+| `/blacklist add`    | Add an entity to a blacklist      |
+| `/blacklist remove` | Remove an entity from a blacklist |
+| `/blacklist check`  | Check if an entity is blacklisted |
+| `/blacklist clear`  | Reset a blacklist                 |
+
+## Command Access
+
+By default, all commands and subcommands are restricted to users with the **Timeout members** permission.
+You can modify this in the <DashLink route="?next=/command-config">dashboard</DashLink>.
+There you can set whitelisted channels, roles and users as well as needed permissions - if nothing is configured, default permission checks apply.
+
+<Aside type="caution">
+  It is highly recommended to restrict access to the `clear` subcommand to prevent accidental or
+  malicious removal of all blacklist entries.
+</Aside>
+
+## Blacklist Scopes
+
+You can blacklist an entity for multiple scopes:
+
+- Tickets
+- Reports
+- [Tags](/getting-support/using-tags/)
+
+## Blacklisting Anonymous Users
+
+If a user who created an anonymous ticket misbehaves and you want to prevent them from creating further tickets, you can blacklist them by the ticket ID.
+Use the `/blacklist add` command and provide the ticket ID in the `ticket-id` option.
+
+When blacklisting by ticket ID, the system will automatically extract the anonymous identifier from the ticket and add it to the blacklist.
+
+## Changing an Entry
+
+To update an entry, you can simply just use `/blacklist add` or `/blacklist remove` again with the same entity and provide the according scopes.
+
+### Examples
+
+<details>
+  <summary>A user is blocked from creating `tickets` and you want to allow them to create `tickets` again</summary>
+
+```plaintext
+/blacklist remove target:123456789012345678
+```
+
+<Aside type="note" title="Info">
+  Because the user was only blacklisted for one scope, the entry will be deleted directly.
+</Aside>
+
+</details>
+
+<details>
+  <summary>A user is blocked from creating `reports` and `tickets` and you want to allow them to create `tickets` again</summary>
+
+```plaintext
+/blacklist remove target:123456789012345678
+```
+
+You will be asked to select the scopes you want to remove.
+
+<Aside type="note" title="Info">
+  Because the user was blacklisted for multiple scopes, you can select multiple scopes to remove. If
+  you select all scopes, the entry will be deleted.
+</Aside>
+
+</details>
+
+<details>
+  <summary>A user is blocked from creating `tickets` and you want to also block them from creating `reports`</summary>
+
+```plaintext
+/blacklist add target:123456789012345678
+```
+
+You will be asked to select the scopes you want to add as you also would if you add a new entry.
+
+<Aside type="note" title="Info">
+  If you select scopes that are already blacklisted for the user, those will be ignored
+</Aside>
+
+</details>

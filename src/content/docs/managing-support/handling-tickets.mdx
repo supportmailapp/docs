@@ -2,9 +2,10 @@
 title: Handling Tickets
 description: Commands and workflows moderators use to manage tickets.
 sidebar:
-  order: 1
+  order: 2
 ---
 
+import { Aside } from "@astrojs/starlight/components";
 import ImageWrapper from "../../../components/ImageWrapper.astro";
 
 Welcome to the guide on handling support tickets. This document is addressed to moderators and supporters who are responsible for managing user inquiries and issues.
@@ -71,7 +72,57 @@ forward the message to the ticket's author and will be removed from the content 
 A niche feature is that you can reply to user messages in the ticket post and the bot will mimic this reply in the user's DMs.
 This helps to keep conversations clear and structured.
 
-<div class="flex flex-wrap gap-2">
+<div class="flex flex-wrap gap-2 items-center">
   <ImageWrapper>![Reply in ticket post](../../../assets/docs/reply-in-guild.png)</ImageWrapper>
-  <ImageWrapper class="mt-0">![Reply in user DMs](../../../assets/docs/reply-in-dm.png)</ImageWrapper>
+  <ImageWrapper class="mt-0">
+    ![Reply in user DMs](../../../assets/docs/reply-in-dm.png)
+  </ImageWrapper>
 </div>
+
+## Closing Tickets
+
+When the issue is resolved, staff can close the ticket using the `/close` command within the ticket post.
+This action will archive the ticket post and **won't** notify the user by default. If you want to notify the user about the closure, provide a comment or provide the appropriate option.
+
+You can also provide the `share-comment` option, which, if **True**, will make the bot send the user the provided comment when closing the ticket.
+If **False**, the user will not receive the comment. By default, the option is **True**.
+
+Another way to notify the user about the ticket's closure, is by having [Feedback](/managing-support/feedback) enabled
+which will result in a note and feedback components to rate the support being added to the direct message to the user.
+
+## Close Requests
+
+Tickets can't be closed by users directly. Instead, you can ask the user if they want to close the ticket using the `/close-request create` command. This will send a message to the user asking if they want to close the ticket.
+
+You can provide a comment and the `share-comment` option again. The user will see the comment when they receive the close request, if not otherwise specified.
+
+<Aside type="caution">
+  If **anyone** responds in the ticket while a close request is open, the close request will be
+  automatically cancelled.
+</Aside>
+
+### Timed Close Requests
+
+You can also provide a `close-time` option when creating a cose request. This will automatically close the ticket after the specified time if the user does not respond.
+
+See [Timestrings](/guides/timestrings) for more information on how to set the time correctly.
+
+### Deleting Close Requests
+
+If you need to cancel an open close request, you can use the `/close-request delete` command within the ticket post.
+This will remove the close request and silently delete the notification in the user's DMs.
+
+## Reopening Tickets
+
+If a ticket was closed but because God knows why someone wants to open it again, staff can use the `/reopen` command - follow the available options and read their descriptions and the ticket will be reopened.
+
+## Anonymous Replies
+
+Managers can configure whether messages in ticket posts are forwarded anonymously to the user. This is useful if staff want to maintain privacy or you have multiple staff members working on common tickets on a regular basis.
+
+## Anonymous Tickets
+
+Users can create anonymous tickets if a server has this feature enabled. In anonymous tickets, the user's identity is hidden from staff members. Staff will see a radnom nickname and avatar instead of the user's actual Discord username and avatar.
+
+If a user abuses this and misbehaves, take a look at [Blacklisting](/managing-support/blacklisting) to prevent the user from creating further tickets.
+
