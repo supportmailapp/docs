@@ -1,6 +1,7 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
+import tailwindcss from "@tailwindcss/vite";
 
 import starlight from "@astrojs/starlight";
 import sitemap from "@astrojs/sitemap";
@@ -14,6 +15,16 @@ export default defineConfig({
   adapter: cloudflare({ imageService: "compile" }),
   site: "https://docs.supportmail.dev",
   trailingSlash: "ignore",
+  env: {
+    schema: {
+      PUBLIC_DASHBOARD_URL: envField.string({
+        access: "public",
+        default: "https://dash.supportmail.dev",
+        context: "client",
+        optional: true,
+      }),
+    },
+  },
   integrations: [
     svelte({ extensions: [".svelte"] }),
     starlight({
@@ -40,7 +51,7 @@ export default defineConfig({
       credits: true,
       favicon: "/favicon.ico",
       lastUpdated: true,
-      customCss: ["./src/styles/custom.css"],
+      customCss: ["./src/styles/global.css"],
       components: {
         MarkdownContent: "./src/components/overrides/MarkdownContent.astro",
       },
@@ -120,4 +131,7 @@ export default defineConfig({
       },
     }),
   ],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

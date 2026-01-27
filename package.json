@@ -24,9 +24,11 @@
     "starlight-theme-rapide": "^0.5.2",
     "svelte": "^5.48.2",
     "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "wrangler": "^4.60.0"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.1.18",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1"
   },
