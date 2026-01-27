@@ -5,8 +5,73 @@ sidebar:
   order: 1
 ---
 
-## Handling Tickets
+import ImageWrapper from "../../../components/ImageWrapper.astro";
 
-Document workflows for moderators: claiming, replying, transferring, closing, and automations.
+Welcome to the guide on handling support tickets. This document is addressed to moderators and supporters who are responsible for managing user inquiries and issues.
 
-> TODO: Add command reference, step-by-step workflows, and common scenarios.
+## Ticket Creation
+
+When a user wants to contact support, they will eventually need to DM the bot, whether this is triggered by a command, panel or by DMing the bot.
+After the user completed the whole process, a ticket will be created. The user does not see that "a ticket was created", but will see "message sent".
+
+In the server, a ticket post will be created in the ticket forum. This post contains all relevant information about the ticket, including user details and the initial message.  
+Tickets with SupportMail are handled in a private ticket forum. Tickets are created as ticket posts in this forum. This removes the need for a transcript because the posts are locked and archived.
+
+## Interacting with the user
+
+In this ticket post, staff can interact with the user by just sending messages in the ticket post. These messages will be forwarded to the user via DM, depending on the configuration.
+
+### Automatic Forwarding
+
+Server managers can configure whether messages sent in the ticket post are automatically forwarded to the user. Automatic forwarding is the default behavior.
+If automatic forwarding is disabled, there are 3 ways to send messages to the user:
+
+#### 1. Using the `/send` command
+
+<ImageWrapper>![Send Command](../../../assets/docs/send-command.png)</ImageWrapper>
+
+The `/send` command lets staff send a message directly to a user or to the user associated with the current ticket.
+It's useful when automatic forwarding is disabled or when you want to message a user outside of the ticket workflow.
+
+##### Options
+
+- `user` (optional): The user to send the message to. Not required when used inside a ticket post.
+- `message` (optional): The content to send. Leave empty to open the interactive modal.
+- `anonym-override` (True/False): If True, the message will be sent anonymously. This only works when used inside a ticket.
+
+##### Behavior
+
+- In a ticket post: You can omit the user option and the bot will send the message to the ticket's author. Use anonym-override if you need an anonymous reply.
+- Outside a ticket: Supply the user option to send a direct message to that user.
+- Leaving the message blank opens the command modal to write longer replies.
+
+In a ticket, the bot will send the sent mesage in the ticket post as well, using a webhook to mimic your user.
+
+<ImageWrapper>
+  ![Send Command in a ticket](../../../assets/docs/send-cmd-in-ticket.png)
+</ImageWrapper>
+
+##### Failures and edge cases
+
+- If the recipient has DMs disabled or has blocked the bot, the message will fail and you'll receive an error.
+- Anonymous sending only applies to ticket replies and respects server configuration.
+
+#### 2. Use a flag or mention the bot
+
+You can also use a special flag `-r` or mention the bot at the start of your message. This tells the bot to
+forward the message to the ticket's author and will be removed from the content before sending it to the user.
+
+##### Examples
+
+- `-r Hello, how can I help you?`
+- `@SupportMail Hello, how can I help you?`
+
+### Replies
+
+A niche feature is that you can reply to user messages in the ticket post and the bot will mimic this reply in the user's DMs.
+This helps to keep conversations clear and structured.
+
+<div class="flex flex-wrap gap-2">
+  <ImageWrapper>![Reply in ticket post](../../../assets/docs/reply-in-guild.png)</ImageWrapper>
+  <ImageWrapper class="mt-0">![Reply in user DMs](../../../assets/docs/reply-in-dm.png)</ImageWrapper>
+</div>
