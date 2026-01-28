@@ -9,7 +9,7 @@ import sitemap from "@astrojs/sitemap";
 import starlightThemeRapide from "starlight-theme-rapide";
 import starlightImageZoomPlugin from "starlight-image-zoom";
 import starlightContextualMenu from "starlight-contextual-menu";
-import starlightSiteGraph from "starlight-site-graph";
+// import starlightSiteGraph from "starlight-site-graph";
 
 export default defineConfig({
   output: "static",
@@ -37,9 +37,7 @@ export default defineConfig({
           hideMainActionLabel: true,
           injectMarkdownRoutes: true,
         }),
-        starlightSiteGraph({
-          
-        }),
+        // starlightSiteGraph(),
       ],
       title: "SupportMail",
       description: "Documentation for SupportMail, the feature-rich modmail bot for Discord.",
@@ -128,5 +126,13 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    // optimizeDeps: {
+    //   include: ["picomatch", "micromatch", "anymatch"],
+    //   esbuildOptions: {
+    //     define: {
+    //       "process.platform": '"linux"',
+    //     },
+    //   },
+    // },
   },
 });
