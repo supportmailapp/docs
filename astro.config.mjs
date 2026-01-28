@@ -53,6 +53,9 @@ export default defineConfig({
       lastUpdated: true,
       customCss: ["./src/styles/global.css"],
       components: {
+        Header: "./src/components/overrides/Header.astro",
+        Sidebar: "./src/components/overrides/Sidebar.astro",
+        MobileMenuFooter: "./src/components/overrides/MobileMenuFooter.astro",
         MarkdownContent: "./src/components/overrides/MarkdownContent.astro",
       },
       head: [
@@ -76,18 +79,6 @@ export default defineConfig({
             name: "theme-color",
             content: "#214aff",
           },
-        },
-      ],
-      social: [
-        {
-          icon: "github",
-          label: "GitHub",
-          href: "https://github.com/orgs/supportmailapp",
-        },
-        {
-          icon: "discord",
-          href: "https://discord.gg/CkreDcF2PU",
-          label: "Support Server",
         },
       ],
       sidebar: [
