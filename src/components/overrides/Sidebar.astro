@@ -13,12 +13,19 @@ const { sidebar } = Astro.locals.starlightRoute;
 
 <SidebarPersister>
   <SidebarSublist sublist={sidebar} />
-  <LinkButton href="https://legal.supportmail.dev" variant="minimal" icon="external" iconPlacement="start">
-    Legal
-  </LinkButton>
-  <LinkButton href="https://venocix.de/?utm_source=supportmail" variant="minimal" icon="external" iconPlacement="start">
-    Venocix Hosting
-  </LinkButton>
+  <div class="flex flex-col w-full">
+    <LinkButton href="https://legal.supportmail.dev" variant="minimal" icon="external" iconPlacement="start">
+      Legal
+    </LinkButton>
+    <LinkButton
+      href="https://venocix.de/?utm_source=supportmail"
+      variant="minimal"
+      icon="external"
+      iconPlacement="start"
+    >
+      Venocix Hosting
+    </LinkButton>
+  </div>
 </SidebarPersister>
 
 <div class="md:sl-hidden">
