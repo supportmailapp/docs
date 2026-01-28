@@ -18,3 +18,15 @@ Most settings are applied globally. Granular settings can be configured in indiv
 - **Default Creation & Close Message**: These are used when creating or closing tickets and nothing else is set.
 
 Read the god damn descriptions in the dashboard please... Then you wouldn't need to read this.
+
+## Commands
+
+Although most settings are configured in the dashboard, some can also be configured via commands:
+
+### Pausing the ticket system
+
+`/config pause`  
+`/config resume`
+
+Pause or resume ticket creation (existing tickets are not affected)  
+Use a [timestring](/guides/timestrings) when providing a duration. It can also be a [unix timestamp](https://www.unixtimestamp.com/)
