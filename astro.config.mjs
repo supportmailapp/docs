@@ -109,10 +109,10 @@ export default defineConfig({
           label: "Guides",
           autogenerate: { directory: "guides" },
         },
-        {
-          label: "Troubleshooting",
-          autogenerate: { directory: "troubleshooting" },
-        },
+        // {
+        //   label: "Troubleshooting",
+        //   autogenerate: { directory: "troubleshooting" },
+        // },
         {
           label: "Changelogs",
           autogenerate: { directory: "changelogs" },
