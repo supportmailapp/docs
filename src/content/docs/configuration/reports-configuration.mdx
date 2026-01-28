@@ -1,12 +1,79 @@
 ---
 title: Reports Configuration
-description: Configure automated and manual reporting features.
+description: Configure report settings
 sidebar:
   order: 7
 ---
 
-## Reports Configuration
+import { Aside } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
+import ArrowInline from "../../../components/ArrowInline.astro";
+import LinkButton from "../../../components/LinkButton.astro";
 
-Explain how reporting is configured, scheduled reports, and data retention settings.
+## What are reports?
 
-> TODO: Add examples of report templates and settings.
+Reports in the context of a Discord bot are submissions made by users to notify server moderators of inappropriate behavior, messages, or activities within the server.
+
+These reports help maintain community standards by allowing moderators to review and take appropriate action against violations, ensuring a safe and respectful environment for all members.
+
+## The workflow
+
+Before each report-process is started, the following data is checked:
+
+- Is the author blacklisted?
+- Is the user immune?
+- Has the server, user, or author reached a limit?
+
+## Report Limits
+
+<LinkButton
+  variant="secondary"
+  href="https://dash.supportmail.dev?next=/report-settings"
+  icon="external"
+>
+  Configure
+</LinkButton>
+
+<div class="table-wrapper">
+
+| Limit                          | Explanation                                                                    | Min / Max configurable | Default |
+| ------------------------------ | ------------------------------------------------------------------------------ | ---------------------- | ------- |
+| Open reports a user can create | The number of reports that are still open and where the **author** is the user | 1 - 100                | 5       |
+| Max open reports per user      | The number of reports that are still open and where the **target** is the user | 1 - 100                | 1       |
+| Max open reports in the server | The number of open reports in the whole server                                 | 1 - 1000               | 20      |
+
+</div>
+
+_Limits for the limits may change when [SupportMail Diamond](https://supportmail.dev/premium) is introduced._
+
+<details>
+  <summary>Limits examples</summary>
+
+**Example 1:**
+
+- User A has created `5` reports that are still open.
+- The "Open reports a user can create" limit is set to `5`.
+- User A tries to create a new report.
+
+<ArrowInline class="ml-4" /> User A cannot create a new report because they have reached the limit
+of open reports they can create.
+
+**Example 2:**
+
+- User B has `3` open reports against them.
+- The "Max open reports per user" limit is set to `3`.
+- User C tries to create a new report against User B.
+
+<ArrowInline class="ml-4" /> User C cannot create a new report against User B because User B has
+reached the limit of open reports against them.
+
+**Example 3:**
+
+- The server has `20` open reports.
+- The "Max open reports in the server" limit is set to `20`.
+- User D tries to create a new report.
+
+<ArrowInline class="ml-4" /> User D cannot create a new report because the server has reached the
+maximum number of open reports allowed.
+
+</details>

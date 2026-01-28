@@ -104,9 +104,9 @@ a[href="#footnote-label"] svg {
 }
 
 .table-wrapper {
-  display: flex;
   overflow-x: auto;
   width: 100%;
+  /* min-width: var(--breakpoint-sm); | Horizontal scroll is bugged */
   scrollbar-width: thin;
   scrollbar-color: var(--sl-color-accent) var(--sl-color-gray-2);
 

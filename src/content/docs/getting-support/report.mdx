@@ -1,0 +1,28 @@
+---
+title: Reports
+description: Report users and messages to server moderators
+sidebar:
+  order: 5
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+You can report messages in the server using <Annotation annotate="Slash commands start with a forward slash [/] and let you trigger bot functions directly. You can browse them by clicking the little + icon on the left side in the chat bar for easy access.">
+slash commands</Annotation>
+or <Annotation annotate="Context commands appear when you right-click a user or message and hovering over Apps, offering specific actions related to that context (user/message)">
+context menu commands</Annotation>.
+
+#### Report metadata
+
+When reporting messages or users you might need to provide additional information depending on the type of report:
+
+| Command                    | Reason       | Comment  | Attachments |
+| -------------------------- | ------------ | -------- | ----------- |
+| `/report message`          | Optional     | Optional | --          |
+| `Report Message` (Context) | Optional     | Optional | --          |
+| `/report user`             | **Required** | Optional | Optional    |
+| `Report User` (Context)    | **Required** | Optional | Optional    |
+
+After submitting a report, the moderators in the server will be notified and can take appropriate action based on the information provided.
+
+You might or might not receive feedback on the report depending on the server's configuration and moderation policies.

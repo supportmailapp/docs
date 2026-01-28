@@ -1,3 +1,13 @@
+---
+import type { ClassValue } from "svelte/elements";
+
+interface Props {
+  class?: ClassValue;
+}
+
+const { class: className } = Astro.props;
+---
+
 <svg
   xmlns="http://www.w3.org/2000/svg"
   width="24"
@@ -8,6 +18,6 @@
   stroke-width="2.75"
   stroke-linecap="round"
   stroke-linejoin="round"
-  class="lucide lucide-arrow-right-icon lucide-arrow-right inline-block h-[1.05rem]"
+  class={`lucide lucide-arrow-right-icon lucide-arrow-right inline-block h-[1.05rem] ${className ?? ""}`.trim()}
   ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg
 >
