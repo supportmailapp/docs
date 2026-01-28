@@ -3,7 +3,10 @@
   "main": "dist/_worker.js/index.js",
   "name": "sm-docs",
   "compatibility_date": "2026-01-26",
-  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
   "assets": {
     "binding": "ASSETS",
     "directory": "./dist",
@@ -11,4 +14,11 @@
   "observability": {
     "enabled": true,
   },
+  "routes": [
+    {
+      "custom_domain": true,
+      "pattern": "docs.supportmail.dev"
+    }
+  ],
+  "workers_dev": true
 }
