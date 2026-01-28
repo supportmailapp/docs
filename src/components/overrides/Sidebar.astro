@@ -8,11 +8,14 @@ const { sidebar } = Astro.locals.starlightRoute;
 ---
 
 <div class="sl-flex gap-2 md:sl-hidden w-full justify-start">
-  <LinkButton href="https://dash.supportmail.dev" variant="primary" iconPlacement="start">Dashboard</LinkButton>
+  <LinkButton href="https://dash.supportmail.dev" variant="primary">Dashboard</LinkButton>
 </div>
 
 <SidebarPersister>
   <SidebarSublist sublist={sidebar} />
+  <LinkButton href="https://legal.supportmail.dev" variant="minimal" icon="external" iconPlacement="start">
+    Legal
+  </LinkButton>
 </SidebarPersister>
 
 <div class="md:sl-hidden">
