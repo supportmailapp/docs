@@ -77,3 +77,54 @@ reached the limit of open reports against them.
 maximum number of open reports allowed.
 
 </details>
+
+<Aside type="note">
+  There are so-called "hard limits" which are hardcoded in the bot and cannot be changed in any way.
+</Aside>
+
+## Report Actions
+
+Moderators can take actions on reports to manage and resolve them. The available actions include:
+
+| Action                         | Description                                                                                                                                       |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Ignore**\*                   | Dismiss the report without taking any action.<br />_implies that the report has been rejected_                                                    |
+| **Resolve** (without action)\* | Mark the report as resolved after taking appropriate action on the reported issue.<br />_implies that the report has been handled in another way_ |
+| **Timeout**                    | Timeout the user<br />[min-max: 10 seconds - 28 days](https://support.discord.com/hc/en-us/articles/4413305239191-Time-Out-FAQ)                   |
+| **Kick**                       | Remove the user from the server                                                                                                                   |
+| **Ban**                        | Permanently ban the user from the server                                                                                                          |
+| **Delete Reported Message**    | Delete the message that was reported                                                                                                              |
+
+\* These actions are always available, even if you disable actions in the [Dashboard](https://dash.supportmail.dev?next=/report-settings).
+
+## Immune Entities
+
+You can configure certain users and roles to be immune from being reported. This means that reports against
+these entities will show an error to the user trying to report them, indicating that they cannot be reported.
+
+<Aside type="danger">
+  However, if you have a larger team or do not know how they behave, we strongly recommend that you
+  do not configure this setting to ensure that no one abuses their rights and breaks rules with
+  impunity.
+</Aside>
+
+## Moderators
+
+By default, everyone with at least **Timeout members** permissions can take action on a report.
+Kick and ban require the user to also have the respective permission.
+
+Mods also bypass the report limit you've manually configured. _(the hard limits still apply)_
+
+## Special Channels
+
+You can configure specific channels in your server to be excluded/included from reporting.
+
+If you include channels, reports can only be created in those channels.  
+If you exclude channels, reports cannot be created in those channels.
+
+You cannot configured both at the same time - you need to choose one or the other.
+
+<Aside type="note">
+  By default, no channels are excluded or included, meaning that reports can be created in any
+  channel.
+</Aside>
