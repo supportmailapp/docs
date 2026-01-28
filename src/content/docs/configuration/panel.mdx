@@ -1,12 +1,30 @@
 ---
 title: Panel
-description: The configuration panel and its options for SupportMail.
+description: Let users create tickets via a panel message
 sidebar:
   order: 4
+tableOfContents:
+  maxHeadingLevel: 2 # we dont wanna display h3 on this page
 ---
 
-## Panel
+import { Aside } from "@astrojs/starlight/components";
+import ImageWrapper from "../../../components/ImageWrapper.astro";
 
-Describe the Panel (UI) configuration: how to create/configure panels, buttons, and links that users interact with.
+The idea of modmail is, to reduce clutter in your server by removing public support
+channels where users can see their tickets and a channel where they can create tickets.
 
-> TODO: Add examples and UI screenshots for panel setup.
+However you might notice, that users might not know how to create tickets in the first place if your users are not the most "discord-savvy".
+
+To solve this, you can create a Panel in your server. A Panel is a message in a specified channel where users can create tickets by interacting clicking a button.
+
+Currently, you can only create a Panel by using the `/config panel` command in your server.
+This will be moved to the dashboard in the future with more options, providing a better user experience.
+
+### Example
+
+<ImageWrapper>![Panel Example](../../../assets/docs/panel-example.png)</ImageWrapper>
+
+<Aside type="note">
+  The author of the embed can currently not be changed but when the panel builder in the dashboard
+  is completed, you will be able to customize the panel completely.
+</Aside>
