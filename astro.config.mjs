@@ -9,6 +9,7 @@ import sitemap from "@astrojs/sitemap";
 import starlightThemeRapide from "starlight-theme-rapide";
 import starlightImageZoomPlugin from "starlight-image-zoom";
 import starlightContextualMenu from "starlight-contextual-menu";
+import starlightSidebarSwipe from "starlight-sidebar-swipe";
 // import starlightSiteGraph from "starlight-site-graph";
 
 export default defineConfig({
@@ -37,6 +38,7 @@ export default defineConfig({
           hideMainActionLabel: true,
           injectMarkdownRoutes: true,
         }),
+        starlightSidebarSwipe(),
         // starlightSiteGraph(),
       ],
       title: "SupportMail",

@@ -21,6 +21,7 @@
     "sharp": "^0.34.5",
     "starlight-contextual-menu": "^0.1.5",
     "starlight-image-zoom": "^0.13.2",
+    "starlight-sidebar-swipe": "^0.1.1",
     "starlight-theme-rapide": "^0.5.2",
     "svelte": "^5.48.2",
     "tailwindcss": "^4.1.18",

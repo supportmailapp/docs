@@ -35,6 +35,9 @@ importers:
       starlight-image-zoom:
         specifier: ^0.13.2
         version: 0.13.2(@astrojs/starlight@0.37.4(astro@5.16.15(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.56.0)(typescript@5.9.3)))
+      starlight-sidebar-swipe:
+        specifier: ^0.1.1
+        version: 0.1.1(@astrojs/starlight@0.37.4(astro@5.16.15(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.56.0)(typescript@5.9.3)))
       starlight-theme-rapide:
         specifier: ^0.5.2
         version: 0.5.2(@astrojs/starlight@0.37.4(astro@5.16.15(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.56.0)(typescript@5.9.3)))
@@ -2777,6 +2780,12 @@ packages:
     resolution: {integrity: sha512-23LXRaZp7pyE+r/HP6rxHfwic8HfvUBT4EImECA6encs/eTtrF0Z+7svANofdtfbiNt31D5q26i03B6FtcSmGg==}
     peerDependencies:
       astro: ^5.0.0
+
+  starlight-sidebar-swipe@0.1.1:
+    resolution: {integrity: sha512-Q+xv7LSpSLCG3yQaEmZX4Qpks9dcIEc+FBA0Ql+LbLMO9IMBXt8S2zK5wJDhjJn5lbI0i0ipyP375T1GrVS8ig==}
+    engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
+    peerDependencies:
+      '@astrojs/starlight': '>=0.30'
 
   starlight-site-graph@0.5.0:
     resolution: {integrity: sha512-/FYCXDg+JwQGtxaDy1X/Lhhc5CYAF0ThOWvzBH3VmJSRlpAhqWgoUS/mGUNSy+QqGns+een+VDma+dkfBVWggA==}
@@ -6350,6 +6359,10 @@ snapshots:
   starlight-markdown@0.1.5(astro@5.16.15(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.56.0)(typescript@5.9.3)):
     dependencies:
       astro: 5.16.15(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.56.0)(typescript@5.9.3)
+
+  starlight-sidebar-swipe@0.1.1(@astrojs/starlight@0.37.4(astro@5.16.15(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.56.0)(typescript@5.9.3))):
+    dependencies:
+      '@astrojs/starlight': 0.37.4(astro@5.16.15(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.56.0)(typescript@5.9.3))
 
   starlight-site-graph@0.5.0(@astrojs/starlight@0.37.4(astro@5.16.15(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.56.0)(typescript@5.9.3)))(astro@5.16.15(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.56.0)(typescript@5.9.3)):
     dependencies:
