@@ -2,13 +2,14 @@
 import { defineConfig, envField } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
 import tailwindcss from "@tailwindcss/vite";
+import svelte from "@astrojs/svelte";
 
 import starlight from "@astrojs/starlight";
 import sitemap from "@astrojs/sitemap";
 import starlightThemeRapide from "starlight-theme-rapide";
 import starlightImageZoomPlugin from "starlight-image-zoom";
 import starlightContextualMenu from "starlight-contextual-menu";
-import svelte from "@astrojs/svelte";
+import starlightSiteGraph from "starlight-site-graph";
 
 export default defineConfig({
   output: "static",
@@ -35,6 +36,9 @@ export default defineConfig({
           actions: ["copy", "view", "chatgpt", "claude", "grok"],
           hideMainActionLabel: true,
           injectMarkdownRoutes: true,
+        }),
+        starlightSiteGraph({
+          
         }),
       ],
       title: "SupportMail",

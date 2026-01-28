@@ -3,10 +3,47 @@ title: Ticket Categories
 description: How to create and manage ticket categories used for routing and reporting.
 sidebar:
   order: 3
+banner:
+  content: See <a href="/getting-started#terminology">Terminology</a> for definitions of key terms used in this document.
 ---
 
-## Ticket Categories
+import { Aside } from "@astrojs/starlight/components";
 
-Explain categories, when to use them, and how they affect routing and reporting.
+Ticket categories allow you to organize tickets into different groups for better management.
 
-> TODO: Add examples, category best practices, and migration tips.
+<Aside type="note">
+  You need to configure at least two categories for them to be choosable by users before creating a
+  ticket.
+</Aside>
+
+## Category Specific settings
+
+The following settings differ from the [global ticket system configuration](/configuration/ticket-system-config):
+
+- **Category Name**: The name of the ticket category
+- **Emoji**: An optional emoji to represent the category, which is used for the tag in the ticket forum and is applied to the ticket post for tickets in that category and the emoji in the category selection menu.
+- **Pings**: Overwrite the default global pings.
+- **Creation & Close Message**: Overwrite the default global messages.
+- **Modal Fields**: Have up to 5 questions, the user is asked before creating a ticket in this category.
+
+## Syncing Category Tags
+
+On the main page where all catgories are listed, there is a button to "Sync Category Tags".
+When clicked, you can select up to 14/9 categories to sync their tags to the ticket forum.
+This means, you can have a tag for each category in the ticket forum, making it easier to filter tickets by category.
+
+<details>
+  <summary>Why (only) 14/9 tags?</summary>
+
+This limit for tags in a forum is 20. However, [6 tags](/managing-support/handling-tickets#ticket-forum-tags) are reserved by the ticket system itself.
+
+This leaves 14 tags for category tags.
+
+However if you have feedback enabled and set up Rating Tags, those will also reserve 5 tags in the forum for each rating (1-5 stars).
+This leaves only 9 tags for category tags. So be mindful of that when syncing category tags if you have feedback with rating tags enabled.
+
+<Aside type="note">
+  It might added in the future to apply activity tags manually to free 3 more tags.
+</Aside>
+
+</details>

@@ -1,12 +1,20 @@
 ---
 title: Ticket System Config
-description: Configuration options for ticket behavior and routing.
+description: Global configuration options for the ticket system
 sidebar:
   order: 2
 ---
 
-## Ticket System Configuration
+Most settings are applied globally. Granular settings can be configured in individual [ticket categories](/configuration/ticket-categories).
 
-Document global settings, routing, automations, and typical configuration patterns for admins.
+- **Status**: Ticket System is enabled or disabled
+- **Pausing**: Pause ticket creation globally indefinitely or for a set time period/until a specific date (up to 1 month)
+- **Ticket Forum**: The forum where tickets are created in
+- **Automatic Forwarding**: Whether replies in ticket posts are automatically forwarded to the user
+- **Allowed Bots**: Bots are usually ignored in ticket posts. Allow up to 5 bots that will not be ignored.
+- **Pings**: A list of entities (roles/users) that will be pinged when a new ticket is created
+- **Anonymous Replies**: When enabled, every reply from the staff will be anonymously sent to the user, hiding the staff's identity.
+- **Anonymous Tickets**: You can allow users to open tickets without revealing their identity.
+- **Default Creation & Close Message**: These are used when creating or closing tickets and nothing else is set.
 
-> TODO: Include examples of JSON/YAML config and recommended defaults.
+Read the god damn descriptions in the dashboard please... Then you wouldn't need to read this.
