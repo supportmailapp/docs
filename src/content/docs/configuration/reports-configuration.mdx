@@ -10,13 +10,15 @@ import DashLink from "../../../components/DashLink.astro";
 import ArrowInline from "../../../components/ArrowInline.astro";
 import LinkButton from "../../../components/LinkButton.astro";
 
-## What are reports?
+## About Reports
+
+### What are reports?
 
 Reports in the context of a Discord bot are submissions made by users to notify server moderators of inappropriate behavior, messages, or activities within the server.
 
 These reports help maintain community standards by allowing moderators to review and take appropriate action against violations, ensuring a safe and respectful environment for all members.
 
-## The workflow
+### The workflow
 
 Before each report-process is started, the following data is checked:
 
@@ -24,7 +26,7 @@ Before each report-process is started, the following data is checked:
 - Is the user immune?
 - Has the server, user, or author reached a limit?
 
-## Report Limits
+## Configuration
 
 <LinkButton
   variant="secondary"
@@ -33,6 +35,8 @@ Before each report-process is started, the following data is checked:
 >
   Configure
 </LinkButton>
+
+### Report Limits
 
 <div class="table-wrapper">
 
@@ -82,7 +86,7 @@ maximum number of open reports allowed.
   There are so-called "hard limits" which are hardcoded in the bot and cannot be changed in any way.
 </Aside>
 
-## Report Actions
+### Report Actions
 
 Moderators can take actions on reports to manage and resolve them. The available actions include:
 
@@ -97,7 +101,7 @@ Moderators can take actions on reports to manage and resolve them. The available
 
 \* These actions are always available, even if you disable actions in the [Dashboard](https://dash.supportmail.dev?next=/report-settings).
 
-## Immune Entities
+### Immune Entities
 
 You can configure certain users and roles to be immune from being reported. This means that reports against
 these entities will show an error to the user trying to report them, indicating that they cannot be reported.
@@ -108,14 +112,14 @@ these entities will show an error to the user trying to report them, indicating 
   impunity.
 </Aside>
 
-## Moderators
+### Moderators
 
 By default, everyone with at least **Timeout members** permissions can take action on a report.
 Kick and ban require the user to also have the respective permission.
 
 Mods also bypass the report limit you've manually configured. _(the hard limits still apply)_
 
-## Special Channels
+### Special Channels
 
 You can configure specific channels in your server to be excluded/included from reporting.
 
