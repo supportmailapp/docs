@@ -116,6 +116,7 @@ export default defineConfig({
         {
           label: "Changelogs",
           autogenerate: { directory: "changelogs" },
+          collapsed: true,
         },
       ],
     }),
