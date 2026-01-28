@@ -2,7 +2,7 @@
 title: Handling Tickets
 description: Commands and workflows moderators use to manage tickets.
 sidebar:
-  order: 2
+  order: 1
 ---
 
 import { Aside } from "@astrojs/starlight/components";
@@ -87,7 +87,7 @@ This action will archive the ticket post and **won't** notify the user by defaul
 You can also provide the `share-comment` option, which, if **True**, will make the bot send the user the provided comment when closing the ticket.
 If **False**, the user will not receive the comment. By default, the option is **True**.
 
-Another way to notify the user about the ticket's closure, is by having [Feedback](/managing-support/feedback) enabled
+Another way to notify the user about the ticket's closure, is by having [Feedback](/configuration/ticket-feedback-configuration) enabled
 which will result in a note and feedback components to rate the support being added to the direct message to the user.
 
 ## Close Requests

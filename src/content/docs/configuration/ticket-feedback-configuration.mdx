@@ -5,8 +5,26 @@ sidebar:
   order: 6
 ---
 
-## Ticket Feedback Configuration
+Managers can configure feedback collection settings to gather insights from users after their support tickets are resolved. This feedback helps improve service quality and user satisfaction.
 
-Document how feedback is gathered after ticket resolution, scoring options, and storage/analytics.
+However there are a few side effects to be aware of when enabling feedback collection:
 
-> TODO: Add examples of feedback flows and configuration options.
+- The user will receive a notification once their ticket is closed, prompting them to provide feedback.  
+  This interrupts with the usual flow of ticket closure - usually the user won't receive any notification
+  that their ticket has been closed because they don't even see "Ticket Created".
+- Feedback responses are stored in the database and can optionally be sent in a channel - the discord message will contain an attachment with the feedback details because of potential length.
+
+## Configuration
+
+To set this up go in the [dashboard](https://dashboard.supportmail.dev?next=/feedback) and navigate to the "Feedback" section.
+
+There you can configure all possible settings:
+
+- **Enable Feedback Collection**: Toggle to enable or disable feedback collection for closed tickets.
+- **Feedback Channel**: Specify a channel where feedback responses will be sent. If left blank, feedback will only be available in the dashboard when you view a ticket's details. _Analytics and an overview will be added in the future._
+- **Thank You Message**: Customize the message users see after submitting their feedback.
+- **Feedback Questions**: Define form fields to collect specific information from users. You can various types of fields: text input, text display and a select menu with predefined options.
+
+## User Experience
+
+When feedback collection is enabled, users will receive a message in their direct messages after their ticket is closed. This message will contain the feedback form with the configured questions.
