@@ -1,0 +1,8 @@
+---
+// For centering content horizontally
+const { class: className = "" }: Record<string, any> = Astro.props;
+---
+
+<div class={"mx-auto " + className}>
+  <slot />
+</div>

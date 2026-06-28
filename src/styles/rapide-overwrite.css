@@ -1,0 +1,105 @@
+/* Copid from rapide but with all green colors changed to blue colors */
+
+/**
+  * Badges
+  */
+.sl-badge {
+  --sl-badge-default-text: var(--sl-color-blue-high);
+  --sl-badge-tip-text: var(--sl-color-purple-high);
+  --sl-badge-caution-text: var(--sl-color-orange-high);
+  --sl-badge-note-text: var(--sl-color-blue-high);
+  --sl-badge-success-text: var(--sl-color-blue-high);
+  --sl-badge-danger-text: var(--sl-color-red-high);
+
+  [data-theme="light"] & {
+    --sl-badge-default-bg: var(--sl-color-blue-low);
+    --sl-badge-default-text: var(--sl-color-blue-high);
+    --sl-badge-tip-bg: var(--sl-color-purple-low);
+    --sl-badge-tip-text: var(--sl-color-purple-high);
+    --sl-badge-caution-bg: var(--sl-color-orange-low);
+    --sl-badge-caution-text: var(--sl-color-orange-high);
+    --sl-badge-note-bg: var(--sl-color-blue-low);
+    --sl-badge-note-text: var(--sl-color-blue-high);
+    --sl-badge-success-bg: var(--sl-color-blue-low);
+    --sl-badge-success-text: var(--sl-color-blue-high);
+    --sl-badge-danger-bg: var(--sl-color-red-low);
+    --sl-badge-danger-text: var(--sl-color-red-high);
+  }
+}
+
+/**
+  * Link buttons
+  */
+.sl-link-button {
+  padding: 0.75rem 1rem;
+
+  svg {
+    font-size: 1.25rem;
+  }
+
+  &.primary {
+    background-color: var(--sl-color-blue-low);
+    border: 1px solid var(--sl-color-blue);
+    color: var(--sl-color-blue-high);
+
+    &:is(:hover, :focus-visible) {
+      border-color: oklch(52% 0.11 var(--sl-hue-blue));
+      color: var(--sl-color-blue-accent-invert);
+    }
+  }
+
+  &.secondary {
+    border-color: var(--sl-color-gray-2);
+    color: var(--sl-color-gray-2);
+
+    &:is(:hover, :focus-visible) {
+      border-color: var(--sl-color-accent-high);
+      color: var(--sl-color-accent-high);
+    }
+  }
+
+  &.minimal {
+    padding-inline: 0.25rem;
+
+    &:is(:hover, :focus-visible) {
+      color: var(--sl-color-accent-high);
+    }
+  }
+}
+
+/**
+   * Banner
+   */
+.sl-banner {
+  background-color: var(--sl-color-blue-low);
+  border: 1px solid var(--sl-color-blue);
+  border-radius: 0.5rem;
+  box-shadow: none;
+  color: var(--sl-color-blue-high);
+  line-height: 1.4;
+  margin-block: 2rem -0.5rem;
+  margin-inline: var(--sl-content-pad-x);
+  max-width: var(--sl-content-width);
+  padding: 1rem;
+  text-align: start;
+  text-wrap: initial;
+
+  a {
+    color: var(--sl-color-blue-accent);
+    text-underline-offset: 0.25em;
+
+    &:is(:hover, :focus-visible) {
+      color: var(--sl-color-blue-accent-invert);
+    }
+  }
+
+  @media (min-width: 72rem) {
+    margin-bottom: -1rem;
+    margin-inline: auto;
+
+    [data-has-sidebar] & {
+      justify-self: end;
+      margin-inline: var(--sl-content-pad-x);
+    }
+  }
+}
