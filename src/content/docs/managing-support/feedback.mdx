@@ -7,6 +7,7 @@ sidebar:
 
 import { Aside } from "@astrojs/starlight/components";
 import DashLink from "../../../components/DashLink.astro";
+import ImageWrapper from "../../../components/ImageWrapper.astro";
 
 Feedback lets users rate their support experience when a ticket closes. It gives your team a simple signal of how support is going and doubles as a friendly closure notification for the user. This page is for staff - for the setup options, see [Ticket Feedback Configuration](/configuration/ticket-feedback-configuration).
 
@@ -36,12 +37,16 @@ Each submission is posted to your feedback channel as a compact card:
 - **The user's avatar** appears as a thumbnail, unless the ticket was anonymous.
 - **Answers to custom questions** are rendered into a clean image attached to the card, so longer written feedback stays readable.
 
-Use these cards to spot recurring problems, recognise good work, and see where your process needs improvement.
+<ImageWrapper>
+  ![Example feedback in a Discord
+  channel](../../../assets/docs/feedback-example.png)
+</ImageWrapper>
 
 ## Enabling feedback
 
 Turn it on and choose the feedback channel, thank-you message and any custom questions under <DashLink route="?next=/feedback">Feedback</DashLink> in the dashboard. Full details are in [Ticket Feedback Configuration](/configuration/ticket-feedback-configuration).
 
 <Aside type="note">
-  Keep it light - a rating plus at most a question or two gets far more responses than a long survey.
+  Keep it light - a rating plus at most one or two questions get far more
+  responses than a long survey.
 </Aside>
