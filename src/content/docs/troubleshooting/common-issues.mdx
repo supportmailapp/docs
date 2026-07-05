@@ -5,8 +5,62 @@ sidebar:
   order: 1
 ---
 
-## Troubleshooting — Common Issues
+import { Aside, LinkButton } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
 
-Collect frequent issues, diagnostic steps, and quick fixes.
+Quick fixes for the problems people run into most. If none of these help, [contact us](#still-stuck) and we'll take a look.
 
-> TODO: Add troubleshooting checklist, logs to check, and contact steps.
+## For users
+
+**The bot won't let me open a ticket / my DM goes unanswered**
+
+- Make sure your DMs are open. In the server's **Privacy Settings**, enable _Direct Messages_ so the bot can reach you.
+- You may need to authorize SupportMail with your Discord account first — the bot uses this to identify you from DMs.
+- The server may have the ticket system **paused or disabled**, or you may be [blacklisted](/managing-support/blacklisting) from tickets. Ask the server's staff.
+
+**The panel button does nothing**
+
+- Check your DMs — the bot messages you there to continue. If nothing arrives, your DMs are likely closed.
+
+## For moderators
+
+**Messages I send in a ticket aren't reaching the user**
+
+- **Automatic Forwarding** may be off. Either turn it on, or reply with `/send`, the `-r` flag, or by mentioning the bot. See [Handling Tickets](/managing-support/handling-tickets).
+- If the user has since disabled their DMs or blocked the bot, delivery fails and you'll see an error.
+
+**Report actions (timeout / kick / ban) fail**
+
+- The bot needs the matching Discord permission **and** a role positioned above the target user. Check the role order and the bot's permissions.
+
+## For admins
+
+**Tickets or reports aren't working at all**
+
+- Confirm the system is **enabled** and not **paused** in <DashLink route="?next=/ticket-settings">Ticket Settings</DashLink> / <DashLink route="?next=/report-settings">Report Settings</DashLink>.
+- Reports require an **alert channel** before they can be enabled.
+- The ticket forum requires a **Community server** so Discord allows forum channels. See [Getting Started](/getting-started).
+
+**Users can't open tickets even though the system is on**
+
+- You need at least one enabled [ticket category](/configuration/ticket-categories).
+
+**A server is missing from the dashboard**
+
+- You need the **Manage Server** permission there, and the bot must be in the server.
+
+## Checklist
+
+Before reporting a bug, quickly verify:
+
+- [ ] The bot is in the server and online
+- [ ] The relevant system is enabled and not paused
+- [ ] The bot has the permissions it needs (and correct role order)
+- [ ] The user's DMs are open and they authorized the bot
+- [ ] The user isn't blacklisted
+
+## Still stuck?
+
+<LinkButton href="https://help.supportmail.dev" icon="external">
+  Join the Support Server
+</LinkButton>

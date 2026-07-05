@@ -5,8 +5,40 @@ sidebar:
   order: 1
 ---
 
-## Dashboard Overview
+import { Aside, LinkButton } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
 
-Explain the dashboard layout, key metrics, and how managers can use it to monitor support activity.
+The dashboard is the web app where server managers configure SupportMail without touching Discord commands. Everything on this page can also be done in Discord, but the dashboard is usually faster and easier.
 
-> TODO: Add screenshots and descriptions of each dashboard widget.
+<LinkButton href="https://dash.supportmail.dev" icon="external">
+  Open the Dashboard
+</LinkButton>
+
+## Signing in
+
+Log in with Discord and authorize the app. You'll see every server where you have the **Manage Server** permission and SupportMail is present. Select a server to open its configuration.
+
+<Aside type="note">
+  If a server is missing, make sure the bot is in it and that you have the **Manage Server**
+  permission there.
+</Aside>
+
+## Navigation
+
+Once a server is selected, the sidebar groups the settings into pages:
+
+| Page                   | What you configure                                                        |
+| ---------------------- | ------------------------------------------------------------------------- |
+| **Home**               | A quick summary of the server and its SupportMail status                  |
+| **Ticket Settings**    | The ticket forum, messages, forwarding, anonymity and pings               |
+| **Ticket Categories**  | The topics users choose from when opening a ticket                        |
+| **Panel**              | The message with a button members use to create tickets                   |
+| **Feedback**           | Post-ticket rating and custom questions                                   |
+| **Tags**               | Reusable snippet responses                                                |
+| **Reports**            | Report system settings and the list of submitted reports                  |
+| **Blacklist**          | Users and roles blocked from tickets, reports or tags                     |
+| **Command Config**     | Who can use which commands, and in which channels                         |
+
+## Saving changes
+
+Most pages only apply changes after you press **Save**. When you have unsaved changes, a save bar appears — use it to save or discard. Navigating away without saving discards your edits.

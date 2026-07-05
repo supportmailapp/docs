@@ -5,8 +5,38 @@ sidebar:
   order: 2
 ---
 
-## Ticket System Configuration
+import { Aside } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
 
-Document global settings, routing, automations, and typical configuration patterns for admins.
+These are the core settings for how tickets work in your server. Open them under <DashLink route="?next=/ticket-settings">Ticket Settings</DashLink> in the dashboard, or use `/config tickets` in Discord.
 
-> TODO: Include examples of JSON/YAML config and recommended defaults.
+## System Control
+
+Turn the ticket system **on** or **off**, or **pause** it temporarily. Pausing keeps all your settings intact and stops new tickets until the date you choose (or until you resume). Existing tickets are unaffected.
+
+## Ticket Forum
+
+The private forum channel where tickets are created as posts. You set this up once — via <DashLink route="?next=/ticket-settings?setup=true">the dashboard</DashLink> or `/setup tickets` — and the bot creates and configures the forum for you.
+
+<Aside type="caution">
+  Your server must be a Community server so Discord allows forum channels. See
+  [Getting Started](/getting-started) for the setup steps.
+</Aside>
+
+## Message Handling
+
+- **Automatic Forwarding** — when enabled (the default), messages staff send in a ticket post are relayed to the user automatically. When disabled, staff send replies manually with `/send`, the `-r` flag, or by mentioning the bot. See [Handling Tickets](/managing-support/handling-tickets).
+- **Allowed Bots** — by default other bots are ignored in tickets. Add bots here if you want their messages forwarded too.
+
+## Default Messages
+
+Set the **creation** and **close** messages users receive when a ticket opens or closes. [Ticket Categories](/configuration/ticket-categories) can override these per category.
+
+## Anonymity
+
+- **Anonymous Replies** — staff replies show a generic identity instead of the individual staff member.
+- **Anonymous Tickets** — lets users open tickets without revealing who they are; staff see a random nickname and avatar.
+
+## Notifications (Pings)
+
+Choose which roles and users get pinged when a new ticket is created, so your team is notified right away.
