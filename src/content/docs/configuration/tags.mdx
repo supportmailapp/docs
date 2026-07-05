@@ -5,8 +5,32 @@ sidebar:
   order: 5
 ---
 
-## Tags (Admin)
+import { Aside } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
 
-Admin documentation for creating and mapping tags to routing, views, and automations.
+Tags (also called snippets) are reusable pieces of text your staff can send with the `/tag` command. This page covers **creating and managing** them. For how staff send tags, see [Using Tags](/getting-support/using-tags).
 
-> TODO: Include API examples, CLI commands, and dashboard steps.
+## Managing tags
+
+Manage tags in the <DashLink route="?next=/tags">dashboard</DashLink> or with `/config tags` in Discord, which has subcommands for adding, removing and editing tags.
+
+Each tag has:
+
+- **Name** - what staff type to send it (`/tag name-or-id`). Keep it short and memorable.
+- **Content** - the text that gets sent. This is what the user (or channel) sees.
+
+## Access control
+
+By default any staff member can send tags. To restrict who can use the `/tag` command - or which channels, roles or users it's allowed in - use <DashLink route="?next=/command-config">Command Config</DashLink>.
+
+You can also stop specific users from using tags entirely by adding them to the **Tags** scope in [Blacklisting](/managing-support/blacklisting).
+
+## Tips
+
+- Create tags for your most common answers (how to open a ticket, working hours, known issues) so replies stay consistent.
+- Tags work both inside and outside tickets, so the same snippet can answer a DM or a public channel question.
+
+<Aside type="note">
+  Tags are a great pairing with categories - a tag per common topic keeps your
+  team's responses fast and uniform.
+</Aside>

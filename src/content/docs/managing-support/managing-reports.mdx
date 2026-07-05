@@ -5,8 +5,44 @@ sidebar:
   order: 4
 ---
 
-## Managing Reports
+import { Aside } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
 
-Describe the lifecycle of a report, triaging, escalation, and resolution processes for moderators.
+This guide is for moderators who act on reports. When a member reports a message or user, SupportMail posts it to your **alert channel** for review. For the settings behind this, see [Reports Configuration](/configuration/reports-configuration).
 
-> TODO: Include examples, workflows, and links to tools or dashboard features.
+## The report lifecycle
+
+1. A member submits a report with `/report message`, `/report user`, or the right-click **Apps → Report** menu.
+2. SupportMail posts the report to your alert channel with the reported content and any reason, comment or attachments.
+3. A moderator reviews it and takes an action.
+4. The report is marked **resolved** and recorded, noting who resolved it.
+
+## Acting on a report
+
+Each report comes with action buttons so you can respond without leaving the channel:
+
+| Action             | What it does                                                |
+| ------------------ | ---------------------------------------------------------- |
+| **Resolve**        | Close the report with no further action                    |
+| **Ignore**         | Dismiss the report (e.g. not actionable or a false report) |
+| **Timeout**        | Time the reported user out                                 |
+| **Kick**           | Remove the reported user from the server                   |
+| **Ban**            | Ban the reported user                                      |
+| **Delete Message** | Remove the reported message                                |
+
+Taking a moderation action also resolves the report. Available actions depend on the bot's permissions and your server setup.
+
+<Aside type="note">
+  Timeout, kick and ban require the bot to have the matching Discord permission and a role above the
+  target user.
+</Aside>
+
+## Reviewing on the dashboard
+
+The <DashLink route="?next=/reports">Reports</DashLink> page lists every report with its status and who resolved it. Open a report to see full details. It's the best place to audit past reports or catch up on anything left open.
+
+## Tips
+
+- Agree on what warrants each action so your team stays consistent.
+- Use **Ignore** for false or duplicate reports so genuine ones don't get buried.
+- Set open-report **limits** in the configuration to keep spam from flooding the queue.

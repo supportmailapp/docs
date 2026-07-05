@@ -5,8 +5,29 @@ sidebar:
   order: 4
 ---
 
-## Panel
+import { Aside } from "@astrojs/starlight/components";
 
-Describe the Panel (UI) configuration: how to create/configure panels, buttons, and links that users interact with.
+A **panel** is a message you place in a server channel with a button that members click to open a ticket. It's the friendliest way for users to reach support - they don't need to know any commands or that they can DM the bot.
 
-> TODO: Add examples and UI screenshots for panel setup.
+## Creating a panel
+
+Create or edit your panel with the `/config panel` command in your server. You configure:
+
+- **Panel Data** - the message content members see (title and text).
+- **Panel Actions** - the button(s) that open a ticket.
+- **Allowed Mentions** - which mentions in the panel message are allowed to ping.
+
+<Aside type="note">
+  Panel creation currently lives in the `/config panel` command. The dashboard
+  shows your panel and lets you send it to a channel.
+</Aside>
+
+## Posting the panel
+
+Choose the **channel** where the panel should appear and send it. If you move or lose the message, you can re-post it to a channel at any time - the panel stays linked to your configuration.
+
+## Tips
+
+- Put the panel in a channel every member can see, such as `#support` or `#help`.
+- Keep the message short and tell users what to expect after clicking (that the bot will DM them).
+- A panel is optional. Users can always open a ticket by DMing the bot directly.
