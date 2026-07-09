@@ -10,6 +10,26 @@ import { Aside, Icon } from "@astrojs/starlight/components";
 import ImageWrapper from "../../../components/ImageWrapper.astro";
 import LinkButton from "../../../components/LinkButton.astro";
 
+## 09.07.2026
+
+### New: Pausing Tickets
+
+Staff can now pause bot activity in a single ticket with `/ticket pause`, and resume it with `/ticket unpause`. While paused, the bot ignores all messages in the ticket post - nothing is forwarded to the user.  
+Messages _from_ the user still reach the channel.
+
+<Aside type="tip">
+  You can also use the prefix commands `-pause` and `-unpause` in the ticket
+  channel to pause and unpause the ticket, respectively.
+</Aside>
+
+- New **Ask to Delete History on Unpause** setting under [Message Handling](/configuration/ticket-system-config#message-handling) - when enabled, unpausing prompts staff to bulk-delete the messages sent while the ticket was paused.
+
+See [Pausing Tickets](/managing-support/handling-tickets#pausing-tickets) for details. **Off by default.**
+
+### New: Delete Reported Message on Punish
+
+When punishing a reported user (timeout, kick or ban) via a message report, the action modal now includes a checkbox to also delete the reported message.
+
 ## 07.07.2026
 
 ### New: Testimonials

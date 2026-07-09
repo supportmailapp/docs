@@ -29,7 +29,9 @@ If automatic forwarding is disabled, there are 3 ways to send messages to the us
 
 #### 1. Using the `/send` command
 
-<ImageWrapper>![Send Command](../../../assets/docs/send-command.png)</ImageWrapper>
+<ImageWrapper>
+  ![Send Command](../../../assets/docs/send-command.png)
+</ImageWrapper>
 
 The `/send` command lets staff send a message directly to a user or to the user associated with the current ticket.
 It's useful when automatic forwarding is disabled or when you want to message a user outside of the ticket workflow.
@@ -73,7 +75,9 @@ A niche feature is that you can reply to user messages in the ticket post and th
 This helps to keep conversations clear and structured.
 
 <div class="flex flex-wrap gap-2 items-center">
-  <ImageWrapper>![Reply in ticket post](../../../assets/docs/reply-in-guild.png)</ImageWrapper>
+  <ImageWrapper>
+    ![Reply in ticket post](../../../assets/docs/reply-in-guild.png)
+  </ImageWrapper>
   <ImageWrapper class="mt-0">
     ![Reply in user DMs](../../../assets/docs/reply-in-dm.png)
   </ImageWrapper>
@@ -97,8 +101,8 @@ Tickets can't be closed by users directly. Instead, you can ask the user if they
 You can provide a comment and the `share-comment` option again. The user will see the comment when they receive the close request, if not otherwise specified.
 
 <Aside type="caution">
-  If **anyone** responds in the ticket while a close request is open, the close request will be
-  automatically cancelled.
+  If **anyone** responds in the ticket while a close request is open, the close
+  request will be automatically cancelled.
 </Aside>
 
 ### Timed Close Requests
@@ -115,6 +119,21 @@ This will remove the close request and silently delete the notification in the u
 ## Reopening Tickets
 
 If a ticket was closed but because God knows why someone wants to open it again, staff can use the `/reopen` command - follow the available options and read their descriptions and the ticket will be reopened.
+
+## Pausing Tickets
+
+Sometimes you need to stop bot activity in a single ticket without closing it - for example while investigating something internally without the user seeing typing or replies. Use `/ticket pause` inside the ticket post to pause it, and `/ticket unpause` to resume.
+
+While a ticket is paused, the bot ignores every message sent in that post - nothing gets forwarded to the user, no matter your Automatic Forwarding setting. If the user sends a message while the ticket is paused, the bot will still forward it to the ticket post.
+
+<Aside type="note">
+  A paused ticket only stops message forwarding. It's unrelated to pausing the
+  whole ticket system - see [System
+  Control](/configuration/ticket-system-config#system-control).
+</Aside>
+
+When you unpause, if **Ask to Delete History on Unpause** is enabled (see [Ticket System Config](/configuration/ticket-system-config#message-handling)), you'll be asked whether to bulk-delete the messages sent in the post while it was paused.  
+The user's messages will **not** be deleted, only the messages sent by staff in the ticket post.
 
 ## Anonymous Replies
 
