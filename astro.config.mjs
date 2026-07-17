@@ -55,6 +55,7 @@ export default defineConfig({
       customCss: ["./src/styles/global.css"],
       components: {
         MarkdownContent: "./src/components/overrides/MarkdownContent.astro",
+        ThemeSelect: "./src/components/overrides/ThemeSelect.astro",
       },
       head: [
         {
