@@ -124,6 +124,7 @@ export default defineConfig({
           items: [
             { label: "Overview", slug: "overview" },
             { label: "Getting Started", slug: "getting-started" },
+            { label: "About", slug: "about" },
           ],
         },
         {
