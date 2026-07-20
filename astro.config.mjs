@@ -10,6 +10,7 @@ import starlightThemeRapide from "starlight-theme-rapide";
 // import starlightImageZoomPlugin from "starlight-image-zoom";
 import starlightContextualMenu from "starlight-contextual-menu";
 import svelte from "@astrojs/svelte";
+import starlightDocSearch from "@astrojs/starlight-docsearch";
 
 export default defineConfig({
   output: "static",
@@ -24,6 +25,21 @@ export default defineConfig({
         context: "client",
         optional: true,
       }),
+      ALGOLIA_APP_ID: envField.string({
+        access: "public",
+        context: "client",
+        optional: true,
+      }),
+      ALGOLIA_SEARCH_API_KEY: envField.string({
+        access: "public",
+        context: "client",
+        optional: true,
+      }),
+      ALGOLIA_INDEX_NAME: envField.string({
+        access: "public",
+        context: "client",
+        optional: true,
+      }),
     },
   },
   integrations: [
@@ -35,6 +51,9 @@ export default defineConfig({
           actions: ["copy", "view", "chatgpt", "claude", "grok"],
           hideMainActionLabel: true,
           injectMarkdownRoutes: true,
+        }),
+        starlightDocSearch({
+          clientOptionsModule: "./src/config/docsearch.ts",
         }),
       ],
       title: "SupportMail",
@@ -140,6 +159,7 @@ export default defineConfig({
       },
     }),
   ],
+
   vite: {
     plugins: [tailwindcss()],
   },
