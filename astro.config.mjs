@@ -79,6 +79,13 @@ export default defineConfig({
             content: "#214aff",
           },
         },
+        {
+          tag: "meta",
+          attrs: {
+            name: "algolia-site-verification",
+            content: "834A6D588263731A",
+          },
+        },
       ],
       social: [
         {
