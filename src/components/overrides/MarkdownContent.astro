@@ -6,6 +6,7 @@ import "@astrojs/starlight/style/markdown.css";
 
 <script src="../../scripts/inlineCode.js"></script>
 <script src="../../scripts/utils.js"></script>
+<script src="../../scripts/imageLightbox.js"></script>
 
 <!-- <ImageZoom /> -->
 <div class="sl-markdown-content">
@@ -20,7 +21,10 @@ import "@astrojs/starlight/style/markdown.css";
   }
 
   /* Headings after non-headings have more spacing. */
-  .sl-markdown-content :global(:not(.heading-wrapper) + :is(.heading-wrapper):not(:where(.not-content *))) {
+  .sl-markdown-content
+    :global(
+      :not(.heading-wrapper) + :is(.heading-wrapper):not(:where(.not-content *))
+    ) {
     margin-top: 1.5em;
   }
 

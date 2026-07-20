@@ -16,6 +16,15 @@ const sizeClasses = (_size: Props["size"] = "md") =>
   })[_size];
 ---
 
-<div class={`mx-auto overflow-clip ${sizeClasses(size)} ${customClasses}`.trim()} data-type="image-wrapper">
+<div
+  class={`mx-auto overflow-clip ${sizeClasses(size)} ${customClasses}`.trim()}
+  data-type="image-wrapper"
+>
   <slot />
 </div>
+
+<style>
+  [data-type="image-wrapper"] :global(img) {
+    cursor: zoom-in;
+  }
+</style>
