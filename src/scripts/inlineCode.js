@@ -3,7 +3,11 @@
 document.addEventListener("click", (event) => {
   const target = event.target;
   console.log("Clicked element:", target);
-  if (target instanceof HTMLElement && target.tagName.toLowerCase() === "code" && target.dir === "auto") {
+  if (
+    target instanceof HTMLElement &&
+    target.tagName.toLowerCase() === "code" &&
+    target.dir === "auto"
+  ) {
     console.log(Date.now(), "Copying code to clipboard:", target.textContent);
     navigator.clipboard.writeText(target.textContent || "");
     alert("Code copied to clipboard!");

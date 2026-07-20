@@ -6,25 +6,26 @@ sidebar:
 ---
 
 import { Aside } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
 
 A **panel** is a message you place in a server channel with a button that members click to open a ticket. It's the friendliest way for users to reach support - they don't need to know any commands or that they can DM the bot.
 
 ## Creating a panel
 
-Create or edit your panel with the `/config panel` command in your server. You configure:
+Create and edit your panel in the <DashLink route="?next=/panel">Panel</DashLink> page of the dashboard. You configure:
 
-- **Panel Data** - the message content members see (title and text).
-- **Panel Actions** - the button(s) that open a ticket.
+- **Panel Data** - the message content members see (title and text), built with the panel editor.
+- **Panel Actions** - the button(s) on the message. A button can open a ticket (`ticket:create`), or be a link.
 - **Allowed Mentions** - which mentions in the panel message are allowed to ping.
 
 <Aside type="note">
-  Panel creation currently lives in the `/config panel` command. The dashboard
-  shows your panel and lets you send it to a channel.
+  Panel management moved to the dashboard - the old `/config panel` command no
+  longer exists. Edit, save and send your panel entirely from the Panel page.
 </Aside>
 
 ## Posting the panel
 
-Choose the **channel** where the panel should appear and send it. If you move or lose the message, you can re-post it to a channel at any time - the panel stays linked to your configuration.
+Choose the **channel** where the panel should appear and press send. If you move or lose the message, you can re-post it to a channel at any time - the panel stays linked to your configuration, so you don't have to rebuild it.
 
 ## Tips
 

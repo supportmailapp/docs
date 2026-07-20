@@ -4,7 +4,11 @@ document.addEventListener(
   function (e) {
     if (!window) return;
     const target = e.target;
-    if (target instanceof HTMLElement && target.tagName === "A" && !target.href.includes(window.location.hostname)) {
+    if (
+      target instanceof HTMLElement &&
+      target.tagName === "A" &&
+      !target.href.includes(window.location.hostname)
+    ) {
       e.preventDefault();
       window.open(target.href, "_blank", "noopener");
     }

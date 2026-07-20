@@ -16,10 +16,17 @@ There are multiple way you can send messages to a sserver to contact support sta
 
 1. Sending a DM to the Bot
 2. Using a Panel
-3. Using the `/create-ticket` command in a server
+3. Using the `/ticket-create` command in a server
 
 Note that you need to authorize SupportMail to access your Discord account to create tickets.
 This is so that the bot can identify you from DMs and access your member information in servers more easily.
+You authorize with the `/login` command and can revoke access at any time with `/logout`.
+
+<Aside type="note">
+  A server can set **support hours** with a [support
+  schedule](/configuration/support-schedule). If you try to open a ticket
+  outside those hours, the bot tells you when to try again.
+</Aside>
 
 ## With a DM
 
@@ -32,5 +39,5 @@ The bot will then send you a DM which you can respond to in order to create the 
 
 ## With a Command
 
-You can use the `/create-ticket` command to create a ticket. It is available in both DMs and servers.
+You can use the `/ticket-create` command to create a ticket. It is available in both DMs and servers.
 When used in a server, the ticket will be created in that server. When used in DMs, you need to select the server you want to create the ticket in.

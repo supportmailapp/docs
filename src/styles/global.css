@@ -66,7 +66,11 @@
 }
 
 hr {
-  border-bottom-color: color-mix(in oklab, var(--sl-color-accent) 70%, transparent);
+  border-bottom-color: color-mix(
+    in oklab,
+    var(--sl-color-accent) 70%,
+    transparent
+  );
 }
 
 small {
@@ -74,7 +78,8 @@ small {
 }
 
 table thead th {
-  border-bottom: 1px solid color-mix(in oklab, var(--sl-color-accent) 60%, transparent);
+  border-bottom: 1px solid
+    color-mix(in oklab, var(--sl-color-accent) 60%, transparent);
 }
 
 td {
@@ -82,7 +87,11 @@ td {
 }
 
 code[dir="auto"]:hover {
-  background-color: color-mix(in oklab, white 20%, var(--sl-color-bg-inline-code));
+  background-color: color-mix(
+    in oklab,
+    white 20%,
+    var(--sl-color-bg-inline-code)
+  );
   cursor: pointer;
 }
 
@@ -171,7 +180,6 @@ a[href="#footnote-label"] svg {
 
   /* col 1, align text right */
   &.c1-right {
-
     th:nth-child(1),
     td:nth-child(1) {
       text-align: end;
@@ -180,7 +188,6 @@ a[href="#footnote-label"] svg {
 
   /* col 2, align text right */
   &.c2-right {
-
     th:nth-child(2),
     td:nth-child(2) {
       text-align: end;

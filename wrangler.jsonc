@@ -2,7 +2,7 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "sm-docs",
   "compatibility_date": "2026-06-28",
-  "compatibility_flags": [ "nodejs_compat", "global_fetch_strictly_public" ],
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
     "binding": "ASSETS",
     "directory": "./dist",
@@ -12,7 +12,7 @@
   },
   "route": {
     "custom_domain": true,
-    "pattern": "docs.supportmail.dev"
+    "pattern": "docs.supportmail.dev",
   },
-  "preview_urls": true
+  "preview_urls": true,
 }

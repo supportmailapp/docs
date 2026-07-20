@@ -21,7 +21,7 @@ This guide is for moderators who act on reports. When a member reports a message
 
 Each report comes with action buttons so you can respond without leaving the channel:
 
-| Action             | What it does                                                |
+| Action             | What it does                                               |
 | ------------------ | ---------------------------------------------------------- |
 | **Resolve**        | Close the report with no further action                    |
 | **Ignore**         | Dismiss the report (e.g. not actionable or a false report) |
@@ -33,8 +33,22 @@ Each report comes with action buttons so you can respond without leaving the cha
 Taking a moderation action also resolves the report. Available actions depend on the bot's permissions and your server setup.
 
 <Aside type="note">
-  Timeout, kick and ban require the bot to have the matching Discord permission and a role above the
-  target user.
+  Timeout, kick and ban require the bot to have the matching Discord permission
+  and a role above the target user.
+</Aside>
+
+## Bulk report commands
+
+The `/reports` command helps you manage the queue as a whole:
+
+| Command                   | What it does                                                          |
+| ------------------------- | --------------------------------------------------------------------- |
+| `/reports resend-missing` | Re-sends the alert message for open reports whose message was deleted |
+| `/reports ignore-all`     | Sets every currently open report to **ignored** in one go             |
+
+<Aside type="note">
+  The report system is set up with `/setup reports` (or the dashboard). See
+  [Reports Configuration](/configuration/reports-configuration).
 </Aside>
 
 ## Reviewing on the dashboard

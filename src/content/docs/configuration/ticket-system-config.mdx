@@ -14,6 +14,14 @@ These are the core settings for how tickets work in your server. Open them under
 
 Turn the ticket system **on** or **off**, or **pause** it temporarily. Pausing keeps all your settings intact and stops new tickets until the date you choose (or until you resume). Existing tickets are unaffected.
 
+You can also pause and resume from Discord with `/config pause` and `/config resume`.
+
+<Aside type="note">
+  Pausing the whole system is different from pausing a single ticket with
+  `/ticket pause`, and from a [support
+  schedule](/configuration/support-schedule) that gates tickets by time of day.
+</Aside>
+
 ## Ticket Forum
 
 The private forum channel where tickets are created as posts. You set this up once - via <DashLink route="?next=/ticket-settings?setup=true">the dashboard</DashLink> or `/setup tickets` - and the bot creates and configures the forum for you.

@@ -1,0 +1,42 @@
+---
+title: Support Schedule
+description: Set support hours so tickets can only be opened when your team is available.
+sidebar:
+  order: 8
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
+
+A **support schedule** lets you define the hours your team is available. When the schedule is active, users can only open tickets during those hours - outside them, the bot tells the user when to try again instead of creating a ticket. Configure it under <DashLink route="?next=/schedule">Schedule</DashLink>.
+
+<Aside type="note">
+  The schedule only gates **new** ticket creation. Open tickets keep working
+  normally, and staff can always reply regardless of the time.
+</Aside>
+
+## Turning it on
+
+Use the **Schedule Active** switch to enable or disable the schedule. While inactive, tickets can be opened at any time - your configured hours are kept but ignored.
+
+## UTC Offset
+
+Set the **UTC Offset** for your team's timezone. All the times you enter in the weekly schedule are interpreted against this offset, so a slot of `09:00` means 9 AM in your chosen timezone. Pick the offset that matches where your support hours are based.
+
+## Weekly Schedule
+
+For each day of the week, add one or more **time slots** during which tickets can be opened:
+
+- Times use the 24-hour `HH:MM` format (for example `09:00`-`17:00`).
+- You can add up to **3 slots per day** - useful for splitting around a break (e.g. `09:00`-`12:00` and `13:00`-`17:00`).
+- A day with **no slots is closed all day** - no tickets can be opened then.
+
+## What the user sees
+
+If a user tries to open a ticket while you're closed, the bot doesn't create the ticket. Instead it lets them know support is currently unavailable and, when there is an upcoming slot, when to try again.
+
+<Aside type="tip">
+  Pair the schedule with a clear **creation message** (see [Ticket System
+  Config](/configuration/ticket-system-config#default-messages)) so users know
+  what to expect during off-hours.
+</Aside>

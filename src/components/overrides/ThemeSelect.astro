@@ -191,7 +191,7 @@ const id = `moon-mask-${crypto.randomBytes(4).toString("hex")}`;
   /** Load the user’s preference from `localStorage`. */
   function loadTheme(): Theme {
     return parseTheme(
-      typeof localStorage !== "undefined" && localStorage.getItem(storageKey),
+      typeof localStorage !== "undefined" && localStorage.getItem(storageKey)
     );
   }
 
@@ -200,7 +200,7 @@ const id = `moon-mask-${crypto.randomBytes(4).toString("hex")}`;
     if (typeof localStorage !== "undefined") {
       localStorage.setItem(
         storageKey,
-        theme === "light" || theme === "dark" ? theme : "",
+        theme === "light" || theme === "dark" ? theme : ""
       );
     }
   }
@@ -240,6 +240,6 @@ const id = `moon-mask-${crypto.randomBytes(4).toString("hex")}`;
           button?.setAttribute("aria-label", `${newTheme} theme`);
         });
       }
-    },
+    }
   );
 </script>
