@@ -8,38 +8,43 @@ sidebar:
 import { Aside } from "@astrojs/starlight/components";
 import DashLink from "../../../components/DashLink.astro";
 
-Reports let members flag messages and users for your moderators. Configure the system under <DashLink route="?next=/report-settings">Report Settings</DashLink>. To learn how mods act on reports, see [Managing Reports](/managing-support/managing-reports).
+Reports let your members flag messages and other users for your mod team to review. You can turn reports on, decide where mods get notified, and control what (if anything) gets sent to users by DM. Set it all up under <DashLink route="?next=/report-settings">Report Settings</DashLink>. For how your mods actually handle incoming reports day-to-day, see [Managing Reports](/managing-support/managing-reports).
 
-## System Control
+## Turning reports on
 
-Turn the report system on/off or **pause** it. You must set an **alert channel** before you can enable it.
+Before you can enable reports, pick an **alert channel** - that's where every new report shows up for your mods. Once that's set, flip the system on. You can also **pause** it at any time without losing your settings.
 
-- **Automatic Resolution** - choose whether reports resolve instantly or stay open for a mod to review and resolve.
+- **Automatic Resolution** - decide if reports close themselves right away, or stay open until a mod reviews and resolves them.
 
-## Alert Channel
+<Aside type="caution">
+  Set an alert channel and sensible limits before you turn reports on, so your
+  mods actually see new reports and don't get flooded.
+</Aside>
 
-The channel where new reports are posted for your moderators. This is required for the system to run.
+## Where reports can be created
 
-## Special Channels
+By default members can report from anywhere. If you want to restrict that, choose channels and pick one of:
 
-Limit where reports can be created:
-
-- **Included** - reports can _only_ be created in the selected channels.
-- **Excluded** - reports _cannot_ be created in the selected channels.
+- **Included** - reports can only be made in the channels you pick.
+- **Excluded** - reports can be made everywhere except the channels you pick.
 
 ## Limits
 
-Protect your team from spam by capping open reports:
+Stop your report channel from getting spammed:
 
-- **Max open reports per user** - how many a single user can have open at once.
-- **Max open reports in the server** - a server-wide ceiling.
+- **Max open reports per user** - how many reports one member can have open at the same time.
+- **Max open reports in the server** - a total cap for the whole server.
 
 ## Notifications
 
-- **Pings** - roles and users to notify when a new report comes in.
-- **User Notifications** - control what feedback the reporting user receives after submitting.
+- **Pings** - roles or people to ping in the alert channel whenever a new report comes in.
 
-<Aside type="caution">
-  Set the alert channel and reasonable limits before enabling reports, so
-  moderators see submissions immediately and can't be flooded.
-</Aside>
+### DMs to users
+
+SupportMail can also message users directly about reports. There are three separate DMs, each with its own on/off switch, so turn on only what you want:
+
+- **DM on report creation** - lets the person who made the report know it went through. Sent right away.
+- **DM on report resolution** - tells the reporter what happened once a mod resolves their report. You choose which outcomes send this DM (e.g. only for timeouts/kicks/bans, or also when a report is ignored or dismissed).
+- **DM to the reported user** - lets someone know when a mod has taken action against them. This DM never says who reported them or which mod handled it. If the action is a kick or ban, it's sent right before it happens, so the person still gets it even if the kick/ban itself doesn't go through.
+
+For the resolution and reported-user DMs, use **Sent for** to pick which outcomes trigger the message. For all three, use **Included info** to pick what details are in it - things like the reason given, a link to the reported message, or how long a timeout lasts. Options differ slightly per DM: for example the reported user's DM never reveals the reporter's identity or the moderator's name, no matter what you pick.
