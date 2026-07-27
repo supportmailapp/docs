@@ -151,6 +151,10 @@ export default defineConfig({
           label: "Changelogs",
           items: [{ autogenerate: { directory: "changelogs" } }],
         },
+        {
+          label: "Legal Notice",
+          link: "https://legal.supportmail.dev",
+        },
       ],
     }),
     sitemap({
