@@ -10,6 +10,30 @@ import { Aside, Icon } from "@astrojs/starlight/components";
 import ImageWrapper from "../../../components/ImageWrapper.astro";
 import LinkButton from "../../../components/LinkButton.astro";
 
+## 28.07.2026
+
+### New: `/view` command
+
+Moderators can now browse currently open tickets and unresolved reports right in Discord with `/view tickets` and `/view reports` - paginated, no dashboard trip needed.
+
+See [Viewing Tickets and Reports](/managing-support/viewing-tickets-and-reports) for details.
+
+### Changed: Granular DM notifications for reports
+
+Report DMs are now three separate toggles instead of one all-or-nothing setting: DM on report creation, DM on report resolution, and DM to the reported user.
+Each has its own **Sent for** (which outcomes trigger it) and **Included info** (what details it contains) controls.
+
+See [Reports Configuration](/configuration/reports-configuration#dms-to-users) for details.
+
+### Removed: Deprecated dashboard-redirect commands
+
+A handful of slash subcommands that only pointed you to the dashboard have been removed - use the dashboard directly instead:
+
+- `/config tickets` and `/config reports` (use [Ticket System Config](/configuration/ticket-system-config) / [Managing Reports](/managing-support/managing-reports) in the dashboard)
+- `/config blacklist` (use the **Blacklist** page in the dashboard)
+- `/config tags list` (use the **Tags** page in the dashboard, or [Tags](/configuration/tags))
+- `/blacklist view` (use the **Blacklist** page in the dashboard)
+
 ## 09.07.2026
 
 ### New: Pausing Tickets
