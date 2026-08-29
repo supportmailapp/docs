@@ -20,6 +20,22 @@ import LinkButton from "../../../components/LinkButton.astro";
 - Role and permission changes (e.g., being promoted to mod/admin) now take effect immediately instead of requiring a re-login.
 - This update requires everyone to log in again once. Your Discord bot setup and tickets are unaffected - only the dashboard session resets.
 
+<details>
+  <summary>For the curious - what actually changed</summary>
+
+Previously, one database record did double duty as both your Discord connection (used by the bot) and your dashboard login session - and its "expiry" meant different things depending on which system last touched it. That's why logging in via the bot's `/login` command could quietly overwrite your dashboard session, and why logging in on a second device would silently invalidate the first.
+
+I split those into two independent things:
+
+- **Session** - just your dashboard login. Rotates freely, supports multiple devices, expires on a fixed schedule.
+- **Grant** - your actual Discord connection, shared with the bot. Untouched by dashboard logouts, refreshed automatically instead of just expiring.
+
+I also consolidated two separate, competing login implementations into one, and fixed a few quieter reliability bugs along the way (a cold-cache request that intermittently returned server errors, a login-replay edge case, and a banned-server redirect that was broken).
+
+None of this changes what you can do on the dashboard - it changes how reliably it works.
+
+</details>
+
 ## 28.07.2026
 
 ### New: `/view` command
