@@ -10,6 +10,16 @@ import { Aside, Icon } from "@astrojs/starlight/components";
 import ImageWrapper from "../../../components/ImageWrapper.astro";
 import LinkButton from "../../../components/LinkButton.astro";
 
+## 29.08.2026
+
+### Authentication overhaul
+
+- Rebuilt how dashboard logins work under the hood — sessions are now independent of your Discord connection, fixing several edge-case bugs around expired sessions and multi-device logins.
+- Logging in on a new device or browser no longer signs you out elsewhere. Each session is now separate.
+- Added a **Disconnect Discord** option (next to Log out) for fully revoking dashboard access to your Discord account, separate from just logging out of the dashboard.
+- Role and permission changes (e.g., being promoted to mod/admin) now take effect immediately instead of requiring a re-login.
+- This update requires everyone to log in again once. Your Discord bot setup and tickets are unaffected — only the dashboard session resets.
+
 ## 28.07.2026
 
 ### New: `/view` command
