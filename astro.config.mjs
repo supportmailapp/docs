@@ -1,16 +1,15 @@
 // @ts-check
 import { defineConfig, envField } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
-import tailwindcss from "@tailwindcss/vite";
-
 import starlight from "@astrojs/starlight";
 import sitemap from "@astrojs/sitemap";
-import starlightThemeRapide from "starlight-theme-rapide";
-// TODO: add back in once the plugin is fixed to work with Sätteri
-// import starlightImageZoomPlugin from "starlight-image-zoom";
-import starlightContextualMenu from "starlight-contextual-menu";
 import svelte from "@astrojs/svelte";
-import starlightDocSearch from "@astrojs/starlight-docsearch";
+import tailwindcss from "@tailwindcss/vite";
+import components from "./src/config/components";
+import head from "./src/config/head";
+import plugins from "./src/config/plugins";
+import sidebar from "./src/config/sidebar";
+import social from "./src/config/social";
 
 export default defineConfig({
   output: "static",
@@ -45,117 +44,27 @@ export default defineConfig({
   integrations: [
     svelte({ extensions: [".svelte"] }),
     starlight({
-      plugins: [
-        starlightThemeRapide(),
-        starlightContextualMenu({
-          actions: ["copy", "view", "chatgpt", "claude", "grok"],
-          hideMainActionLabel: true,
-          injectMarkdownRoutes: true,
-        }),
-        starlightDocSearch({
-          clientOptionsModule: "./src/config/docsearch.ts",
-        }),
-      ],
       title: "SupportMail",
       description:
         "Documentation for SupportMail, the feature-rich modmail bot for Discord.",
-      editLink: {
-        baseUrl: "https://github.com/supportmailapp/docs/tree/main",
-      },
-      pagefind: true,
       logo: {
         src: "./src/assets/logo.png",
         alt: "SupportMail Logo",
         replacesTitle: false,
       },
-      credits: true,
       favicon: "/favicon.ico",
+      credits: true,
+      social,
+      editLink: {
+        baseUrl: "https://github.com/supportmailapp/docs/tree/main",
+      },
+      pagefind: true,
       lastUpdated: true,
       customCss: ["./src/styles/global.css"],
-      components: {
-        MarkdownContent: "./src/components/overrides/MarkdownContent.astro",
-        ThemeSelect: "./src/components/overrides/ThemeSelect.astro",
-      },
-      head: [
-        {
-          tag: "meta",
-          attrs: {
-            property: "og:image",
-            content: "https://docs.supportmail.dev/logo.png",
-          },
-        },
-        {
-          tag: "meta",
-          attrs: {
-            name: "twitter:card",
-            content: "-", // Reset because of SEO issues
-          },
-        },
-        {
-          tag: "meta",
-          attrs: {
-            name: "theme-color",
-            content: "#214aff",
-          },
-        },
-        {
-          tag: "meta",
-          attrs: {
-            name: "algolia-site-verification",
-            content: "834A6D588263731A",
-          },
-        },
-      ],
-      social: [
-        {
-          icon: "github",
-          label: "GitHub",
-          href: "https://github.com/orgs/supportmailapp",
-        },
-        {
-          icon: "discord",
-          href: "https://discord.gg/CkreDcF2PU",
-          label: "Support Server",
-        },
-      ],
-      sidebar: [
-        {
-          label: "Welcome",
-          items: [
-            { label: "Overview", slug: "overview" },
-            { label: "Getting Started", slug: "getting-started" },
-            { label: "About", slug: "about" },
-          ],
-        },
-        {
-          label: "Getting Support",
-          items: [{ autogenerate: { directory: "getting-support" } }],
-        },
-        {
-          label: "Managing Support",
-          items: [{ autogenerate: { directory: "managing-support" } }],
-        },
-        {
-          label: "Configuration",
-          items: [{ autogenerate: { directory: "configuration" } }],
-        },
-        {
-          label: "Guides",
-          items: [{ autogenerate: { directory: "guides" } }],
-        },
-        {
-          label: "Troubleshooting",
-          items: [{ autogenerate: { directory: "troubleshooting" } }],
-        },
-        {
-          label: "Changelogs",
-          items: [{ autogenerate: { directory: "changelogs" } }],
-        },
-        {
-          label: "Legal Notice",
-          link: "https://legal.supportmail.dev",
-        },
-      ],
+      head,
+      sidebar,
+      components,
+      plugins,
     }),
     sitemap({
       serialize(item) {
@@ -164,7 +73,6 @@ export default defineConfig({
       },
     }),
   ],
-
   vite: {
     plugins: [tailwindcss()],
   },
