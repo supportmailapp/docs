@@ -10,6 +10,23 @@ import { Aside, Icon } from "@astrojs/starlight/components";
 import ImageWrapper from "../../../components/ImageWrapper.astro";
 import LinkButton from "../../../components/LinkButton.astro";
 
+## 23.10.2026
+
+### New: Setup wizard
+
+Setting up tickets and reports is now a guided, step-by-step flow - in the dashboard and right inside Discord.
+
+- **Dashboard:** new servers are taken straight into the wizard. If you skipped it, use **Continue setup** in the sidebar.
+- **Discord:** `/setup tickets wizard` and `/setup reports wizard` walk you through every setting in a message only you can see. Re-running a wizard starts from your current settings.
+- Nothing is saved until you confirm on the final review screen. If a step fails while applying, you can retry without creating a second forum or panel.
+
+See [Setup Wizard](/configuration/setup-wizard) for details.
+
+### Changed: `/setup` commands
+
+- `/setup tickets` is now `/setup tickets quick` (the one-shot setup with default settings).
+- `/setup reports` used to only point you to the dashboard. It is now `/setup reports wizard`, a full setup inside Discord.
+
 ## 29.08.2026
 
 ### Authentication overhaul

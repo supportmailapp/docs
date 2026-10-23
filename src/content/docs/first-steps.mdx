@@ -1,0 +1,76 @@
+---
+slug: first-steps
+title: First Steps
+description: What to set up after your first ticket works, plus best practices and the terms SupportMail uses.
+sidebar:
+  order: 2
+---
+
+import { Aside, CardGrid, LinkCard } from "@astrojs/starlight/components";
+import DashLink from "../../components/DashLink.astro";
+
+Your ticket forum is live and tickets can be opened. This page shows what to set up next, in a sensible order.
+If you haven't run the setup wizard yet, start with [Getting Started](/getting-started).
+
+## Recommended setup
+
+<CardGrid>
+  <LinkCard
+    title="1. Set up notifications"
+    description="Ping your staff when a new ticket arrives."
+    href="/configuration/ticket-system-config"
+  />
+  <LinkCard
+    title="2. Add ticket categories"
+    description="Let users pick a topic when they open a ticket."
+    href="/configuration/ticket-categories"
+  />
+  <LinkCard
+    title="3. Create tags"
+    description="Save snippet answers for questions you get all the time."
+    href="/configuration/tags"
+  />
+  <LinkCard
+    title="4. Set support hours"
+    description="Only allow new tickets when your team is available."
+    href="/configuration/support-schedule"
+  />
+  <LinkCard
+    title="5. Collect feedback"
+    description="Ask users to rate their support experience."
+    href="/configuration/ticket-feedback-configuration"
+  />
+  <LinkCard
+    title="6. Enable reports"
+    description="Let members report messages and users to your mods."
+    href="/configuration/reports-configuration"
+  />
+</CardGrid>
+
+## Best practices
+
+- Tell your members about the new support system and how to open a ticket.
+- Set up ping roles and users for ticket notifications in the <DashLink route="?next=/ticket-settings">Ticket Settings</DashLink>.
+- Briefly train your staff. The **Managing Support** section is a good reference, especially if they haven't used modmail or Discord bots before.
+- Keep the bot's permissions in the ticket forum as they are. The bot manages them.
+- Test changes by opening a ticket yourself before you announce them.
+
+## Terminology
+
+| Term         | Description                                                                       |
+| ------------ | --------------------------------------------------------------------------------- |
+| Ticket\*     | A support conversation between a user and server staff                            |
+| Panel        | A message with a button in a server for users to create tickets                   |
+| Ticket Forum | A forum channel in a server where tickets are created as threads for server staff |
+| Entity       | A general term for "a user or a role" in SupportMail                              |
+
+\* Tickets are in the process of changing. In the future, tickets will be a backend concept for server staff only.
+Users will experience support mostly as one continuous thread, rather than managing separate tickets.
+
+## Keep exploring
+
+- [Dashboard Overview](/configuration/dashboard-overview): everything you can configure.
+- [Handling Tickets](/managing-support/handling-tickets): the commands your staff will use every day.
+- [Managing Reports](/managing-support/managing-reports): how mods work through user reports.
+- [Common Issues](/troubleshooting/common-issues): quick fixes for the problems people run into most.
+- Need help? Join the [SupportMail Discord Server](https://help.supportmail.dev) for help or to give feedback.
