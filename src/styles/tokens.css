@@ -40,6 +40,11 @@
   --sm-blue-tint: oklch(0.27 0.06 257);
   --sm-on-blue: oklch(0.98 0.01 257);
 
+  /* Primary action fill (buttons). Bright in dark mode so it stands out from
+     the page (>= 3:1), with dark ink text on top. */
+  --sm-primary: oklch(0.72 0.14 252);
+  --sm-on-primary: oklch(0.17 0.03 262);
+
   /* Yellow mark: highlight fill, sparingly. */
   --sm-mark: oklch(0.88 0.155 92);
   --sm-mark-ink: oklch(0.3 0.06 85);
@@ -75,6 +80,9 @@
   --sm-blue-soft: oklch(0.42 0.14 257);
   --sm-blue-tint: oklch(0.93 0.035 257);
   --sm-on-blue: oklch(0.98 0.01 257);
+
+  --sm-primary: oklch(0.36 0.115 257);
+  --sm-on-primary: oklch(0.98 0.01 257);
 
   --sm-mark: oklch(0.88 0.155 92);
   --sm-mark-ink: oklch(0.3 0.06 85);

@@ -192,9 +192,9 @@ code[dir="auto"]:hover {
 
 .sl-link-button.primary,
 .sl-link-button.primary:hover {
-  background-color: var(--sm-blue);
-  border-color: var(--sm-blue);
-  color: var(--sm-on-blue);
+  background-color: var(--sm-primary);
+  border-color: var(--sm-primary);
+  color: var(--sm-on-primary);
 }
 
 .sl-link-button.secondary {

@@ -172,19 +172,20 @@ const id = `moon-mask-${crypto.randomBytes(4).toString("hex")}`;
       position: relative;
     }
 
-    /* Small "A" marks auto mode (following the system setting). */
+    /* Small "A" in the top corner marks auto mode (follows the system setting). */
     .auto-badge {
       position: absolute;
-      inset-block-end: 0.35rem;
-      inset-inline-end: 0.35rem;
+      inset-block-start: 0.1rem;
+      inset-inline-end: 0.1rem;
       display: none;
-      min-width: 0.85rem;
-      padding-inline: 0.15rem;
+      width: 0.8rem;
+      height: 0.8rem;
       border-radius: 999px;
-      background: var(--sm-blue);
+      background: var(--sm-blue-strong);
       color: var(--sm-on-blue);
-      font: 600 0.55rem/0.85rem var(--sm-font-body);
+      font: 700 0.5rem/0.8rem var(--sm-font-body);
       text-align: center;
+      pointer-events: none;
     }
 
     :global(sm-theme-select[data-mode="auto"]) .auto-badge {
