@@ -1,0 +1,55 @@
+---
+// Brand mark: logo, wordmark in the display font, and a small "Docs" chip.
+import { Image } from "astro:assets";
+import logo from "../../assets/logo.png";
+
+const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
+---
+
+<a href={siteTitleHref} class="site-title">
+  <Image src={logo} alt="" width={64} height={64} class="mark" loading="eager" />
+  <span class="wordmark" translate="no">{siteTitle}</span>
+  <span class="chip">Docs</span>
+</a>
+
+<style>
+  .site-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 0;
+    color: var(--sm-text-strong);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .mark {
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--sm-radius-md);
+    flex-shrink: 0;
+  }
+
+  .wordmark {
+    overflow: hidden;
+    font-family: var(--sm-font-display);
+    font-size: var(--sl-text-h4);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .chip {
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    background-color: var(--sm-blue-tint);
+    color: var(--sm-blue-soft);
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
+  }
+
+  @media (max-width: 30rem) {
+    .chip {
+      display: none;
+    }
+  }
+</style>

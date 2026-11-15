@@ -63,7 +63,7 @@ export default defineConfig({
       },
       pagefind: true,
       lastUpdated: true,
-      customCss: ["./src/styles/global.css", "./src/styles/tokens.css"],
+      customCss: ["./src/styles/global.css", "./src/styles/tokens.css", "./src/styles/chrome.css"],
       head,
       sidebar,
       components,
