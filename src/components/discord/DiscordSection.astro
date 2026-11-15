@@ -1,0 +1,57 @@
+---
+// V2 Section: 1-3 Text Displays on the left, one accessory on the right
+// (a Thumbnail or a Button).
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import DiscordButtonView from "./DiscordButton.astro";
+import type { DiscordButton } from "./types";
+
+interface Props {
+  thumbnail?: ImageMetadata;
+  button?: DiscordButton;
+}
+
+const { thumbnail, button } = Astro.props;
+---
+
+<div class="sm-dsection">
+  <div class="texts"><slot /></div>
+  {
+    (thumbnail || button) && (
+      <div class="accessory">
+        {thumbnail ? <Image src={thumbnail} alt="" width={170} height={170} /> : button && <DiscordButtonView {...button} />}
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .sm-dsection {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 1rem;
+  }
+
+  .texts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 0;
+  }
+
+  .accessory :global(img) {
+    display: block;
+    width: 5.3rem;
+    height: 5.3rem;
+    border-radius: var(--sm-radius-md);
+    object-fit: cover;
+  }
+
+  @media (max-width: 30rem) {
+    .accessory :global(img) {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+</style>

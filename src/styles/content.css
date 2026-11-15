@@ -186,9 +186,13 @@ code[dir="auto"]:not(.sm-slash):hover {
   color: var(--sm-text-muted);
 }
 
-/* Link buttons (src/components/LinkButton.astro). */
+/* Link buttons: our src/components/LinkButton.astro and Starlight's own
+   LinkButton share this. One size everywhere (Starlight's grows to 56px tall
+   on wide screens). */
 .sl-link-button {
   border-radius: var(--sm-radius-md);
+  padding: 0.5rem 1.1rem;
+  font-size: var(--sl-text-base);
 }
 
 .sl-link-button.primary,

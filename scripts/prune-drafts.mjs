@@ -22,7 +22,8 @@ function walk(dir, out = []) {
 const drafts = walk(contentDir)
   .filter((file) => {
     const fm = readFileSync(file, "utf8").match(/^---\r?\n([\s\S]*?)\r?\n---/);
-    return fm && /^draft:\s*true\s*$/m.test(fm[1]);
+    // YAML 1.2 booleans: true, True, TRUE (what Astro's schema accepts as true).
+    return fm && /^draft:\s*(true|True|TRUE)\s*(#.*)?$/m.test(fm[1]);
   })
   .map((file) => relative(contentDir, file).replaceAll("\\", "/").replace(/\.(md|mdx)$/, "").replace(/(^|\/)index$/, ""));
 
@@ -39,3 +40,12 @@ for (const slug of drafts) {
   }
 }
 console.log(`prune-drafts: ${drafts.length} draft page(s), ${removed} output path(s) removed.`);
+
+// Fail closed: no draft output may survive.
+const leftovers = drafts.flatMap((slug) =>
+  outDirs.flatMap((out) => [join(out, slug), join(out, `${slug}.md`), join(out, `${slug}.html`)]).filter((t) => existsSync(t)),
+);
+if (leftovers.length) {
+  console.error(`prune-drafts: draft output still present: ${leftovers.join(", ")}`);
+  process.exit(1);
+}

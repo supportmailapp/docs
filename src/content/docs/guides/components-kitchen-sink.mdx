@@ -8,8 +8,12 @@ import { Aside, Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
 import LinkButton from "../../../components/LinkButton.astro";
 import SlashCommand from "../../../components/SlashCommand.astro";
 import DiscordMessage from "../../../components/discord/DiscordMessage.astro";
-import DiscordEmbed from "../../../components/discord/DiscordEmbed.astro";
-import DiscordButtons from "../../../components/discord/DiscordButtons.astro";
+import DiscordContainer from "../../../components/discord/DiscordContainer.astro";
+import DiscordText from "../../../components/discord/DiscordText.astro";
+import DiscordSeparator from "../../../components/discord/DiscordSeparator.astro";
+import DiscordSection from "../../../components/discord/DiscordSection.astro";
+import DiscordActionRow from "../../../components/discord/DiscordActionRow.astro";
+import DiscordMediaGallery from "../../../components/discord/DiscordMediaGallery.astro";
 import logo from "../../../assets/logo.png";
 
 ## Asides
@@ -80,40 +84,65 @@ Long, unbroken: <SlashCommand name="a-very-long-command-name-without-any-spaces-
 
 ## Discord messages
 
+Components V2, mirroring the bot's builders in `v2/src`.
+
 <DiscordMessage author="SupportMail" bot time="Today at 14:02">
-  Your ticket has been created. The staff team will answer here.
+  <DiscordText>A plain text display, no container.</DiscordText>
 </DiscordMessage>
 
 <DiscordMessage author="Luke" time="Today at 14:03" avatar={logo}>
-  Thanks! A user message with a custom avatar and a long word: supercalifragilisticexpialidocious-and-even-longer-unbroken-text.
+  <DiscordText>A user message with a custom avatar and a long word: supercalifragilisticexpialidocious-and-even-longer-unbroken-text.</DiscordText>
 </DiscordMessage>
 
-<DiscordMessage author="SupportMail" bot>
-  <DiscordEmbed title="Close request" color="#5865f2">
-    The staff wants to close this ticket. Do you agree?
-  </DiscordEmbed>
-  <DiscordButtons
+{/* Mirrors createDMComponents in v2/src/commands/closeRequests.ts */}
+<DiscordMessage author="SupportMail" bot time="Today at 14:05">
+  <DiscordContainer accent="info">
+    {/* en.json: tickets.closeRequest, tickets.acceptOrDenyCloseRequest */}
+    <DiscordText heading="Close Request">
+      Accept or deny the close request in [My Server](https://discord.com).
+    </DiscordText>
+    <DiscordSeparator divider={false} spacing="large" />
+    {/* en.json: labels.comment */}
+    <DiscordText>
+      <u>**Comment**</u>
+    </DiscordText>
+    <DiscordText>
+      > Looks like everything is solved, can we close this?
+    </DiscordText>
+    <DiscordSeparator />
+    <DiscordText subtext>Today at 14:05 (just now)</DiscordText>
+  </DiscordContainer>
+  {/* en.json: labels.accept, labels.deny */}
+  <DiscordActionRow
     buttons={[
-      { label: "Close", style: "success", emoji: "✅" },
-      { label: "Keep open", style: "danger" },
+      { label: "Accept", style: "success", emoji: "✅" },
+      { label: "Deny", style: "danger", emoji: "❌" },
     ]}
   />
 </DiscordMessage>
 
-<DiscordMessage author="SupportMail" bot time="Yesterday at 09:41">
-  <DiscordEmbed
-    title="New report"
-    color="#ed4245"
-    fields={[
-      { name: "Reported user", value: "@someone", inline: true },
-      { name: "Reason", value: "Spam", inline: true },
-      { name: "Status", value: "Open", inline: true },
-      { name: "Comment", value: "A full-width field below the inline ones." },
-    ]}
-  >
-    A report was submitted in #general.
-  </DiscordEmbed>
-  <DiscordButtons
+{/* Mirrors the login prompt in v2/src/commands/ticketCreate.ts */}
+<DiscordMessage author="SupportMail" bot>
+  <DiscordContainer accent="orange">
+    <DiscordSection button={{ label: "Login", style: "link" }}>
+      {/* en.json: loginRequired, loginWithDiscordDesc */}
+      <DiscordText heading="Login required!">
+        You need to log in with Discord. This is the easiest way of determining our mutual servers. Please click the login button to continue or [here](https://discord.com).
+      </DiscordText>
+    </DiscordSection>
+  </DiscordContainer>
+</DiscordMessage>
+
+<DiscordMessage author="SupportMail" bot>
+  <DiscordContainer accent="error">
+    <DiscordSection thumbnail={logo}>
+      <DiscordText heading="Section with a thumbnail" />
+      <DiscordText>Text sits left, the thumbnail right.</DiscordText>
+    </DiscordSection>
+    <DiscordSeparator spacing="large" />
+    <DiscordMediaGallery items={[logo, logo, logo]} />
+  </DiscordContainer>
+  <DiscordActionRow
     buttons={[
       { label: "Primary", style: "primary" },
       { label: "Secondary", style: "secondary" },
@@ -122,8 +151,4 @@ Long, unbroken: <SlashCommand name="a-very-long-command-name-without-any-spaces-
       { label: "Link", style: "link" },
     ]}
   />
-</DiscordMessage>
-
-<DiscordMessage author="SupportMail" bot>
-  <DiscordEmbed>An embed with only a description and no colour.</DiscordEmbed>
 </DiscordMessage>

@@ -1,0 +1,32 @@
+---
+// V2 Separator: vertical spacing with an optional divider line.
+// Bot shorthand (v2/src/utils/enums.ts `Separators`): Div = divider + small,
+// DivLg = divider + large, Std = no divider + small, Lg = no divider + large.
+interface Props {
+  divider?: boolean;
+  spacing?: "small" | "large";
+}
+
+const { divider = true, spacing = "small" } = Astro.props;
+---
+
+<div class:list={["sm-dsep", spacing, { divider }]} role="separator" aria-hidden="true"></div>
+
+<style>
+  .sm-dsep {
+    flex-shrink: 0;
+    margin-block: 0.125rem;
+  }
+
+  .large {
+    margin-block: 0.4rem;
+  }
+
+  .divider {
+    border-top: 1px solid var(--sm-line);
+  }
+
+  .sm-dsep:not(.divider) {
+    height: 0.25rem;
+  }
+</style>
