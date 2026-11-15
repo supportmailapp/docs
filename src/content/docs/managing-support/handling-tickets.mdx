@@ -98,7 +98,7 @@ which will result in a note and feedback components to rate the support being ad
 
 Tickets can't be closed by users directly. Instead, you can ask the user if they want to close the ticket using the `/close-request create` command. This will send a message to the user asking if they want to close the ticket.
 
-You can provide a comment and the `share-comment` option again. The user will see the comment when they receive the close request, if not otherwise specified.
+You can provide a comment and the `share-comment` option here too. Unlike `/close`, the option defaults to **False** for close requests: the comment stays private unless you set `share-comment` to **True**, in which case the user sees it in the close request.
 
 <Aside type="caution">
   If **anyone** responds in the ticket while a close request is open, the close
@@ -107,7 +107,7 @@ You can provide a comment and the `share-comment` option again. The user will se
 
 ### Timed Close Requests
 
-You can also provide a `close-time` option when creating a cose request. This will automatically close the ticket after the specified time if the user does not respond.
+You can also provide a `close-in` option when creating a close request. This will automatically close the ticket after the specified time if the user does not respond.
 
 See [Timestrings](/guides/timestrings) for more information on how to set the time correctly.
 
