@@ -1,0 +1,149 @@
+/*
+ * Console theme tokens.
+ *
+ * Every colour, font and radius the theme uses lives here, for dark (default)
+ * and light mode, and is mapped onto Starlight's own custom properties below.
+ * This file is unlayered on purpose so it wins over Starlight's and
+ * @astrojs/starlight-tailwind's layered defaults.
+ *
+ * Palette anchors come from website/DESIGN.md: blueprint blue, yellow mark,
+ * destructive red. Light mode uses --sm-mark only as a fill behind
+ * --sm-mark-ink text, never as a text colour.
+ */
+
+@import "@fontsource-variable/bricolage-grotesque";
+@import "@fontsource-variable/inter";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
+
+/* Dark (default). */
+:root {
+  /* Surfaces: blue-tinted near-blacks, layered rather than bordered. */
+  --sm-surface-0: oklch(0.2 0.03 262); /* page */
+  --sm-surface-1: oklch(0.17 0.03 262); /* header, sidebar */
+  --sm-surface-2: oklch(0.24 0.03 262); /* cards, messages */
+  --sm-surface-3: oklch(0.29 0.03 262); /* hover on surface-2 */
+  --sm-line: oklch(0.32 0.03 262); /* 1px hairlines */
+
+  /* Text. */
+  --sm-text-strong: oklch(0.97 0.006 262);
+  --sm-text: oklch(0.88 0.015 262);
+  --sm-text-muted: oklch(0.74 0.02 262);
+
+  /* Blue. --sm-blue is the blueprint ground: fills with light text on top.
+     --sm-blue-strong is the interactive accent. --sm-blue-soft is accent text
+     on the page background. --sm-blue-tint is a quiet accent fill. */
+  --sm-blue: oklch(0.36 0.115 257);
+  --sm-blue-strong: oklch(0.55 0.17 257);
+  --sm-blue-soft: oklch(0.85 0.08 250);
+  --sm-blue-tint: oklch(0.27 0.06 257);
+  --sm-on-blue: oklch(0.98 0.01 257);
+
+  /* Yellow mark: highlight fill, sparingly. */
+  --sm-mark: oklch(0.88 0.155 92);
+  --sm-mark-ink: oklch(0.3 0.06 85);
+
+  /* Destructive. */
+  --sm-danger: oklch(0.76 0.15 28);
+
+  /* Shape. */
+  --sm-radius-sm: 6px;
+  --sm-radius-md: 8px;
+  --sm-radius-lg: 12px;
+
+  /* Type. */
+  --sm-font-display: "Bricolage Grotesque Variable", "Inter Variable", system-ui, sans-serif;
+  --sm-font-body: "Inter Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sm-font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+
+/* Light. */
+:root[data-theme="light"] {
+  --sm-surface-0: oklch(0.985 0.005 255);
+  --sm-surface-1: oklch(0.965 0.01 255);
+  --sm-surface-2: oklch(0.945 0.014 255);
+  --sm-surface-3: oklch(0.915 0.018 255);
+  --sm-line: oklch(0.86 0.018 258);
+
+  --sm-text-strong: oklch(0.18 0.03 262);
+  --sm-text: oklch(0.29 0.03 262);
+  --sm-text-muted: oklch(0.45 0.03 262);
+
+  --sm-blue: oklch(0.36 0.115 257);
+  --sm-blue-strong: oklch(0.46 0.16 257);
+  --sm-blue-soft: oklch(0.42 0.14 257);
+  --sm-blue-tint: oklch(0.93 0.035 257);
+  --sm-on-blue: oklch(0.98 0.01 257);
+
+  --sm-mark: oklch(0.88 0.155 92);
+  --sm-mark-ink: oklch(0.3 0.06 85);
+
+  --sm-danger: oklch(0.52 0.18 28);
+}
+
+/* Map onto Starlight. Dark first; Starlight inverts the gray scale in light mode. */
+:root {
+  --sl-font: var(--sm-font-body);
+  --sl-font-mono: var(--sm-font-mono);
+
+  --sl-color-white: var(--sm-text-strong);
+  --sl-color-gray-1: oklch(0.94 0.01 262);
+  --sl-color-gray-2: var(--sm-text);
+  --sl-color-gray-3: var(--sm-text-muted);
+  --sl-color-gray-4: oklch(0.5 0.03 262);
+  --sl-color-gray-5: var(--sm-line);
+  --sl-color-gray-6: var(--sm-surface-2);
+  --sl-color-black: var(--sm-surface-0);
+
+  --sl-color-accent-low: var(--sm-blue-tint);
+  --sl-color-accent: var(--sm-blue-strong);
+  --sl-color-accent-high: var(--sm-blue-soft);
+
+  --sl-color-bg: var(--sm-surface-0);
+  --sl-color-bg-nav: var(--sm-surface-1);
+  --sl-color-bg-sidebar: var(--sm-surface-1);
+  --sl-color-bg-inline-code: var(--sm-surface-2);
+  --sl-color-hairline-light: var(--sm-line);
+  --sl-color-hairline: var(--sm-line);
+  --sl-color-hairline-shade: var(--sm-surface-1);
+}
+
+:root[data-theme="light"] {
+  --sl-color-white: var(--sm-text-strong);
+  --sl-color-gray-1: oklch(0.24 0.03 262);
+  --sl-color-gray-2: var(--sm-text);
+  --sl-color-gray-3: var(--sm-text-muted);
+  --sl-color-gray-4: oklch(0.62 0.02 262);
+  --sl-color-gray-5: var(--sm-line);
+  --sl-color-gray-6: var(--sm-surface-2);
+  --sl-color-gray-7: var(--sm-surface-1);
+  --sl-color-black: var(--sm-surface-0);
+
+  --sl-color-accent-low: var(--sm-blue-tint);
+  --sl-color-accent: var(--sm-blue-strong);
+  --sl-color-accent-high: var(--sm-blue);
+
+  --sl-color-bg: var(--sm-surface-0);
+  --sl-color-bg-nav: var(--sm-surface-1);
+  --sl-color-bg-sidebar: var(--sm-surface-0);
+  --sl-color-bg-inline-code: var(--sm-surface-2);
+  --sl-color-hairline-light: var(--sm-line);
+  --sl-color-hairline: var(--sm-line);
+  --sl-color-hairline-shade: var(--sm-line);
+}
+
+body {
+  background-color: var(--sm-surface-0);
+}
+
+:is(h1, h2, h3, h4, h5, h6),
+.sl-markdown-content :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--sm-font-display);
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background-color: var(--sm-mark);
+  color: var(--sm-mark-ink);
+}

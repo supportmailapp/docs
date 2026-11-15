@@ -31,6 +31,7 @@ const id = `moon-mask-${crypto.randomBytes(4).toString("hex")}`;
         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
       </g>
     </svg>
+    <span class="auto-badge" aria-hidden="true">A</span>
   </button>
 </sm-theme-select>
 
@@ -166,6 +167,29 @@ const id = `moon-mask-${crypto.randomBytes(4).toString("hex")}`;
       );
       transition-duration: var(--sm-theme-select-animation-duration);
     }
+
+    button {
+      position: relative;
+    }
+
+    /* Small "A" marks auto mode (following the system setting). */
+    .auto-badge {
+      position: absolute;
+      inset-block-end: 0.35rem;
+      inset-inline-end: 0.35rem;
+      display: none;
+      min-width: 0.85rem;
+      padding-inline: 0.15rem;
+      border-radius: 999px;
+      background: var(--sm-blue);
+      color: var(--sm-on-blue);
+      font: 600 0.55rem/0.85rem var(--sm-font-body);
+      text-align: center;
+    }
+
+    :global(sm-theme-select[data-mode="auto"]) .auto-badge {
+      display: block;
+    }
   }
 </style>
 
@@ -175,53 +199,39 @@ const id = `moon-mask-${crypto.randomBytes(4).toString("hex")}`;
 </script>
 
 <script>
-  type Theme = "auto" | "dark" | "light";
+  /** Picker mode. Stored as Starlight does: "light", "dark", or "" for auto. */
+  type Mode = "auto" | "dark" | "light";
 
-  /** Key in `localStorage` to store color theme preference at. */
   const storageKey = "starlight-theme";
+  const order: Mode[] = ["dark", "light", "auto"];
+  const labels: Record<Mode, string> = {
+    dark: "Dark theme (click for light)",
+    light: "Light theme (click to follow system)",
+    auto: "System theme (click for dark)",
+  };
 
-  /** Get a typesafe theme string from any JS value (unknown values are coerced to `'auto'`). */
-  function parseTheme(theme: unknown): Theme {
-    return theme === "auto" || theme === "dark" || theme === "light"
-      ? theme
-      : "auto";
+  function loadMode(): Mode {
+    const stored =
+      typeof localStorage !== "undefined" ? localStorage.getItem(storageKey) : null;
+    return StarlightThemeProvider.modeOf(stored) as Mode;
   }
 
-  /** Load the user’s preference from `localStorage`. */
-  function loadTheme(): Theme {
-    return parseTheme(
-      typeof localStorage !== "undefined" && localStorage.getItem(storageKey)
-    );
-  }
-
-  /** Store the user’s preference in `localStorage`. */
-  function storeTheme(theme: Theme): void {
-    if (typeof localStorage !== "undefined") {
-      localStorage.setItem(
-        storageKey,
-        theme === "light" || theme === "dark" ? theme : ""
-      );
-    }
-  }
-
-  /** Get the preferred system color scheme. */
-  function getPreferredColorScheme(): Theme {
-    return matchMedia("(prefers-color-scheme: light)").matches
-      ? "light"
-      : "dark";
-  }
-
-  /** Update select menu UI, document theme, and local storage state. */
-  function onThemeChange(theme: Theme): void {
-    StarlightThemeProvider.updatePickers(theme);
+  function apply(mode: Mode, store: boolean): void {
+    StarlightThemeProvider.updatePickers(mode);
     document.documentElement.dataset["theme"] =
-      theme === "auto" ? getPreferredColorScheme() : theme;
-    storeTheme(theme);
+      mode === "auto" ? StarlightThemeProvider.systemTheme() : mode;
+    if (store && typeof localStorage !== "undefined") {
+      localStorage.setItem(storageKey, mode === "auto" ? "" : mode);
+    }
+    document.querySelectorAll("sm-theme-select button").forEach((b) => {
+      b.setAttribute("aria-label", labels[mode]);
+      b.setAttribute("title", labels[mode]);
+    });
   }
 
-  // React to changes in system color scheme.
-  matchMedia(`(prefers-color-scheme: light)`).addEventListener("change", () => {
-    if (loadTheme() === "auto") onThemeChange("auto");
+  // Follow system changes only while in auto mode.
+  matchMedia("(prefers-color-scheme: light)").addEventListener("change", () => {
+    if (loadMode() === "auto") apply("auto", false);
   });
 
   customElements.define(
@@ -229,14 +239,11 @@ const id = `moon-mask-${crypto.randomBytes(4).toString("hex")}`;
     class SmThemeSelect extends HTMLElement {
       constructor() {
         super();
-        onThemeChange(loadTheme());
-        const button = this.querySelector("button");
-        button?.addEventListener("click", () => {
-          const theme = parseTheme(document.documentElement.dataset["theme"]);
-          const newTheme =
-            theme === "dark" ? "light" : theme === "light" ? "dark" : "auto";
-          onThemeChange(newTheme);
-          button?.setAttribute("aria-label", `${newTheme} theme`);
+        // Do not store anything on load, so a first visit stays "nothing stored".
+        apply(loadMode(), false);
+        this.querySelector("button")?.addEventListener("click", () => {
+          const next = order[(order.indexOf(loadMode()) + 1) % order.length];
+          apply(next, true);
         });
       }
     }

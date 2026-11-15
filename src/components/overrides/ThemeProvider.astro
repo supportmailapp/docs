@@ -1,0 +1,56 @@
+---
+// Based on Starlight 0.42's ThemeProvider. One change: a visitor with nothing
+// stored gets dark mode regardless of `prefers-color-scheme` (dark-first site).
+// Storage format is Starlight's own: "light" or "dark", and "" for auto, which
+// follows the system setting. `localStorage.getItem` returns null when nothing
+// was ever stored, which is how a first visit is told apart from a stored auto.
+import { Icon } from "@astrojs/starlight/components";
+---
+
+{/* This is intentionally inlined to avoid FOUC. */}
+<script is:inline>
+  window.StarlightThemeProvider = (() => {
+    const storedTheme =
+      typeof localStorage !== "undefined"
+        ? localStorage.getItem("starlight-theme")
+        : null;
+    const systemTheme = () =>
+      window.matchMedia("(prefers-color-scheme: light)").matches
+        ? "light"
+        : "dark";
+    const theme =
+      storedTheme === null ? "dark" : storedTheme || systemTheme();
+    document.documentElement.dataset.theme = theme === "light" ? "light" : "dark";
+    /** The picker mode: "dark" | "light" | "auto". */
+    const modeOf = (stored) =>
+      stored === null ? "dark" : stored === "" ? "auto" : stored;
+    return {
+      modeOf,
+      systemTheme,
+      updatePickers(mode = modeOf(storedTheme)) {
+        document.querySelectorAll("sm-theme-select").forEach((picker) => {
+          picker.dataset.mode = mode;
+        });
+        document.querySelectorAll("starlight-theme-select").forEach((picker) => {
+          const select = picker.querySelector("select");
+          if (select) select.value = mode;
+          /** @type {HTMLTemplateElement | null} */
+          const tmpl = document.querySelector(`#theme-icons`);
+          const newIcon = tmpl && tmpl.content.querySelector("." + mode);
+          if (newIcon) {
+            const oldIcon = picker.querySelector("svg.label-icon");
+            if (oldIcon) {
+              oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+            }
+          }
+        });
+      },
+    };
+  })();
+</script>
+
+<template id="theme-icons">
+  <Icon name="sun" class="light" />
+  <Icon name="moon" class="dark" />
+  <Icon name="laptop" class="auto" />
+</template>

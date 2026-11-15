@@ -4,59 +4,28 @@
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
 
-/* Dark mode colors. */
+/* Layout sizes. Colours and fonts live in tokens.css. */
 :root {
   --sl-content-width: 60rem;
   --sl-text-5xl: 4rem;
-
-  --sl-color-accent-low: #131e4f;
-  --sl-color-accent: #3447ff;
-  --sl-color-accent-high: #6991ff;
-  --sl-color-white: #ffffff;
-  --sl-color-gray-1: #eceef2;
-  --sl-color-gray-2: #c6c8ce;
-  --sl-color-gray-3: #a0a4ae;
-  --sl-color-gray-4: #545861;
-  --sl-color-gray-5: #353841;
-  --sl-color-gray-6: #24272f;
-  --sl-color-black: #17181c;
 }
 
-/* Light mode colors. */
-:root[data-theme="light"] {
-  --sl-color-accent-low: #c7d6ff;
-  --sl-color-accent: #2827e9;
-  --sl-color-accent-high: #182775;
-  --sl-color-white: #17181c;
-  --sl-color-gray-1: #24272f;
-  --sl-color-gray-2: #353841;
-  --sl-color-gray-3: #545861;
-  --sl-color-gray-4: #888b96;
-  --sl-color-gray-5: #c0c2c7;
-  --sl-color-gray-6: #eceef2;
-  --sl-color-gray-7: #f5f6f8;
-  --sl-color-black: #ffffff;
-}
-
+/* Tailwind theme, pointed at the Console tokens so utilities match the theme. */
 @theme {
-  /* Your preferred text font. Starlight uses a system font stack by default. */
-  --font-sans: "Atkinson Hyperlegible";
-  /* Your preferred code font. Starlight uses system monospace fonts by default. */
-  --font-mono: "IBM Plex Mono";
-  /* Generated accent color palettes. */
-  --color-accent-200: #b3c7ff;
-  --color-accent-600: #2827e9;
-  --color-accent-900: #182775;
-  --color-accent-950: #131e4f;
-  /* Generated gray color palettes. */
-  --color-gray-100: #f5f6f8;
-  --color-gray-200: #eceef2;
-  --color-gray-300: #c0c2c7;
-  --color-gray-400: #888b96;
-  --color-gray-500: #545861;
-  --color-gray-700: #353841;
-  --color-gray-800: #24272f;
-  --color-gray-900: #17181c;
+  --font-sans: var(--sm-font-body);
+  --font-mono: var(--sm-font-mono);
+  --color-accent-200: oklch(0.85 0.08 250);
+  --color-accent-600: oklch(0.55 0.17 257);
+  --color-accent-900: oklch(0.36 0.115 257);
+  --color-accent-950: oklch(0.27 0.06 257);
+  --color-gray-100: oklch(0.965 0.01 255);
+  --color-gray-200: oklch(0.94 0.01 262);
+  --color-gray-300: oklch(0.88 0.015 262);
+  --color-gray-400: oklch(0.74 0.02 262);
+  --color-gray-500: oklch(0.5 0.03 262);
+  --color-gray-700: oklch(0.32 0.03 262);
+  --color-gray-800: oklch(0.24 0.03 262);
+  --color-gray-900: oklch(0.2 0.03 262);
 }
 
 .inline-block {
