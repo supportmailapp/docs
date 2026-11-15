@@ -9,9 +9,8 @@ house rules live in [`CONVENTIONS.md`](CONVENTIONS.md).
 
 ## What a good change looks like
 
-- **Keep the changeset complete.** A change updates any affected docs (README, a CHANGELOG
-  entry under `[Unreleased]`, CONVENTIONS) in the **same** PR. Docs are part of the change, not a
-  follow-up.
+- **Keep the changeset complete.** A change updates any affected docs (README,
+  CONVENTIONS) in the **same** PR. Docs are part of the change, not a follow-up.
 - **Check the content before you push.** Run `pnpm check:content` for the content rules and `pnpm build` for the full site build, which also runs the Starlight links validator.
 
 ## Pull requests

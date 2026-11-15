@@ -25,9 +25,7 @@ Dense, specific, honest. Tables for matrices, prose for reasoning. No marketing 
 ("seamless", "world-class", "cutting-edge") and no "simply" (if it were simple, the sentence would not need the word). No unexplained
 acronyms on first use. American spelling.
 
-## 4. Versioning and releases
+## 4. Commits
 
-[Semantic versioning](https://semver.org/). Every user-facing change lands a CHANGELOG entry
-under `[Unreleased]` in the same PR. Cutting a release renames `[Unreleased]` to the dated
-version, bumps the version manifest in the same commit, and opens a fresh `[Unreleased]`. Commits follow [Conventional Commits](https://www.conventionalcommits.org/)
+Commits follow [Conventional Commits](https://www.conventionalcommits.org/)
 (`feat:` / `fix:` / `docs:` / `refactor:` / `test:` / `chore:`).
