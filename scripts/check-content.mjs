@@ -16,7 +16,8 @@ const targets = [
 ];
 
 const rules = [
-  { re: /[—―]/, msg: "dash character" },
+  // Built from code points so this file never contains the characters it bans.
+  { re: new RegExp(`[${String.fromCharCode(0x2014, 0x2015)}]`), msg: "dash character" },
   { re: /close-time/, msg: "option is close-in" },
   { re: /discord\.gg\/gv8jupwGtA/, msg: "use https://help.supportmail.dev/" },
   { re: /SupportMail Gold|Diamond/, msg: "plan name not public" },
