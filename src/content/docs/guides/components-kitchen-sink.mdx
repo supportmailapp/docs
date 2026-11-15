@@ -6,6 +6,11 @@ draft: true
 
 import { Aside, Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
 import LinkButton from "../../../components/LinkButton.astro";
+import SlashCommand from "../../../components/SlashCommand.astro";
+import DiscordMessage from "../../../components/discord/DiscordMessage.astro";
+import DiscordEmbed from "../../../components/discord/DiscordEmbed.astro";
+import DiscordButtons from "../../../components/discord/DiscordButtons.astro";
+import logo from "../../../assets/logo.png";
 
 ## Asides
 
@@ -64,3 +69,61 @@ pnpm check:content
 <LinkButton href="/overview">Primary</LinkButton>
 <LinkButton href="/overview" variant="secondary">Secondary</LinkButton>
 <LinkButton href="/overview" variant="minimal">Minimal</LinkButton>
+
+## Slash commands
+
+Plain: <SlashCommand name="ticket-create" />. With options:
+<SlashCommand name="close-request create" options={["close-in:1h"]} />. Several options:
+<SlashCommand name="ticket-create" options={["server:My Server", "anonymous:True"]} />.
+
+Long, unbroken: <SlashCommand name="a-very-long-command-name-without-any-spaces-at-all-to-test-wrapping" options={["another-very-long-option-name:with-an-equally-long-value-that-must-wrap"]} />.
+
+## Discord messages
+
+<DiscordMessage author="SupportMail" bot time="Today at 14:02">
+  Your ticket has been created. The staff team will answer here.
+</DiscordMessage>
+
+<DiscordMessage author="Luke" time="Today at 14:03" avatar={logo}>
+  Thanks! A user message with a custom avatar and a long word: supercalifragilisticexpialidocious-and-even-longer-unbroken-text.
+</DiscordMessage>
+
+<DiscordMessage author="SupportMail" bot>
+  <DiscordEmbed title="Close request" color="#5865f2">
+    The staff wants to close this ticket. Do you agree?
+  </DiscordEmbed>
+  <DiscordButtons
+    buttons={[
+      { label: "Close", style: "success", emoji: "✅" },
+      { label: "Keep open", style: "danger" },
+    ]}
+  />
+</DiscordMessage>
+
+<DiscordMessage author="SupportMail" bot time="Yesterday at 09:41">
+  <DiscordEmbed
+    title="New report"
+    color="#ed4245"
+    fields={[
+      { name: "Reported user", value: "@someone", inline: true },
+      { name: "Reason", value: "Spam", inline: true },
+      { name: "Status", value: "Open", inline: true },
+      { name: "Comment", value: "A full-width field below the inline ones." },
+    ]}
+  >
+    A report was submitted in #general.
+  </DiscordEmbed>
+  <DiscordButtons
+    buttons={[
+      { label: "Primary", style: "primary" },
+      { label: "Secondary", style: "secondary" },
+      { label: "Success", style: "success" },
+      { label: "Danger", style: "danger" },
+      { label: "Link", style: "link" },
+    ]}
+  />
+</DiscordMessage>
+
+<DiscordMessage author="SupportMail" bot>
+  <DiscordEmbed>An embed with only a description and no colour.</DiscordEmbed>
+</DiscordMessage>

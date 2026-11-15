@@ -1,0 +1,54 @@
+---
+// Inline chip for a Discord slash command, for example
+// <SlashCommand name="close-request create" options={["close-in:1h"]} />
+// renders "/close-request create close-in:1h". Presentational, no JS.
+interface Props {
+  /** Command name without the leading slash, subcommands separated by spaces. */
+  name: string;
+  /** Options as "name:value" strings, shown after the command. */
+  options?: string[];
+}
+
+const { name, options = [] } = Astro.props;
+---
+
+<code class="sm-slash not-content" translate="no"
+  ><span class="cmd">/{name}</span>{
+    options.map((opt) => {
+      const i = opt.indexOf(":");
+      return i === -1 ? (
+        <span class="opt"> {opt}</span>
+      ) : (
+        <span class="opt">
+          {" "}
+          <span class="key">{opt.slice(0, i + 1)}</span>
+          {opt.slice(i + 1)}
+        </span>
+      );
+    })
+  }</code
+>
+
+<style>
+  .sm-slash {
+    display: inline;
+    padding: 0.12em 0.45em;
+    border-radius: var(--sm-radius-sm);
+    background-color: var(--sm-blue-tint);
+    color: var(--sm-blue-soft);
+    font-family: var(--sm-font-mono);
+    font-size: 0.875em;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  .opt {
+    color: var(--sm-text-strong);
+  }
+
+  .key {
+    color: var(--sm-text-muted);
+  }
+</style>

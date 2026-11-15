@@ -1,0 +1,75 @@
+---
+// A row of Discord message buttons. Presentational only: rendered as spans so
+// readers don't expect them to do anything on the docs page.
+interface Button {
+  label: string;
+  style: "primary" | "secondary" | "success" | "danger" | "link";
+  emoji?: string;
+}
+
+interface Props {
+  buttons: Button[];
+}
+
+const { buttons } = Astro.props;
+---
+
+<div class="sm-dbuttons">
+  {
+    buttons.map((b) => (
+      <span class:list={["dbtn", b.style]}>
+        {b.emoji && <span class="emoji" aria-hidden="true">{b.emoji}</span>}
+        {b.label}
+        {b.style === "link" && (
+          <svg class="ext" aria-hidden="true" viewBox="0 0 24 24" width="14" height="14">
+            <path fill="currentColor" d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3ZM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" />
+          </svg>
+        )}
+      </span>
+    ))
+  }
+</div>
+
+<style>
+  .sm-dbuttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .dbtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 2rem;
+    padding: 0 1rem;
+    border-radius: var(--sm-radius-md);
+    color: oklch(0.99 0 0);
+    font-size: var(--sl-text-sm);
+    font-weight: 500;
+    line-height: 1;
+    cursor: default;
+  }
+
+  /* Discord's own button colours, readable with white text. */
+  .primary {
+    background-color: oklch(0.52 0.19 275);
+  }
+
+  .secondary,
+  .link {
+    background-color: oklch(0.42 0.015 270);
+  }
+
+  .success {
+    background-color: oklch(0.5 0.13 150);
+  }
+
+  .danger {
+    background-color: oklch(0.52 0.19 25);
+  }
+
+  .ext {
+    opacity: 0.85;
+  }
+</style>

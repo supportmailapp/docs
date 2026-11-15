@@ -1,0 +1,94 @@
+---
+// A Discord embed inside a DiscordMessage. The left edge is Discord's own
+// embed colour bar (the real look of an embed), not a callout style.
+interface Field {
+  name: string;
+  value: string;
+  inline?: boolean;
+}
+
+interface Props {
+  title?: string;
+  /** Embed colour as any CSS colour, e.g. "#5865f2". */
+  color?: string;
+  fields?: Field[];
+}
+
+const { title, color, fields = [] } = Astro.props;
+---
+
+<div class="sm-dembed" style={color ? `--sm-embed-color: ${color}` : undefined}>
+  {title && <div class="title">{title}</div>}
+  {Astro.slots.has("default") && <div class="desc"><slot /></div>}
+  {
+    fields.length > 0 && (
+      <div class="fields">
+        {fields.map((f) => (
+          <div class:list={["field", { inline: f.inline }]}>
+            <div class="name">{f.name}</div>
+            <div class="value">{f.value}</div>
+          </div>
+        ))}
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .sm-dembed {
+    max-width: 32rem;
+    padding: 0.6rem 0.9rem 0.75rem;
+    border-left: 4px solid var(--sm-embed-color, var(--sm-line));
+    border-radius: 4px;
+    background-color: var(--sm-surface-1);
+  }
+
+  :global(:root[data-theme="light"]) .sm-dembed {
+    background-color: var(--sm-surface-0);
+  }
+
+  .title {
+    margin-bottom: 0.25rem;
+    color: var(--sm-text-strong);
+    font-weight: 600;
+  }
+
+  .desc :global(p) {
+    margin: 0;
+  }
+
+  .fields {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .field {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+
+  .field.inline {
+    grid-column: auto;
+  }
+
+  @media (max-width: 30rem) {
+    .fields {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .field.inline {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .name {
+    color: var(--sm-text-strong);
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
+  }
+
+  .value {
+    overflow-wrap: anywhere;
+  }
+</style>

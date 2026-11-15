@@ -73,8 +73,9 @@
   color: var(--sm-text-strong);
 }
 
-/* Inline code. Clicking copies it (src/scripts/inlineCode.js). */
-.sl-markdown-content :not(pre) > code {
+/* Inline code. Clicking copies it (src/scripts/inlineCode.js).
+   SlashCommand chips (.sm-slash) keep their own blue styling. */
+.sl-markdown-content :not(pre) > code:not(.sm-slash) {
   padding: 0.12em 0.4em;
   border-radius: 5px;
   background-color: var(--sm-surface-2);
@@ -82,11 +83,11 @@
   font-size: 0.875em;
 }
 
-.sl-markdown-content .starlight-aside :not(pre) > code {
+.sl-markdown-content .starlight-aside :not(pre) > code:not(.sm-slash) {
   background-color: color-mix(in oklab, var(--sm-surface-0) 55%, transparent);
 }
 
-code[dir="auto"]:hover {
+code[dir="auto"]:not(.sm-slash):hover {
   background-color: var(--sm-surface-3);
   cursor: pointer;
 }
