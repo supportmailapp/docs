@@ -1,5 +1,4 @@
 ---
-// From starlight-rapide, because I override thje Header where this is used, I need to override this too to use it.
 import crypto from "node:crypto";
 
 const id = `moon-mask-${crypto.randomBytes(4).toString("hex")}`;
@@ -8,7 +7,7 @@ const id = `moon-mask-${crypto.randomBytes(4).toString("hex")}`;
 // https://github.com/withastro/starlight/blob/9237581c766f68fbb3ce5f9401ca2046f106c7d5/packages/starlight/components/ThemeSelect.astro
 ---
 
-<starlight-rapide-theme-select>
+<sm-theme-select>
   <button
     aria-label={Astro.locals.t("themeSelect.accessibleLabel")}
     aria-live="polite"
@@ -33,13 +32,13 @@ const id = `moon-mask-${crypto.randomBytes(4).toString("hex")}`;
       </g>
     </svg>
   </button>
-</starlight-rapide-theme-select>
+</sm-theme-select>
 
 <style>
-  @layer rapide {
-    starlight-rapide-theme-select {
-      --sl-rapide-theme-select-animation-duration: 400ms;
-      --sl-rapide-theme-select-ease-elastic: cubic-bezier(
+  @layer components {
+    sm-theme-select {
+      --sm-theme-select-animation-duration: 400ms;
+      --sm-theme-select-ease-elastic: cubic-bezier(
         0.5,
         1.25,
         0.75,
@@ -114,42 +113,42 @@ const id = `moon-mask-${crypto.randomBytes(4).toString("hex")}`;
 
     :global([data-theme="dark"]) svg {
       animation: theme-icon-spin
-        var(--sl-rapide-theme-select-animation-duration) ease;
+        var(--sm-theme-select-animation-duration) ease;
     }
 
     :global([data-theme="light"]) svg {
       animation: theme-icon-spin
-        var(--sl-rapide-theme-select-animation-duration) ease reverse;
+        var(--sm-theme-select-animation-duration) ease reverse;
     }
 
     svg .sun {
-      transition: transform var(--sl-rapide-theme-select-animation-duration)
-        var(--sl-rapide-theme-select-ease-elastic);
+      transition: transform var(--sm-theme-select-animation-duration)
+        var(--sm-theme-select-ease-elastic);
     }
 
     svg .sun-beams {
       transition:
-        opacity var(--sl-rapide-theme-select-animation-duration) ease,
-        transform var(--sl-rapide-theme-select-animation-duration)
-          var(--sl-rapide-theme-select-ease-elastic);
+        opacity var(--sm-theme-select-animation-duration) ease,
+        transform var(--sm-theme-select-animation-duration)
+          var(--sm-theme-select-ease-elastic);
     }
 
     svg .moon circle {
       transition: transform
-        calc(var(--sl-rapide-theme-select-animation-duration) / 2) ease-out;
+        calc(var(--sm-theme-select-animation-duration) / 2) ease-out;
     }
 
     @supports (cx: 1) {
       svg .moon circle {
         transition: cx
-          calc(var(--sl-rapide-theme-select-animation-duration) / 2) ease-out;
+          calc(var(--sm-theme-select-animation-duration) / 2) ease-out;
       }
     }
 
     :global([data-theme="dark"]) svg .sun {
       transform: scale(1.75);
       transition-duration: calc(
-        var(--sl-rapide-theme-select-animation-duration) / 2
+        var(--sm-theme-select-animation-duration) / 2
       );
       transition-timing-function: ease;
     }
@@ -157,15 +156,15 @@ const id = `moon-mask-${crypto.randomBytes(4).toString("hex")}`;
     :global([data-theme="dark"]) svg .sun-beams {
       transform: rotateZ(-25deg);
       transition-duration: calc(
-        var(--sl-rapide-theme-select-animation-duration) / 4
+        var(--sm-theme-select-animation-duration) / 4
       );
     }
 
     :global([data-theme="dark"]) svg .moon circle {
       transition-delay: calc(
-        var(--sl-rapide-theme-select-animation-duration) / 4
+        var(--sm-theme-select-animation-duration) / 4
       );
-      transition-duration: var(--sl-rapide-theme-select-animation-duration);
+      transition-duration: var(--sm-theme-select-animation-duration);
     }
   }
 </style>
@@ -226,8 +225,8 @@ const id = `moon-mask-${crypto.randomBytes(4).toString("hex")}`;
   });
 
   customElements.define(
-    "starlight-rapide-theme-select",
-    class StarlightRapideThemeSelect extends HTMLElement {
+    "sm-theme-select",
+    class SmThemeSelect extends HTMLElement {
       constructor() {
         super();
         onThemeChange(loadTheme());

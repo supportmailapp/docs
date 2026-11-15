@@ -1,9 +1,8 @@
-@layer base, starlight, theme, components, utilities, rapide, rapide-overwrite;
+@layer base, starlight, theme, components, utilities;
 
 @import "@astrojs/starlight-tailwind";
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
-@import "./rapide-overwrite.css" layer(rapide-overwrite);
 
 /* Dark mode colors. */
 :root {

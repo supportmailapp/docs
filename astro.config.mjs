@@ -5,6 +5,9 @@ import starlight from "@astrojs/starlight";
 import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
 import tailwindcss from "@tailwindcss/vite";
+// Imported here, not in src/config/plugins.ts: the workerd dev dependency scanner
+// crawls src/ and breaks on this build-only plugin's CLI dependencies.
+import starlightLinksValidator from "starlight-links-validator";
 import components from "./src/config/components";
 import head from "./src/config/head";
 import plugins from "./src/config/plugins";
@@ -13,7 +16,7 @@ import social from "./src/config/social";
 
 export default defineConfig({
   output: "static",
-  adapter: cloudflare({ imageService: "compile" }),
+  adapter: cloudflare({ imageService: "compile", prerenderEnvironment: "node" }),
   site: "https://docs.supportmail.dev",
   trailingSlash: "ignore",
   env: {
@@ -64,7 +67,7 @@ export default defineConfig({
       head,
       sidebar,
       components,
-      plugins,
+      plugins: [starlightLinksValidator(), ...plugins],
     }),
     sitemap({
       serialize(item) {
