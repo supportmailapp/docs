@@ -51,4 +51,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Contributors are expected to follow the
 
 Code: [MIT](LICENSE) © SupportMail
 
-Documentation content: [CC BY-NC 4.0](LICENSE-CONTENT.md) © SupportMail
+Documentation content: [CC BY-NC-SA 4.0](LICENSE-CONTENT.md) © SupportMail

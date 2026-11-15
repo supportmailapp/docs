@@ -22,5 +22,5 @@ house rules live in [`CONVENTIONS.md`](CONVENTIONS.md).
 
 By contributing you agree your code is licensed under the repository's
 [MIT](LICENSE) license and your documentation content under
-[CC BY-NC 4.0](LICENSE-CONTENT.md), and you agree to the
+[CC BY-NC-SA 4.0](LICENSE-CONTENT.md), and you agree to the
 [Code of Conduct](CODE_OF_CONDUCT.md).

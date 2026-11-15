@@ -1,9 +1,9 @@
 # Content License
 
 The documentation content of **SupportMail Docs** is licensed under the
-[Creative Commons Attribution-NonCommercial 4.0 International](https://creativecommons.org/licenses/by-nc/4.0/legalcode)
-license (CC BY-NC 4.0). You may share and adapt it with attribution, for non-commercial purposes
-only. The linked legal code is the authoritative text.
+[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
+license (CC BY-NC-SA 4.0). You may share and adapt it with attribution, for non-commercial purposes
+only, and adaptations must carry the same license. The linked legal code is the authoritative text.
 
 ## Scope
 
