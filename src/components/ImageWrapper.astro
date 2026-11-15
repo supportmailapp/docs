@@ -1,4 +1,6 @@
 ---
+// Screenshot frame. Styles live in src/styles/content.css; the lightbox
+// (src/scripts/imageLightbox.js) finds images via data-type="image-wrapper".
 interface Props {
   size?: "sm" | "md" | "lg" | "xl" | "full";
   class?: string;
@@ -22,9 +24,3 @@ const sizeClasses = (_size: Props["size"] = "md") =>
 >
   <slot />
 </div>
-
-<style>
-  [data-type="image-wrapper"] :global(img) {
-    cursor: zoom-in;
-  }
-</style>

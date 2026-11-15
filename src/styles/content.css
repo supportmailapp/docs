@@ -1,0 +1,290 @@
+/*
+ * Console content surfaces: asides, inline code, tables, cards, link buttons,
+ * image frames, lightbox. Unlayered so it wins over Starlight's layered styles.
+ * Colours come from tokens.css.
+ */
+
+/* Asides: tinted rounded panels, 1px line, no thick left bar. */
+.starlight-aside {
+  --sm-aside-accent: var(--sm-blue-soft);
+  --sm-aside-bg: color-mix(in oklab, var(--sm-blue) 35%, var(--sm-surface-0));
+  --sm-aside-line: color-mix(in oklab, var(--sm-blue-strong) 40%, transparent);
+
+  border: 1px solid var(--sm-aside-line);
+  border-radius: var(--sm-radius-md);
+  background: var(--sm-aside-bg);
+  color: var(--sm-text);
+  padding: 0.9rem 1.1rem;
+}
+
+.starlight-aside--tip {
+  --sm-aside-accent: oklch(0.82 0.12 165);
+  --sm-aside-bg: color-mix(in oklab, oklch(0.45 0.09 165) 25%, var(--sm-surface-0));
+  --sm-aside-line: color-mix(in oklab, oklch(0.6 0.12 165) 40%, transparent);
+}
+
+.starlight-aside--caution {
+  --sm-aside-accent: var(--sm-mark);
+  --sm-aside-bg: color-mix(in oklab, var(--sm-mark) 9%, var(--sm-surface-0));
+  --sm-aside-line: color-mix(in oklab, var(--sm-mark) 35%, transparent);
+}
+
+.starlight-aside--danger {
+  --sm-aside-accent: var(--sm-danger);
+  --sm-aside-bg: color-mix(in oklab, var(--sm-danger) 12%, var(--sm-surface-0));
+  --sm-aside-line: color-mix(in oklab, var(--sm-danger) 40%, transparent);
+}
+
+/* Light: yellow only as a fill, with dark ink for the caution title. */
+:root[data-theme="light"] .starlight-aside {
+  --sm-aside-bg: var(--sm-blue-tint);
+  --sm-aside-line: color-mix(in oklab, var(--sm-blue-strong) 25%, transparent);
+}
+
+:root[data-theme="light"] .starlight-aside--tip {
+  --sm-aside-accent: oklch(0.42 0.1 165);
+  --sm-aside-bg: oklch(0.95 0.03 165);
+  --sm-aside-line: oklch(0.85 0.06 165);
+}
+
+:root[data-theme="light"] .starlight-aside--caution {
+  --sm-aside-accent: var(--sm-mark-ink);
+  --sm-aside-bg: color-mix(in oklab, var(--sm-mark) 32%, var(--sm-surface-0));
+  --sm-aside-line: color-mix(in oklab, var(--sm-mark) 70%, var(--sm-mark-ink));
+}
+
+:root[data-theme="light"] .starlight-aside--danger {
+  --sm-aside-accent: var(--sm-danger);
+  --sm-aside-bg: oklch(0.96 0.025 28);
+  --sm-aside-line: oklch(0.86 0.06 28);
+}
+
+.starlight-aside__title {
+  color: var(--sm-aside-accent);
+  font-family: var(--sm-font-body);
+  font-weight: 600;
+}
+
+.starlight-aside__icon {
+  color: var(--sm-aside-accent);
+}
+
+.starlight-aside__content a {
+  color: var(--sm-text-strong);
+}
+
+/* Inline code. Clicking copies it (src/scripts/inlineCode.js). */
+.sl-markdown-content :not(pre) > code {
+  padding: 0.12em 0.4em;
+  border-radius: 5px;
+  background-color: var(--sm-surface-2);
+  color: var(--sm-text-strong);
+  font-size: 0.875em;
+}
+
+.sl-markdown-content .starlight-aside :not(pre) > code {
+  background-color: color-mix(in oklab, var(--sm-surface-0) 55%, transparent);
+}
+
+code[dir="auto"]:hover {
+  background-color: var(--sm-surface-3);
+  cursor: pointer;
+}
+
+/* Tables. */
+.sl-markdown-content table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.sl-markdown-content table th {
+  background-color: var(--sm-surface-2);
+  border-bottom: 1px solid var(--sm-line);
+  color: var(--sm-text-strong);
+  font-weight: 600;
+}
+
+.sl-markdown-content table :is(th, td) {
+  border-bottom: 1px solid var(--sm-line);
+  padding-inline: 0.75rem;
+}
+
+.sl-markdown-content table th:first-child {
+  border-start-start-radius: var(--sm-radius-md);
+}
+
+.sl-markdown-content table th:last-child {
+  border-start-end-radius: var(--sm-radius-md);
+}
+
+.table-wrapper {
+  display: flex;
+  overflow-x: auto;
+  width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: var(--sm-blue-strong) var(--sm-surface-2);
+
+  table {
+    display: table;
+  }
+
+  table,
+  thead,
+  tbody {
+    width: 100%;
+  }
+
+  /* col 1, align text right */
+  &.c1-right {
+    th:nth-child(1),
+    td:nth-child(1) {
+      text-align: end;
+    }
+  }
+
+  /* col 2, align text right */
+  &.c2-right {
+    th:nth-child(2),
+    td:nth-child(2) {
+      text-align: end;
+    }
+  }
+}
+
+/* Cards and link cards. */
+.card,
+.sl-link-card {
+  border: 1px solid transparent;
+  border-radius: var(--sm-radius-lg);
+  background-color: var(--sm-surface-2);
+  box-shadow: none;
+}
+
+.sl-link-card:is(:hover, :focus-within) {
+  background-color: var(--sm-surface-3);
+  border-color: var(--sm-line);
+}
+
+.card .title {
+  font-family: var(--sm-font-display);
+  color: var(--sm-text-strong);
+}
+
+.card .icon {
+  border: none;
+  border-radius: var(--sm-radius-md);
+  background-color: var(--sm-blue-tint);
+  color: var(--sm-blue-soft);
+}
+
+.sl-link-card .title {
+  color: var(--sm-text-strong);
+}
+
+.sl-link-card .description {
+  color: var(--sm-text-muted);
+}
+
+/* Link buttons (src/components/LinkButton.astro). */
+.sl-link-button {
+  border-radius: var(--sm-radius-md);
+}
+
+.sl-link-button.primary,
+.sl-link-button.primary:hover {
+  background-color: var(--sm-blue);
+  border-color: var(--sm-blue);
+  color: var(--sm-on-blue);
+}
+
+.sl-link-button.secondary {
+  background-color: var(--sm-surface-2);
+  border-color: var(--sm-line);
+  color: var(--sm-text-strong);
+}
+
+.sl-link-button.minimal {
+  color: var(--sm-blue-soft);
+}
+
+/* Horizontal rules and small print. */
+hr {
+  border-bottom-color: var(--sm-line);
+}
+
+small {
+  color: var(--sm-text-muted);
+}
+
+/* Screenshot frame (src/components/ImageWrapper.astro). */
+[data-type="image-wrapper"] {
+  padding: 0.5rem;
+  border-radius: var(--sm-radius-lg);
+  background-color: var(--sm-surface-2);
+}
+
+[data-type="image-wrapper"] img {
+  display: block;
+  height: 100%;
+  border-radius: var(--sm-radius-md);
+  object-fit: cover;
+  cursor: zoom-in;
+}
+
+/* Footnote labels have that stupid hover-link appearance */
+a[href="#footnote-label"]::after,
+a[href="#footnote-label"] svg {
+  content: none;
+  display: none;
+}
+
+/* Image lightbox (src/scripts/imageLightbox.js) open/close transitions. */
+#image-lightbox {
+  opacity: 0;
+  scale: 0.95;
+}
+
+#image-lightbox[open] {
+  opacity: 1;
+  scale: 1;
+}
+
+#image-lightbox::backdrop {
+  background: rgba(0, 0, 0, 0);
+}
+
+#image-lightbox[open]::backdrop {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+#image-lightbox img {
+  border-radius: var(--sm-radius-md);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #image-lightbox {
+    transition:
+      opacity 0.25s ease,
+      scale 0.25s ease,
+      overlay 0.25s ease allow-discrete,
+      display 0.25s ease allow-discrete;
+  }
+
+  #image-lightbox::backdrop {
+    transition:
+      background 0.25s ease,
+      overlay 0.25s ease allow-discrete,
+      display 0.25s ease allow-discrete;
+  }
+
+  @starting-style {
+    #image-lightbox[open] {
+      opacity: 0;
+      scale: 0.95;
+    }
+
+    #image-lightbox[open]::backdrop {
+      background: rgba(0, 0, 0, 0);
+    }
+  }
+}

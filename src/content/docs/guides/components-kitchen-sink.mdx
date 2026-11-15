@@ -1,0 +1,66 @@
+---
+title: Components kitchen sink
+description: Dev-only page that renders every docs component and content style.
+draft: true
+---
+
+import { Aside, Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
+import LinkButton from "../../../components/LinkButton.astro";
+
+## Asides
+
+<Aside type="note">
+  A note aside with `inline code` and a [link](/overview).
+</Aside>
+
+<Aside type="tip">
+  A tip aside with **bold** text.
+</Aside>
+
+<Aside type="caution">
+  A caution aside. Something to be careful about.
+</Aside>
+
+<Aside type="danger" title="Danger title">
+  A danger aside with a custom title.
+</Aside>
+
+## Code
+
+Inline: `/ticket-create`, `close-in:1h`.
+
+```ts title="example.ts"
+export function greet(name: string): string {
+  return `Hello, ${name}!`;
+}
+```
+
+```sh
+pnpm check:content
+```
+
+## Table
+
+| Command           | Reason       | Comment  |
+| ----------------- | ------------ | -------- |
+| `/report message` | Optional     | Optional |
+| `/report user`    | **Required** | Optional |
+
+## Cards
+
+<CardGrid>
+  <Card title="First card" icon="rocket">
+    Card body text.
+  </Card>
+  <Card title="Second card" icon="setting">
+    Card body text.
+  </Card>
+</CardGrid>
+
+<LinkCard title="A link card" href="/overview" description="With a description." />
+
+## Link buttons
+
+<LinkButton href="/overview">Primary</LinkButton>
+<LinkButton href="/overview" variant="secondary">Secondary</LinkButton>
+<LinkButton href="/overview" variant="minimal">Minimal</LinkButton>
