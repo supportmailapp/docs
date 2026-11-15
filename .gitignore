@@ -21,3 +21,6 @@ pnpm-debug.log*
 .DS_Store
 
 /.wrangler/
+
+# impeccable design-hook config and cache (local only)
+.impeccable/
