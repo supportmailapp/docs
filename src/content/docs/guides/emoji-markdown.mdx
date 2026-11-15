@@ -1,0 +1,29 @@
+---
+title: Emoji Format
+description: How to enter standard and custom emojis, for example for panel buttons or ticket categories.
+sidebar:
+  order: 2
+---
+
+Some settings take an emoji, for example panel buttons and [ticket categories](/configuration/ticket-categories). You can enter two kinds.
+
+## Standard emojis
+
+Type or paste the emoji itself, like 🔥, ✅ or 🧙‍♂️.
+
+## Custom emojis
+
+Custom server emojis use Discord's emoji markdown:
+
+| Emoji type | Format            | Example                            |
+| ---------- | ----------------- | ---------------------------------- |
+| Static     | `<:name:id>`      | `<:supportmail:123456789012345678>` |
+| Animated   | `<a:name:id>`     | `<a:loading:123456789012345678>`    |
+
+### Getting an emoji's markdown
+
+1. In any Discord channel, type a backslash followed by the emoji, for example `\:supportmail:`.
+2. Send the message. Discord shows the emoji's markdown, such as `<:supportmail:123456789012345678>`, instead of the emoji.
+3. Copy that text and paste it into the emoji field.
+
+The emoji has to be from a server SupportMail is in, otherwise Discord can't show it.

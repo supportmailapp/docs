@@ -1,0 +1,65 @@
+---
+title: Reports Configuration
+description: Configure automated and manual reporting features.
+sidebar:
+  order: 7
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
+
+Reports let your members flag messages and other users for your mod team to review. You can turn reports on, decide where mods get notified, and control what (if anything) gets sent to users by DM. Set it all up under <DashLink route="?next=/report-settings">Report Settings</DashLink>. For how your mods actually handle incoming reports day-to-day, see [Managing Reports](/managing-support/managing-reports).
+
+## Turning reports on
+
+The quickest way to get started is the [Setup Wizard](/configuration/setup-wizard), in the dashboard or with `/setup reports wizard` in Discord. It covers the alert channel, moderators, pings and limits below. The rest of this page covers the same settings, plus the ones the wizard leaves out, such as DMs.
+
+Before you can enable reports, pick an **alert channel** - that's where every new report shows up for your mods. Once that's set, flip the system on. You can also **pause** it at any time without losing your settings.
+
+- **Actions** - whether moderators can act on reports (timeout, kick, ban and so on) through SupportMail. With actions off, mods can't take any action on reports with the bot.
+- **Automatic Resolution** - decide if reports close themselves right away (**Resolve Reports instantly**), or stay open until a mod reviews and resolves them (**Let mods resolve reports**). Instant resolution is handy when actions are off.
+
+<Aside type="caution">
+  Set an alert channel and sensible limits before you turn reports on, so your
+  mods actually see new reports and don't get flooded.
+</Aside>
+
+## Moderators and immune members
+
+- **Moderators** - the users and roles who can take action on reports.
+- **Immune Settings** - users and roles who can't be reported at all. Use with care.
+
+## Where reports can be created
+
+By default members can report from anywhere. If you want to restrict that, choose channels (or whole categories) under **Special Channels** and pick one of:
+
+- **Included** - reports can only be made in the channels you pick.
+- **Excluded** - reports can be made everywhere except the channels you pick.
+
+## Limits
+
+Stop your report channel from getting spammed:
+
+- **Max open reports per user** (1-10) - how many open reports can be about the same member.
+- **Max open reports a user can create** (1-50) - how many open reports one member can have created at the same time.
+- **Max open reports in the server** (1-100) - a total cap for the whole server.
+
+Values outside the range are adjusted to the nearest allowed value. These are the same three limits as in the [Setup Wizard](/configuration/setup-wizard).
+
+When you save with reports turned on, the dashboard checks the bot's permissions in the alert channel (View Channel, Send Messages, Read Message History, Attach Files). If any are missing, the settings are still saved, and a warning lists what to fix.
+
+## Notifications
+
+Notifications live in the **Notification Settings** card.
+
+- **Pings** - roles or people to ping in the alert channel whenever a new report comes in.
+
+### DMs to users
+
+SupportMail can also message users directly about reports. There are three separate DMs, each with its own on/off switch, so turn on only what you want:
+
+- **DM on report creation** - lets the person who made the report know it went through. Sent right away.
+- **DM on report resolution** - tells the reporter what happened once a mod resolves their report. You choose which outcomes send this DM (e.g. only for timeouts/kicks/bans, or also when a report is ignored or dismissed).
+- **DM to the reported user** - lets someone know when a mod has taken action against them. This DM never says who reported them or which mod handled it. If the action is a kick or ban, it's sent right before it happens, so the person still gets it even if the kick/ban itself doesn't go through.
+
+For the resolution and reported-user DMs, use **Sent for** to pick which outcomes trigger the message. For all three, use **Included info** to pick what details are in it - things like the reason given, a link to the reported message, or how long a timeout lasts. Options differ slightly per DM: for example the reported user's DM never reveals the reporter's identity or the moderator's name, no matter what you pick.

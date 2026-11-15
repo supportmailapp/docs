@@ -1,0 +1,137 @@
+---
+// Starlight 0.42 header layout, with social icons and the theme toggle grouped
+// into one soft toolbar on the right. Colours live in src/styles/chrome.css.
+import config from "virtual:starlight/user-config";
+
+import LanguageSelect from "virtual:starlight/components/LanguageSelect";
+import Search from "virtual:starlight/components/Search";
+import SiteTitle from "virtual:starlight/components/SiteTitle";
+import SocialIcons from "virtual:starlight/components/SocialIcons";
+import ThemeSelect from "virtual:starlight/components/ThemeSelect";
+
+const shouldRenderSearch =
+  config.pagefind ||
+  config.components.Search !== "@astrojs/starlight/components/Search.astro";
+---
+
+<div class="header">
+  <div class="title-wrapper sl-flex">
+    <SiteTitle />
+  </div>
+  <div class="sl-flex print:hidden">{shouldRenderSearch && <Search />}</div>
+  <div class="sl-hidden md:sl-flex print:hidden right-group">
+    <div class="sl-flex social-icons">
+      <SocialIcons />
+    </div>
+    <ThemeSelect />
+    <LanguageSelect />
+  </div>
+</div>
+
+{/* Site-wide: open external links in a new tab. */}
+<script src="../../scripts/utils.js"></script>
+
+<style>
+  .header {
+    display: flex;
+    gap: var(--sl-nav-gap);
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+
+  .title-wrapper {
+    overflow: clip;
+    padding: 0.25rem;
+    margin: -0.25rem;
+    min-width: 0;
+  }
+
+  /* One soft toolbar: equal 2.25rem squares, icons centred. */
+  .right-group {
+    align-items: center;
+    gap: 0.125rem;
+    padding: 0.2rem;
+    border-radius: var(--sm-radius-lg);
+    background-color: var(--sm-surface-2);
+  }
+
+  .social-icons {
+    align-items: center;
+    gap: 0.125rem;
+  }
+
+  .right-group :global(:is(.social-icons a, sm-theme-select button)) {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    /* Starlight's SocialIcons uses padding 0.5em + margin -0.5em; undo both. */
+    margin: 0;
+    padding: 0;
+    border-radius: var(--sm-radius-md);
+    color: var(--sm-text-muted);
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .right-group :global(:is(.social-icons a, sm-theme-select button) svg) {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .right-group
+    :global(
+      :is(.social-icons a, sm-theme-select button):is(:hover, :focus-visible)
+    ) {
+    background-color: var(--sm-surface-3);
+    color: var(--sm-text-strong);
+  }
+
+  .right-group :global(sm-theme-select) {
+    display: flex;
+    align-self: center;
+  }
+
+  /* Starlight draws a divider after the social icons; not needed in a toolbar. */
+  .social-icons::after {
+    content: none;
+  }
+
+  @media (min-width: 50rem) {
+    :global(:root[data-has-sidebar]) {
+      --__sidebar-pad: calc(2 * var(--sl-nav-pad-x));
+    }
+    :global(:root:not([data-has-toc])) {
+      --__toc-width: 0rem;
+    }
+    .header {
+      --__sidebar-width: max(
+        0rem,
+        var(--sl-content-inline-start, 0rem) - var(--sl-nav-pad-x)
+      );
+      --__main-column-fr: calc(
+        (
+            100% + var(--__sidebar-pad, 0rem) -
+              var(--__toc-width, var(--sl-sidebar-width)) -
+              (2 * var(--__toc-width, var(--sl-nav-pad-x))) -
+              var(--sl-content-inline-start, 0rem) - var(--sl-content-width)
+          ) /
+          2
+      );
+      display: grid;
+      grid-template-columns:
+        minmax(
+          calc(
+            var(--__sidebar-width) +
+              max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))
+          ),
+          auto
+        )
+        1fr
+        auto;
+      align-content: center;
+    }
+  }
+</style>

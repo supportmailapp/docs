@@ -1,0 +1,181 @@
+/*
+ * Console chrome: header, sidebar, table of contents, search trigger.
+ * Unlayered so it wins over Starlight's layered component styles.
+ * Colours come from tokens.css only.
+ */
+
+/* Header. */
+header.header {
+  background-color: var(--sm-surface-1);
+  border-bottom: 1px solid var(--sm-line);
+}
+
+/* Search trigger: a soft rounded field. */
+header :is(.DocSearch-Button, button[data-open-modal]) {
+  background-color: var(--sm-surface-2);
+  border: 1px solid var(--sm-line);
+  border-radius: var(--sm-radius-md);
+  color: var(--sm-text-muted);
+  box-shadow: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+header :is(.DocSearch-Button, button[data-open-modal]):is(:hover, :focus-visible) {
+  background-color: var(--sm-surface-3);
+  border-color: var(--sm-blue-strong);
+  color: var(--sm-text);
+}
+
+header :is(.DocSearch-Button-Key, kbd) {
+  background: var(--sm-surface-1);
+  border-radius: 4px;
+  box-shadow: none;
+  color: var(--sm-text-muted);
+}
+
+/* Sidebar. */
+.sidebar-pane {
+  background-color: var(--sl-color-bg-sidebar);
+}
+
+#starlight__sidebar a {
+  border-radius: var(--sm-radius-sm);
+  color: var(--sm-text-muted);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+#starlight__sidebar a:is(:hover, :focus-visible) {
+  background-color: var(--sm-surface-2);
+  color: var(--sm-text-strong);
+}
+
+#starlight__sidebar a[aria-current="page"],
+#starlight__sidebar a[aria-current="page"]:is(:hover, :focus-visible) {
+  background-color: var(--sm-blue);
+  color: var(--sm-on-blue);
+  font-weight: 600;
+}
+
+/* Quiet group labels. */
+#starlight__sidebar .group-label .large {
+  color: var(--sm-text-muted);
+  font-family: var(--sm-font-body);
+  font-size: var(--sl-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#starlight__sidebar summary {
+  border-radius: var(--sm-radius-sm);
+}
+
+#starlight__sidebar summary:hover .large {
+  color: var(--sm-text);
+}
+
+/* Nested lists: lighter guide line instead of a border per item. */
+#starlight__sidebar ul ul li {
+  border-inline-start-color: var(--sm-line);
+}
+
+/* Table of contents. */
+starlight-toc nav a,
+mobile-starlight-toc nav a {
+  color: var(--sm-text-muted);
+  border-radius: var(--sm-radius-sm);
+}
+
+starlight-toc nav a:hover,
+mobile-starlight-toc nav a:hover {
+  color: var(--sm-text-strong);
+}
+
+starlight-toc nav a[aria-current="true"],
+mobile-starlight-toc nav a[aria-current="true"] {
+  color: var(--sm-blue-soft);
+  font-weight: 600;
+}
+
+starlight-toc h2,
+mobile-starlight-toc .toggle {
+  font-family: var(--sm-font-body);
+  font-size: var(--sl-text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sm-text-muted);
+}
+
+/* Mobile menu toggle. */
+.sl-menu-button {
+  border-radius: var(--sm-radius-md);
+  background-color: var(--sm-surface-2);
+  color: var(--sm-text);
+}
+
+/* Title row. starlight-contextual-menu makes .sl-container an inline-styled
+   flex row (h1 + menu). Wrap it so extra children such as the draft notice
+   drop below the title instead of squeezing between title and menu.
+   !important only where the plugin sets the property inline. */
+.sl-container.contextual-menu-parent {
+  flex-wrap: wrap;
+  align-items: flex-start !important;
+  column-gap: 1rem;
+}
+
+.sl-container.contextual-menu-parent > h1 {
+  flex: 1 1 0;
+  min-width: min(100%, 16rem);
+}
+
+.sl-container.contextual-menu-parent > .contextual-menu-container {
+  order: 1;
+  margin-top: 1rem;
+}
+
+.sl-container.contextual-menu-parent > :not(h1, .contextual-menu-container) {
+  order: 2;
+  flex-basis: 100%;
+  margin-top: 0.75rem;
+}
+
+/* Narrow screens: search and menu toggle as equal 2.5rem squares.
+   The menu toggle is position: fixed and centred with --sl-menu-button-size,
+   so size it through that variable, not width/height. */
+:root {
+  --sl-menu-button-size: 2.5rem;
+}
+
+.sl-menu-button {
+  place-items: center;
+  padding: 0;
+  box-shadow: none;
+}
+
+.sl-menu-button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+@media (max-width: 49.99rem) {
+  /* Only below Starlight's 50rem breakpoint: an unlayered display here
+     would override Starlight's display: none on desktop. */
+  .sl-menu-button {
+    display: grid;
+  }
+
+  header :is(.DocSearch-Button, button[data-open-modal]) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--sl-menu-button-size);
+    height: var(--sl-menu-button-size);
+    min-width: var(--sl-menu-button-size);
+    margin: 0;
+    padding: 0;
+  }
+}

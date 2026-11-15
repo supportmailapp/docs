@@ -1,0 +1,126 @@
+---
+title: Setup Wizard
+description: Set up tickets and reports step by step, in the dashboard or right inside Discord.
+sidebar:
+  order: 0
+---
+
+import { Aside, Steps } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
+
+The setup wizard walks you through the important settings for tickets and reports, one step at a time. Nothing is changed on your server until you confirm on the final review screen, so you can look around, go back and change your mind freely.
+
+There are two versions of the wizard. They cover almost the same settings, so use whichever you prefer:
+
+| Version          | Where                              | Covers                                      |
+| ---------------- | ---------------------------------- | ------------------------------------------- |
+| Dashboard wizard | <DashLink>The dashboard</DashLink> | Language, tickets and reports in one go     |
+| Discord wizard   | `/setup` commands                  | Tickets and reports, each as its own wizard |
+
+You can run either wizard again at any time. It starts from your current settings, so it works for changing an existing setup just as well as for a fresh one.
+
+<Aside type="note">
+  Tickets need a **Community** server, because tickets live in a forum channel.
+  On a server without Community enabled, the ticket steps are unavailable. See
+  [Getting Started](/getting-started) for how to turn it on.
+</Aside>
+
+## Dashboard wizard
+
+When you open a server in the <DashLink>dashboard</DashLink> for the first time, it sends you straight into the wizard. If you skipped it, or never finished it and the server has no ticket forum yet, a **Continue setup** button appears at the bottom of the dashboard sidebar.
+
+<Steps>
+
+1. **Language** - the bot's fallback language, used for members whose own language isn't available. This does not change the language of the dashboard itself.
+
+2. **Features** - tick **Tickets**, **Reports**, or both. You need at least one.
+
+3. **Ticket steps** (if you picked tickets)
+   - **Forum** - keep your current ticket forum, or create a new one, optionally inside a category. For a new forum, **Who can see the forum?** picks the roles and users who can see it and answer tickets. If you pick nobody, only you can see it. You can change this later in the channel's permissions.
+   - **Anonymity** - anonymous staff replies and anonymous ticket authors.
+   - **Pings** - the roles and users pinged on new tickets.
+   - **Messages** - the creation and close messages. Leave them empty to use the defaults.
+   - **Feedback** - whether users are asked to rate their support experience, and the thank-you message.
+   - **Panel** - no panel, keep your current one, or send a ready-made one to a channel you pick.
+
+4. **Report steps** (if you picked reports)
+   - **Channel** - where new reports show up for your mods.
+   - **Actions** - moderation actions and automatic resolution.
+   - **Moderators**, **Immune** and **Pings** - which roles and users handle reports, which are exempt from being reported, and who gets pinged.
+   - **Limits** - how many open reports can be about one member, how many one member can create, and how many can be open in the server.
+
+5. **Review** - see every choice in one place, jump back to edit a section, then press **Apply**.
+
+</Steps>
+
+Steps that already have sensible defaults have a **Leave default** button next to **Next**. Steps that need an answer (language, features, forum, and the report channel) don't.
+
+If you'd rather configure everything by hand, choose **Skip setup**. Nothing is changed, and you can still configure every setting from the dashboard later.
+
+## Discord wizard
+
+The Discord wizard runs entirely in a message that only you can see. It works one feature at a time:
+
+| Command                 | What it does                                            |
+| ----------------------- | ------------------------------------------------------- |
+| `/setup tickets wizard` | Step-by-step ticket setup                               |
+| `/setup reports wizard` | Step-by-step report setup                               |
+| `/setup tickets quick`  | One-shot ticket setup with default settings (see below) |
+
+You need the **Manage Server** permission to use these commands.
+
+### How it works
+
+The command shows a short intro with a **Start** button. After that, every step is the same message being updated:
+
+- **Next** and **Back** move between steps. **Cancel** ends the wizard and throws the draft away.
+- Some steps open a pop-up form (for example anonymity, messages, feedback, and report limits). Submitting a form only updates your draft - click **Next** when you're done.
+- Roles and users are picked from a select menu. Picking someone who is already on the list removes them, and picking someone new adds them. **Clear list** empties it. Each list holds up to 100 entries.
+- The last step is a review. **Finish** applies everything.
+
+### Ticket steps
+
+1. **Forum** - keep your current forum if it still exists, or create a new one. For a new forum you can pick an existing category or have one created, and you choose who can see the forum (up to 25 roles or users, starting with you). A kept forum is not touched.
+2. **Anonymity** - anonymous staff replies and anonymous ticket authors.
+3. **Pings** - roles and users pinged on new tickets.
+4. **Messages** - creation and close message, up to 2000 characters each.
+5. **Feedback** - turn feedback on or off and set the thank-you message.
+6. **Panel** - no panel, keep your current panel, or a ready-made panel in your server's language sent to a channel you pick.
+7. **Review**
+
+<Aside type="note">
+  If you replace or remove a panel, the old panel message stays up in its
+  channel but SupportMail stops tracking it. Delete it yourself if you don't
+  want it anymore. For a fully customized panel, use the
+  [Panel](/configuration/panel) page in the dashboard.
+</Aside>
+
+### Report steps
+
+1. **Channel** - where new reports are posted.
+2. **Actions** - moderation actions and automatic resolution.
+3. **Moderators**, **Immune** and **Pings** - three role/user lists.
+4. **Limits** - reports received per user (1-10), reports created per user (1-50), and open reports (1-100). Numbers outside the range are adjusted to the nearest allowed value. Anything that isn't a number is rejected and your previous value is kept.
+5. **Review**
+
+### Finishing
+
+Before **Finish** runs, SupportMail checks that the bot has every permission it needs, such as creating the forum, or viewing and sending in your panel and report channels. Anything missing is listed on the review screen, and **Finish** stays blocked until you fix it. Roles the bot can't mention only produce a warning.
+
+Finish then applies the steps in order. If one fails, the message tells you which one and offers **Retry**. Steps that already worked are never repeated, so a retry won't create a second forum or send a second panel. Finishing also turns the feature on and marks your setup as done, so the dashboard stops sending you to its own wizard.
+
+### Time limit
+
+The wizard waits up to **30 minutes** between clicks. In any case, a setup has to be finished within **1 hour** of starting it. If you're too late, your next click tells you so, and you can run the command again.
+
+Only one person can run each wizard on a server at a time. If someone else is already setting up tickets or reports, you'll be told, and you can try again once they finish, cancel or time out.
+
+### Quick ticket setup
+
+`/setup tickets quick` skips the questions. It creates the ticket forum (inside a category, if you pick one in the optional `category` option) and turns tickets on with default settings. You and the server owner get access to the forum. It doesn't run if tickets are already set up. Use `/setup tickets wizard` to change an existing setup.
+
+## What the wizards don't cover
+
+- **Panel design** - the wizards only send a ready-made panel. Customize it in the [Panel](/configuration/panel) page of the dashboard.
+- **Language** - only the dashboard wizard has a language step. The Discord wizard leaves your server's language as it is.
+- **Everything else** - for example categories, tags, schedules, blacklists, and the DM settings for reports. Each has its own page in the dashboard. See [Dashboard Overview](/configuration/dashboard-overview).

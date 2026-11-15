@@ -1,0 +1,208 @@
+---
+title: Changelog 2026
+description: A summary of changes made to the project in 2026.
+tableOfContents:
+  minHeadingLevel: 1
+  maxHeadingLevel: 2
+---
+
+import { Aside, Icon } from "@astrojs/starlight/components";
+import ImageWrapper from "../../../components/ImageWrapper.astro";
+import LinkButton from "../../../components/LinkButton.astro";
+import SlashCommand from "../../../components/SlashCommand.astro";
+
+## 14.11.2026
+
+### New: Whitelabel (beta)
+
+Servers in the beta can run SupportMail under their **own bot**: own name, avatar, banner, About me and presence, managed on the new **Whitelabel** page of the dashboard. Start, stop, restart, and switch back to the main bot at any time.
+
+- Your bot serves only your server. Users DM it directly, with no login and no server picker.
+- Panels are sent by whichever bot serves your server.
+
+Access is limited during the beta. To request it, open a ticket in the [support server](https://help.supportmail.dev/). Whitelabel will become part of a future paid plan. See [Whitelabel](/configuration/whitelabel).
+
+## 13.11.2026
+
+### Fixed: Feedback settings
+
+- Fixed a database issue that could stop a server's feedback settings from saving. Each server now has exactly one feedback configuration.
+
+## 31.10.2026
+
+### Changed: Hidden channels and permission warnings
+
+Discord is starting to hide channels a bot isn't allowed to view. SupportMail now handles this:
+
+- The dashboard shows such channels as **Unknown or hidden channel** instead of a raw ID.
+- Saving Report Settings warns you if the bot is missing permissions in the alert channel.
+- Sending a panel tells you if the bot can't view the channel or is missing permissions.
+- <SlashCommand name="debug" /> keeps a hidden channel's configuration and tells you to grant **View Channel**, instead of deleting it.
+
+See [Common Issues](/troubleshooting/common-issues#hidden-channels-and-missing-permissions).
+
+## 29.10.2026
+
+### New: Edit an existing panel
+
+The Panel page has a new **Edit** tab: paste the link of a panel message and SupportMail updates it in place. If the message can't be edited (for example it was deleted), a new one is sent instead. See [Panel](/configuration/panel).
+
+## 23.10.2026
+
+### New: Setup wizard
+
+Setting up tickets and reports is now a guided, step-by-step flow - in the dashboard and right inside Discord.
+
+- **Dashboard:** new servers are taken straight into the wizard. If you skipped it, use **Continue setup** in the sidebar.
+- **Discord:** `/setup tickets wizard` and `/setup reports wizard` walk you through every setting in a message only you can see. Re-running a wizard starts from your current settings.
+- When the dashboard wizard creates a new ticket forum, you choose which roles and users can see it.
+- Nothing is saved until you confirm on the final review screen. If a step fails while applying, you can retry without creating a second forum or panel.
+
+See [Setup Wizard](/configuration/setup-wizard) for details.
+
+### Changed: `/setup` commands
+
+- `/setup tickets` is now `/setup tickets quick` (the one-shot setup with default settings).
+- `/setup reports` used to only point you to the dashboard. It is now `/setup reports wizard`, a full setup inside Discord.
+
+## 11.10.2026
+
+### Changed: Testimonials temporarily disabled
+
+Submitting testimonials is paused for now. See [Testimonials](/managing-support/testimonials).
+
+## 09.10.2026
+
+### New: Account menu
+
+The dashboard has a new account menu at the bottom of the sidebar, with **My Settings**, the theme toggle, useful links, **Logout** and **Disconnect Discord** in one place.
+
+## 07.10.2026
+
+### New: Tag rule sets
+
+Limit who can send a tag and where. A rule set combines roles, whether the tag works in tickets, which channels it works in outside tickets, and whether replies are always hidden. Assign rule sets to tags on the Tags page. `/tag` autocomplete now hides tags you can't send. See [Tag Rule Sets](/configuration/tag-rule-sets).
+
+## 14.09.2026
+
+### New: Report a bug from the dashboard
+
+A **Report a Bug** button in the dashboard sends a bug report straight to us. Add your email if you'd like us to follow up.
+
+## 29.08.2026
+
+### Authentication overhaul
+
+- Rebuilt how dashboard logins work under the hood - sessions are now independent of your Discord connection, fixing several edge-case bugs around expired sessions and multi-device logins.
+- Logging in on a new device or browser no longer signs you out elsewhere. Each session is now separate.
+- Added a **Disconnect Discord** option (next to Log out) for fully revoking dashboard access to your Discord account, separate from just logging out of the dashboard.
+- Role and permission changes (e.g., being promoted to mod/admin) now take effect immediately instead of requiring a re-login.
+- This update requires everyone to log in again once. Your Discord bot setup and tickets are unaffected - only the dashboard session resets.
+
+<details>
+  <summary>For the curious - what actually changed</summary>
+
+Previously, one database record did double duty as both your Discord connection (used by the bot) and your dashboard login session - and its "expiry" meant different things depending on which system last touched it. That's why logging in via the bot's `/login` command could quietly overwrite your dashboard session, and why logging in on a second device would silently invalidate the first.
+
+I split those into two independent things:
+
+- **Session** - just your dashboard login. Rotates freely, supports multiple devices, expires on a fixed schedule.
+- **Grant** - your actual Discord connection, shared with the bot. Untouched by dashboard logouts, refreshed automatically instead of just expiring.
+
+I also consolidated two separate, competing login implementations into one, and fixed a few quieter reliability bugs along the way (a cold-cache request that intermittently returned server errors, a login-replay edge case, and a banned-server redirect that was broken).
+
+None of this changes what you can do on the dashboard - it changes how reliably it works.
+
+</details>
+
+## 15.08.2026
+
+### New: Report attachments
+
+<SlashCommand name="report user" /> and <SlashCommand name="report message" /> take an optional `attachment`, and reports from the right-click menu carry the reported message's attachments. Images and videos show up in a media gallery right in the report. See [Managing Reports](/managing-support/managing-reports).
+
+## 07.08.2026
+
+### Changed: `/ping`
+
+<SlashCommand name="ping" /> now shows the server and cluster count across the whole bot, and links to the [status page](https://status.supportmail.dev/).
+
+## 28.07.2026
+
+### New: `/view` command
+
+Moderators can now browse currently open tickets and unresolved reports right in Discord with `/view tickets` and `/view reports` - paginated, no dashboard trip needed.
+
+See [Viewing Tickets and Reports](/managing-support/viewing-tickets-and-reports) for details.
+
+### Changed: Granular DM notifications for reports
+
+Report DMs are now three separate toggles instead of one all-or-nothing setting: DM on report creation, DM on report resolution, and DM to the reported user.
+Each has its own **Sent for** (which outcomes trigger it) and **Included info** (what details it contains) controls.
+
+See [Reports Configuration](/configuration/reports-configuration#dms-to-users) for details.
+
+### Removed: Deprecated dashboard-redirect commands
+
+A handful of slash subcommands that only pointed you to the dashboard have been removed - use the dashboard directly instead:
+
+- `/config tickets` and `/config reports` (use [Ticket System Config](/configuration/ticket-system-config) / [Managing Reports](/managing-support/managing-reports) in the dashboard)
+- `/config blacklist` (use the **Blacklist** page in the dashboard)
+- `/config tags list` (use the **Tags** page in the dashboard, or [Tags](/configuration/tags))
+- `/blacklist view` (use the **Blacklist** page in the dashboard)
+
+## 09.07.2026
+
+### New: Pausing Tickets
+
+Staff can now pause bot activity in a single ticket with `/ticket pause`, and resume it with `/ticket unpause`. While paused, the bot ignores all messages in the ticket post - nothing is forwarded to the user.  
+Messages _from_ the user still reach the channel.
+
+<Aside type="tip">
+  You can also use the prefix commands `-pause` and `-unpause` in the ticket
+  channel to pause and unpause the ticket, respectively.
+</Aside>
+
+- New **Ask to Delete History on Unpause** setting under [Message Handling](/configuration/ticket-system-config#message-handling) - when enabled, unpausing prompts staff to bulk-delete the messages sent while the ticket was paused.
+
+See [Pausing Tickets](/managing-support/handling-tickets#pausing-tickets) for details. **Off by default.**
+
+### New: Delete Reported Message on Punish
+
+When punishing a reported user (timeout, kick or ban) via a message report, the action modal now includes a checkbox to also delete the reported message.
+
+## 07.07.2026
+
+### New: Testimonials
+
+Anyone with dashboard access can now submit a testimonial for their server directly from the dashboard. Approved testimonials may be featured on the SupportMail homepage.
+
+- Submit a testimonial from the new **Testimonial** page in the dashboard - a server can only have one.
+- Only the person who submitted it can edit or revoke it; everyone else sees a read-only view naming the submitter.
+- Once approved, changes require contacting support.
+
+See [Testimonials](/managing-support/testimonials) for details.
+
+## 04.07.2026
+
+### New: SupportMail Blog
+
+A new Blog page was added to the SupportMail homepage, featuring insights and updates from the developer(s).
+
+<LinkButton href="https://supportmail.dev/blog" icon="external">
+  Visit the Blog
+</LinkButton>
+
+Edit 3 days later: We now already have 3 posts with some insights about the blog and the architecture of SupportMail.
+
+## 28.06.2026
+
+### New: Support Schedule
+
+You can now define **support hours** so tickets can only be opened when your team is available. Set a timezone offset and up to 3 time slots per day; outside those hours the bot tells users when to try again instead of opening a ticket.
+
+See [Support Schedule](/configuration/support-schedule) for details. Configure it on the new **Schedule** page in the dashboard.
+
+### Changed: Panel moved to the dashboard
+
+Creating and editing your [Panel](/configuration/panel) now lives fully in the dashboard on the **Panel** page - build it, save it and send it to a channel from there. The old `/config panel` command has been removed.

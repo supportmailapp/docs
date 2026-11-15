@@ -1,0 +1,43 @@
+---
+title: Ticket Categories
+description: How to create and manage ticket categories used for routing and reporting.
+sidebar:
+  order: 3
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
+
+Categories are the topics a user picks from when opening a ticket (for example _Support_, _Bug Report_, _Billing_). They help you organize incoming tickets and tailor the experience per topic. Manage them under <DashLink route="?next=/ticket-categories">Ticket Categories</DashLink>.
+
+## Creating a category
+
+Click **Create Category** and give it a name (3–45 characters). A server can have up to **10** categories. Open the category to configure the rest:
+
+- **Emoji** - shown next to the label when users choose a category.
+- **Enable Category** - toggle whether users can currently open tickets in it.
+- **Custom Messages** - override the default creation and closing messages for this topic.
+- **Category Pings** - roles or users to notify when a ticket is opened in this category.
+- **Custom Modal Fields** - extra questions the user fills in when opening the ticket, so staff get the details they need upfront.
+
+## Ordering
+
+Categories appear to users in the order shown on the page. Use the move up / move down controls to arrange them.
+
+## Syncing tags
+
+**Sync Tags** creates matching tags on your ticket forum so each ticket post is automatically tagged with its category. This makes filtering and finding tickets in the forum much easier.
+
+## Best practices
+
+- Keep the list short and unambiguous - a handful of clear topics beats a long list.
+- Use **Custom Modal Fields** to collect must-have information, so staff don't have to ask.
+- Disable a category instead of deleting it if you only need to pause it.
+
+<Aside type="note">
+  
+You need at least two categories before users can open tickets in a specific category. If you only have one, all tickets will still be uncategorized.
+
+There is a workaround: When you have a panel you can set a category for the ticket to be created in, but the user will not see category selects.
+
+</Aside>

@@ -1,0 +1,66 @@
+---
+title: Managing Reports
+description: How moderators handle user reports and automated reports.
+sidebar:
+  order: 4
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
+import SlashCommand from "../../../components/SlashCommand.astro";
+
+This guide is for moderators who act on reports. When a member reports a message or user, SupportMail posts it to your **alert channel** for review. For the settings behind this, see [Reports Configuration](/configuration/reports-configuration).
+
+## The report lifecycle
+
+1. A member submits a report with <SlashCommand name="report message" />, <SlashCommand name="report user" />, or the right-click **Apps → Report** menu.
+2. SupportMail posts the report to your alert channel with the reported content and any reason, comment or attachments. Images and videos are shown in a media gallery right in the report, and every attachment is also added as a file.
+3. A moderator reviews it and takes an action.
+4. The report is marked **resolved** and recorded, noting who resolved it.
+
+## Acting on a report
+
+Each report comes with action buttons so you can respond without leaving the channel:
+
+| Action             | What it does                                               |
+| ------------------ | ---------------------------------------------------------- |
+| **Resolve**        | Close the report with no further action                    |
+| **Ignore**         | Dismiss the report (e.g. not actionable or a false report) |
+| **Timeout**        | Time the reported user out                                 |
+| **Kick**           | Remove the reported user from the server                   |
+| **Ban**            | Ban the reported user                                      |
+| **Delete Message** | Remove the reported message                                |
+
+Taking a moderation action also resolves the report. Available actions depend on the bot's permissions and your server setup.
+
+<Aside type="note">
+  Timeout, kick and ban require the bot to have the matching Discord permission
+  and a role above the target user.
+</Aside>
+
+## Bulk report commands
+
+The <SlashCommand name="reports" /> command helps you manage the queue as a whole. It needs the **Manage Server** permission, and its replies are only visible to you:
+
+| Command                   | What it does                                                          |
+| ------------------------- | --------------------------------------------------------------------- |
+| <SlashCommand name="reports resend-missing" /> | Re-sends the alert message for open reports whose message was deleted |
+| <SlashCommand name="reports ignore-all" />     | Sets every currently open report to **ignored** in one go             |
+
+Both run in the background. You get a DM with the result when they finish.
+
+<Aside type="note">
+  The report system is set up with <SlashCommand name="setup reports wizard" /> (or the dashboard
+  wizard). See [Setup Wizard](/configuration/setup-wizard) and [Reports
+  Configuration](/configuration/reports-configuration).
+</Aside>
+
+## Reviewing on the dashboard
+
+The <DashLink route="?next=/reports">Reports</DashLink> page lists every report with its status and who resolved it. Open a report to see full details. It's the best place to audit past reports or catch up on anything left open.
+
+## Tips
+
+- Agree on what warrants each action so your team stays consistent.
+- Use **Ignore** for false or duplicate reports so genuine ones don't get buried.
+- Set open-report **limits** in the configuration to keep spam from flooding the queue.

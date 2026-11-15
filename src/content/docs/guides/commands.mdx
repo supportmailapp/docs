@@ -1,0 +1,113 @@
+---
+title: Command Reference
+description: Every SupportMail slash command, who can use it, and its options.
+sidebar:
+  order: 0
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import SlashCommand from "../../../components/SlashCommand.astro";
+import DashLink from "../../../components/DashLink.astro";
+
+Every slash command SupportMail has, grouped by area. **Who** is the default permission a member needs. Options in **bold** are required.
+
+<Aside type="tip">
+  Server admins can change who may use a command in **Server Settings →
+  Integrations → SupportMail**, or on the <DashLink route="?next=/command-config">Command Config</DashLink> page of the dashboard.
+</Aside>
+
+## Tickets
+
+| Command                                         | Who              | Options                                                         | Details                                                       |
+| ----------------------------------------------- | ---------------- | --------------------------------------------------------------- | ------------------------------------------------------------- |
+| <SlashCommand name="ticket-create" />           | Everyone         | **`server`**, `anonymous`                                       | [Contacting Support](/getting-support/contacting-support)     |
+| <SlashCommand name="send" />                    | Timeout Members  | `user`, `message`, `anonym-override`                            | [Handling Tickets](/managing-support/handling-tickets)        |
+| <SlashCommand name="close" />                   | Timeout Members  | `comment-text`, `share-comment` (default: Yes)                  | [Handling Tickets](/managing-support/handling-tickets)        |
+| <SlashCommand name="close-request create" />    | Everyone         | `comment-text`, `share-comment` (default: No), `close-in`       | [Handling Tickets](/managing-support/handling-tickets), [Timestrings](/guides/timestrings) |
+| <SlashCommand name="close-request delete" />    | Everyone         | none                                                            | [Handling Tickets](/managing-support/handling-tickets)        |
+| <SlashCommand name="ticket pause" />            | Timeout Members  | none                                                            | Pauses bot activity in the current ticket                     |
+| <SlashCommand name="ticket unpause" />          | Timeout Members  | none                                                            | Resumes bot activity in the current ticket                    |
+| <SlashCommand name="reopen" />                  | Manage Server    | `ticket-id` or `ticket-post-link`, `reason`, `reason-visible`   | Reopens a closed ticket                                       |
+| <SlashCommand name="view tickets" />            | Timeout Members  | none                                                            | [Viewing Tickets and Reports](/managing-support/viewing-tickets-and-reports) |
+
+`/close-request` commands and `/send` without `user` run inside a ticket.
+
+## Reports
+
+| Command                                       | Who             | Options                                                              | Details                                                       |
+| --------------------------------------------- | --------------- | -------------------------------------------------------------------- | ------------------------------------------------------------- |
+| <SlashCommand name="report user" />           | Everyone        | **`user`**, **`reason`**, `comment`, `attachment`                    | [Managing Reports](/managing-support/managing-reports)        |
+| <SlashCommand name="report message" />        | Everyone        | **`message-link`**, `reason`, `comment`, `attachment`                | [Managing Reports](/managing-support/managing-reports)        |
+| <SlashCommand name="view reports" />          | Timeout Members | none                                                                 | [Viewing Tickets and Reports](/managing-support/viewing-tickets-and-reports) |
+| <SlashCommand name="reports resend-missing" /> | Manage Server  | none                                                                 | [Managing Reports](/managing-support/managing-reports#bulk-report-commands) |
+| <SlashCommand name="reports ignore-all" />    | Manage Server   | none                                                                 | [Managing Reports](/managing-support/managing-reports#bulk-report-commands) |
+
+You can also report from the right-click menu: **Apps → Report Message** on a message, or **Apps → Report User** on a member. Everyone can use these.
+
+## Tags
+
+| Command                                  | Who             | Options                                                               | Details                                   |
+| ---------------------------------------- | --------------- | --------------------------------------------------------------------- | ----------------------------------------- |
+| <SlashCommand name="tag" />              | Timeout Members | **`name-or-id`**, `mention`, `as-embed`, `anonymous`, `hidden`        | [Using Tags](/getting-support/using-tags) |
+| <SlashCommand name="config tags add" />  | Manage Server   | none (opens a form)                                                   | [Tags](/configuration/tags)               |
+| <SlashCommand name="config tags edit" /> | Manage Server   | **`name`**                                                            | [Tags](/configuration/tags)               |
+| <SlashCommand name="config tags delete" /> | Manage Server | **`name`**                                                            | [Tags](/configuration/tags)               |
+
+Which tags someone can send also depends on the tag's [rule set](/configuration/tag-rule-sets).
+
+## Moderation
+
+| Command                                  | Who             | Options                                         | Details                                         |
+| ---------------------------------------- | --------------- | ----------------------------------------------- | ----------------------------------------------- |
+| <SlashCommand name="blacklist add" />    | Timeout Members | `target` or `ticket-id`                         | [Blacklisting](/managing-support/blacklisting)  |
+| <SlashCommand name="blacklist remove" /> | Timeout Members | **`target`**                                    | [Blacklisting](/managing-support/blacklisting)  |
+| <SlashCommand name="blacklist check" />  | Timeout Members | **`target`**                                    | [Blacklisting](/managing-support/blacklisting)  |
+| <SlashCommand name="blacklist clear" />  | Manage Server   | **`scope`** (Tickets, Reports, Tags)            | [Blacklisting](/managing-support/blacklisting)  |
+
+## Setup and configuration
+
+| Command                                       | Who           | Options                                                       | Details                                                         |
+| --------------------------------------------- | ------------- | ------------------------------------------------------------- | --------------------------------------------------------------- |
+| <SlashCommand name="setup tickets wizard" />  | Manage Server | none                                                          | [Setup Wizard](/configuration/setup-wizard)                     |
+| <SlashCommand name="setup tickets quick" />   | Manage Server | `category`                                                    | [Setup Wizard](/configuration/setup-wizard#quick-ticket-setup)  |
+| <SlashCommand name="setup reports wizard" />  | Manage Server | none                                                          | [Setup Wizard](/configuration/setup-wizard)                     |
+| <SlashCommand name="config pause" />          | Manage Server | **`module`** (Tickets, Reports), `until`                      | Pauses ticket or report creation, optionally until a time       |
+| <SlashCommand name="config resume" />         | Manage Server | **`module`** (Tickets, Reports)                               | Resumes ticket or report creation                               |
+| <SlashCommand name="debug" />                 | Manage Server | **`option`**                                                  | [See below](#debug)                                             |
+
+### Debug
+
+<SlashCommand name="debug" /> checks your setup and repairs broken configuration. Pick one `option`:
+
+#### Check role integrity
+
+Removes roles that no longer exist from your ticket pings, report moderators and immune lists.
+
+#### Check user integrity
+
+Removes users who are no longer in your server from those same lists.
+
+#### Check channel setup
+
+Checks that the ticket forum and the report alert channel still exist and that the bot can see them. A channel that was deleted is removed from your settings. A channel the bot can't see is kept, and you're told to grant **View Channel**.
+
+#### Check permissions
+
+Lists the permissions the bot is missing in those channels.
+
+See [Common Issues](/troubleshooting/common-issues#hidden-channels-and-missing-permissions) for hidden channels.
+
+## Account and utility
+
+| Command                                         | Who      | Options                                    | Details                                                   |
+| ----------------------------------------------- | -------- | ------------------------------------------ | --------------------------------------------------------- |
+| <SlashCommand name="login" />                   | Everyone | none                                       | [Contacting Support](/getting-support/contacting-support) |
+| <SlashCommand name="logout" />                  | Everyone | none                                       | [Contacting Support](/getting-support/contacting-support) |
+| <SlashCommand name="preferences language" />    | Everyone | **`new-language`** (English, Deutsch, Français) | [Preferences](/getting-support/preferences)          |
+| <SlashCommand name="preferences auto-redirect" /> | Everyone | **`setting`**                            | [Preferences](/getting-support/preferences)               |
+| <SlashCommand name="help" />                    | Everyone | **`topic`** (Tickets, Reports, Commands, About) | Short help in Discord                                |
+| <SlashCommand name="docs" />                    | Everyone | **`query`**, `hidden` (default: Yes)       | Searches these docs                                       |
+| <SlashCommand name="dashboard" />               | Everyone | none                                       | Link to the [dashboard](/configuration/dashboard-overview) |
+| <SlashCommand name="ping" />                    | Everyone | none                                       | Latency, servers and clusters, plus a link to the status page |
+
+`/login` and `/logout` don't exist on [whitelabel](/configuration/whitelabel) bots, because those don't need a login.

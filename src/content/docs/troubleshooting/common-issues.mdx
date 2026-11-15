@@ -1,0 +1,81 @@
+---
+title: Troubleshooting - Common Issues
+description: Common problems and solutions across roles (users, mods, admins).
+sidebar:
+  order: 1
+---
+
+import { Aside, LinkButton } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
+import SlashCommand from "../../../components/SlashCommand.astro";
+
+Quick fixes for the problems people run into most. If none of these help, [contact us](#still-stuck) and we'll take a look.
+
+## For users
+
+**The bot won't let me open a ticket / my DM goes unanswered**
+
+- Make sure your DMs are open. In the server's **Privacy Settings**, enable _Direct Messages_ so the bot can reach you.
+- You may need to authorize SupportMail with your Discord account first - the bot uses this to identify you from DMs.
+- The server may have the ticket system **paused or disabled**, or you may be [blacklisted](/managing-support/blacklisting) from tickets. Ask the server's staff.
+
+**The panel button does nothing**
+
+- Check your DMs - the bot messages you there to continue. If nothing arrives, your DMs are likely closed.
+
+## For moderators
+
+**Messages I send in a ticket aren't reaching the user**
+
+- **Automatic Forwarding** may be off. Either turn it on, or reply with <SlashCommand name="send" />, the `-r` flag, or by mentioning the bot. See [Handling Tickets](/managing-support/handling-tickets).
+- If the user has since disabled their DMs or blocked the bot, delivery fails and you'll see an error.
+
+**Report actions (timeout / kick / ban) fail**
+
+- The bot needs the matching Discord permission **and** a role positioned above the target user. Check the role order and the bot's permissions.
+
+## For admins
+
+**Tickets or reports aren't working at all**
+
+- Confirm the system is **enabled** and not **paused** in <DashLink route="?next=/ticket-settings">Ticket Settings</DashLink> / <DashLink route="?next=/report-settings">Report Settings</DashLink>.
+- Reports require an **alert channel** before they can be enabled.
+- The ticket forum requires a **Community server** so Discord allows forum channels. See [Getting Started](/getting-started).
+
+**Users can't open tickets even though the system is on**
+
+- You need at least one enabled [ticket category](/configuration/ticket-categories).
+
+**A server is missing from the dashboard**
+
+- You need the **Manage Server** permission there, and the bot must be in the server.
+
+### Hidden channels and missing permissions
+
+If the bot isn't allowed to **view** a channel, Discord hides that channel from it. SupportMail then can't post there, and you'll see one of these:
+
+- In the dashboard, the channel shows as **Unknown or hidden channel** (hover it for details). The same label appears for a channel that was deleted.
+- Saving [Report Settings](/configuration/reports-configuration) warns **The bot is missing permissions in the alert channel** and lists what's missing. Your settings are still saved.
+- Sending a [panel](/configuration/panel) fails with **The bot can't view this channel** or lists the missing permissions.
+- The [Setup Wizard](/configuration/setup-wizard) review lists missing permissions, and a hidden forum counts as gone.
+- Users who try to open a ticket get **Missing access.** when the bot can't see the ticket forum.
+
+To fix it, give the bot's role **View Channel** (plus **Send Messages**, and for the alert channel **Read Message History** and **Attach Files**) in that channel or its category. Check channel overrides, not just server-wide role permissions.
+
+In Discord, <SlashCommand name="debug" /> (needs **Manage Server**) with the option **Check channel setup** or **Check permissions** tells you which configured channels the bot can't view. A hidden channel keeps its configuration; only a channel that was really deleted is removed from your settings.
+
+## Checklist
+
+Before reporting a bug, quickly verify:
+
+- [ ] The bot is in the server and online
+- [ ] The relevant system is enabled and not paused
+- [ ] The bot has the permissions it needs (and correct role order)
+- [ ] The user's DMs are open and they authorized the bot
+- [ ] The user isn't blacklisted
+
+## Still stuck?
+
+<LinkButton href="https://help.supportmail.dev" icon="external">
+  Join the Support Server
+</LinkButton>

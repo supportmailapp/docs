@@ -1,0 +1,46 @@
+---
+title: Tag Rule Sets
+description: Limit who can send a tag and where, with reusable rule sets.
+sidebar:
+  order: 5.5
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
+import SlashCommand from "../../../components/SlashCommand.astro";
+
+A **rule set** limits who can send a [tag](/configuration/tags) and where. You build a rule set once and assign it to as many tags as you like. Tags without a rule set are public: anyone who can use <SlashCommand name="tag" /> can send them anywhere.
+
+Manage rule sets on the <DashLink route="?next=/tags/rule-sets">Tag rule sets</DashLink> page of the dashboard, then assign them to tags on the <DashLink route="?next=/tags">Tags</DashLink> page. A server can have up to 10 rule sets.
+
+## Fields
+
+- **Name:** a label for the rule set, unique in your server.
+- **Roles:** members need at least one of these roles. Add `@everyone` to allow everybody. With no roles, nobody can send the tag.
+- **Allow in tickets:** whether the tag can be sent inside ticket threads.
+- **Outside tickets:** where the tag can be sent outside of tickets:
+  - **Every channel**
+  - **Only in these channels:** pick channels or categories. A channel also covers its threads, and a category covers its channels.
+  - **Nowhere:** the tag only works in tickets (if allowed there).
+- **Always reply hidden:** the reply is always hidden (only the sender sees it), whatever the `hidden` option of <SlashCommand name="tag" /> says. In tickets, the tag is still sent to the ticket user; only the confirmation in the thread is hidden.
+
+A member must pass **both** checks: the role check, and the location check for where they are (tickets or the channel).
+
+Changing a rule set changes it for every tag that uses it. A rule set that is still assigned to tags can't be deleted: move those tags to another rule set first.
+
+## What staff see
+
+When someone sends a tag with <SlashCommand name="tag" />:
+
+- **Missing role:** "You don't have a role that is allowed to use this tag."
+- **Wrong channel:** "This tag can't be used in this channel."
+- **Always reply hidden:** the tag is sent as if `hidden` was set.
+
+These error replies are only visible to the person who ran the command.
+
+The autocomplete of <SlashCommand name="tag" /> only suggests tags the member is allowed to send in the current channel, so off-limits tags don't clutter the list.
+
+<Aside type="note">
+  Rule sets decide which **tags** someone can send. To limit who can use the
+  <SlashCommand name="tag" /> command at all, use the <DashLink route="?next=/command-config">Command Config</DashLink> page of the dashboard.
+</Aside>

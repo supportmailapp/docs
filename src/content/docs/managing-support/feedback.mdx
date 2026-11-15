@@ -1,0 +1,52 @@
+---
+title: Ticket Feedback
+description: How to collect and manage feedback from users after ticket resolution.
+sidebar:
+  order: 3
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
+import ImageWrapper from "../../../components/ImageWrapper.astro";
+
+Feedback lets users rate their support experience when a ticket closes. It gives your team a simple signal of how support is going and doubles as a friendly closure notification for the user. This page is for staff - for the setup options, see [Ticket Feedback Configuration](/configuration/ticket-feedback-configuration).
+
+## How it works
+
+1. A ticket is [closed](/managing-support/handling-tickets#closing-tickets) while feedback is enabled.
+2. The user gets a rating prompt in their DMs (plus any custom questions you added).
+3. When they submit, they see your **thank-you message**, and their response is posted to your **feedback channel**.
+
+Because the prompt arrives as the ticket closes, users always know their ticket was resolved - even if you closed it without a comment.
+
+## What the user sees
+
+The close message in the user's DMs gets five star buttons labelled **1** to **5**. The user picks a rating:
+
+- If you have **no custom questions**, the rating is submitted immediately.
+- If you have **custom questions**, tapping a star opens a short form for them to fill in.
+
+After submitting, the buttons are disabled and the star they chose turns green, so it's clear their feedback was recorded. Users can also simply ignore the prompt - feedback is never forced.
+
+## How feedback is presented to staff
+
+Each submission is posted to your feedback channel as a compact card:
+
+- **A colour-coded accent** reflects the rating at a glance - red for 1, orange for 2, yellow for 3, aqua for 4, and green for 5.
+- **A heading links back to the ticket** and shows who left the feedback (their mention, or the anonymous alias for [anonymous tickets](/managing-support/handling-tickets#anonymous-tickets)) alongside the star rating.
+- **The user's avatar** appears as a thumbnail, unless the ticket was anonymous.
+- **Answers to custom questions** are rendered into a clean image attached to the card, so longer written feedback stays readable.
+
+<ImageWrapper>
+  ![Example feedback in a Discord
+  channel](../../../assets/docs/feedback-example.png)
+</ImageWrapper>
+
+## Enabling feedback
+
+Turn it on and choose the feedback channel, thank-you message and any custom questions under <DashLink route="?next=/feedback">Feedback</DashLink> in the dashboard. Full details are in [Ticket Feedback Configuration](/configuration/ticket-feedback-configuration).
+
+<Aside type="note">
+  Keep it light - a rating plus at most one or two questions get far more
+  responses than a long survey.
+</Aside>

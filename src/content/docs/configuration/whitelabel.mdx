@@ -1,0 +1,94 @@
+---
+title: Whitelabel (beta)
+description: Run SupportMail in your server under your own bot's name, avatar and presence.
+sidebar:
+  label: Whitelabel
+  order: 20
+  badge:
+    text: Beta
+    variant: caution
+---
+
+import { Aside, Steps } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
+import SlashCommand from "../../../components/SlashCommand.astro";
+
+<Aside type="caution" title="Beta, limited access">
+  Whitelabel is in beta and only available to a few servers for now. To request
+  access, open a ticket in the [support server](https://help.supportmail.dev/).
+  Whitelabel will become part of a future paid plan.
+</Aside>
+
+With whitelabel, SupportMail runs in your server as **your own bot**: your bot's name, avatar, banner and presence, with all of SupportMail's features behind it. Your bot replaces the main SupportMail bot in your server.
+
+Everything is managed on the <DashLink route="?next=/whitelabel">Whitelabel</DashLink> page of the dashboard.
+
+## Who can do what
+
+- **Server owner only:** saving or replacing the bot token, activating your bot, and the switch-back options that close open tickets.
+- **Anyone with dashboard access to the server:** starting, stopping and restarting the bot, changing its branding, and switching back when no tickets are open.
+
+## Set up your bot
+
+<Steps>
+
+1. Create an application in the [Discord Developer Portal](https://discord.com/developers/applications).
+
+2. On the application's **Bot** page, turn on the **Message Content** intent.
+
+3. Reset the bot token and copy it.
+
+4. On the Whitelabel page, paste the token and click **Save token**. The token is sent to our server once, stored encrypted and never shown again.
+
+5. Add your bot to your server with the **Add your bot to the server** button that appears once the token is saved.
+
+6. Click **Activate your bot**. From then on your bot serves your server instead of the main SupportMail bot. Activation can take up to two minutes.
+
+</Steps>
+
+<Aside type="danger" title="Do not kick the main SupportMail bot">
+  Keep the main SupportMail bot in your server after you activate your own bot.
+  It does not need any permissions there, so you can take them away, but it
+  must stay a member of the server.
+</Aside>
+
+When you activate, you can choose **Resend the panel automatically**. Your bot then posts the ticket panel again and deletes the old message. Without it, the old panel's buttons stop working until you send the panel again from the <DashLink route="?next=/panel">Panel</DashLink> page.
+
+To replace the token later, stop the bot first, then save the new token.
+
+## Start, stop and restart
+
+The status card on the Whitelabel page shows whether your bot is running, its application ID and the number of open tickets.
+
+- **Stop** takes your bot offline. While it is stopped, dashboard features that need the bot do not work, and the main SupportMail bot does not step in.
+- **Start** brings it back.
+- **Restart** stops and starts it in one go.
+
+If the bot runs into a problem, for example its token stopped working or it was removed from your server, the status card says so.
+
+## Branding
+
+The **Branding** card sets how your bot looks on Discord:
+
+- **Name, avatar, banner and About me.** Images can be PNG, JPEG, GIF or WebP, up to 8 MiB.
+- **Presence:** status (Online, Idle, Do not disturb, Invisible) and an activity (custom status, Playing, Listening to, Watching or Competing in).
+
+Branding changes your bot's **global** Discord profile, the same one it shows everywhere. It works while the bot is stopped, and it is not touched when you switch back to the main bot.
+
+## Switch back to the main bot
+
+Click **Switch back to the main bot** on the Whitelabel page. Which options you get depends on whether tickets are open:
+
+- **Switch now:** no tickets are open, so the main bot takes over right away.
+- **Close tickets, then switch** (server owner only): your running bot closes the open tickets and tells their users, then the main bot takes over. This can take up to two minutes.
+- **Force the switch** (server owner only): open tickets are closed in the database only. Users get no message and ticket threads stay as they are.
+
+As with activation, you can let the main bot resend the ticket panel automatically.
+
+## Direct messages
+
+Your bot serves exactly one server: yours. That changes how users talk to it in DMs:
+
+- A DM to your bot always goes to your server, so users never pick a server.
+- Users do not need to [log in](/getting-support/contacting-support) first. Your bot checks their membership itself, so <SlashCommand name="login" /> and <SlashCommand name="logout" /> do not exist on whitelabel bots.
+- The main SupportMail bot no longer offers your server in its DMs.

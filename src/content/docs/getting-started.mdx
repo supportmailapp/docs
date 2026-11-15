@@ -1,0 +1,85 @@
+---
+slug: getting-started
+title: Getting Started
+description: Invite SupportMail, run the setup wizard and have working modmail on your server in about 5 minutes.
+sidebar:
+  order: 1
+---
+
+import { Aside, LinkButton, Steps } from "@astrojs/starlight/components";
+import DashLink from "../../components/DashLink.astro";
+
+SupportMail is a modmail bot for Discord. Users contact your staff through DMs with the bot, and staff answer in a private forum channel that members can't see.
+In about 5 minutes you will have a ticket forum, a panel members can click to ask for help, and a working test ticket.
+
+<LinkButton href="https://supportmail.dev/invite" icon="external">
+  Invite Bot
+</LinkButton>
+
+## Before you start
+
+- You need the **Manage Server** permission on the server you want to add SupportMail to.
+- Your server needs **Community** enabled, because tickets live in a forum channel and Discord only offers forums to Community servers. See [Enabling Your Community Server](https://support.discord.com/hc/en-us/articles/360047132851-Enabling-Your-Community-Server).
+- Have at least one role for the staff members who will handle tickets.
+
+## Setup
+
+<Steps>
+
+1. **Invite SupportMail to your server**
+
+   Use the **Invite Bot** button above and pick your server.
+
+2. **Run the setup wizard**
+
+   Open your server in the <DashLink>dashboard</DashLink>. New servers start the setup wizard automatically. It walks you through your language, tickets (including the ticket forum and a panel) and reports.
+
+   Prefer Discord? Run `/setup tickets wizard` and `/setup reports wizard` instead. They cover the same settings. For a ticket forum with default settings right away, use `/setup tickets quick`.
+
+   <Aside type="note">
+     Nothing is changed until you confirm on the final review screen. See the
+     [Setup Wizard](/configuration/setup-wizard) page for every step.
+   </Aside>
+
+3. **Give your staff access**
+
+   Once the forum exists, add your staff roles to it in Discord so they can see and answer tickets.
+
+   <Aside type="caution">
+     The bot's own permissions in the ticket forum are managed by the bot.
+     **Don't change them manually. Please.**
+   </Aside>
+
+4. **Send a panel (optional)**
+
+   Users who aren't Discord-savvy may not know they can DM the bot. A panel is a message with a button that starts a ticket. The setup wizard can send a ready-made one for you.
+
+   To customize it, build and send your own from the <DashLink route="?next=/panel">Panel page</DashLink>. See [Panel](/configuration/panel) for the full walkthrough.
+
+5. **Open a test ticket**
+
+   Send a DM to the bot, or click the button on your panel. Check that the ticket appears in the forum and that a staff reply reaches you in DMs.
+
+</Steps>
+
+You're done. SupportMail is live on your server.
+
+## Something not working?
+
+| Problem                                 | Fix                                                                                                                                                      |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The ticket steps are unavailable        | Enable **Community** on your server. See [Before you start](#before-you-start).                                                                          |
+| The wizard won't let you finish         | The bot is missing a permission it needs, for example to create the forum or to send in your panel channel. The review screen lists what is missing.     |
+| The bot doesn't answer a DM             | The system may be paused or disabled, or the user is [blacklisted](/managing-support/blacklisting). Users also need open DMs and must authorize the bot. |
+| Users can't open tickets                | Make sure the ticket system is enabled and not paused, and that at least one [ticket category](/configuration/ticket-categories) is enabled.             |
+| Your server is missing in the dashboard | The bot must be in the server and you need **Manage Server** there.                                                                                      |
+
+More fixes are on the [Common Issues](/troubleshooting/common-issues) page.
+
+## What's next?
+
+Your tickets are working. Now make SupportMail fit your server.
+
+<LinkButton href="/first-steps" icon="right-arrow">
+  Continue with First Steps
+</LinkButton>

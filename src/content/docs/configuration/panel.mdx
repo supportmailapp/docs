@@ -1,0 +1,45 @@
+---
+title: Panel
+description: The configuration panel and its options for SupportMail.
+sidebar:
+  order: 4
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
+
+A **panel** is a message you place in a server channel with a button that members click to open a ticket. It's the friendliest way for users to reach support - they don't need to know any commands or that they can DM the bot.
+
+## Creating a panel
+
+Create and edit your panel in the <DashLink route="?next=/panel">Panel</DashLink> page of the dashboard. You configure:
+
+- **Panel Data** - the message content members see (title and text), built with the panel editor.
+- **Panel Actions** - the button(s) on the message. A button can open a ticket, or link out to a URL.
+- **Allowed Mentions** - which mentions in the panel message are allowed to ping.
+
+<Aside type="note">
+  Panel management moved to the dashboard - the old `/config panel` command no
+  longer exists. Edit, save and send your panel entirely from the Panel page.
+</Aside>
+
+## Posting the panel
+
+The **Panel Actions** card has two tabs:
+
+- **Send** - pick a channel and press **Send** to post a new panel message there.
+- **Edit** - paste the link of a panel message that's already in your server and press **Edit**. SupportMail updates that message in place, so its link and position stay the same.
+
+If the message can't be edited, because it was deleted, was posted by a different bot (for example before you switched to or from [whitelabel](/configuration/whitelabel)), or is an old-style panel, SupportMail sends a new message to the same channel instead. **Save** afterwards to keep the new message link. Other errors, such as missing permissions, are shown to you and nothing is posted twice.
+
+The bot needs **View Channel** and **Send Messages** (or **Send Messages in Threads**) in the channel. If it's missing either, the dashboard tells you which.
+
+### Reply buttons
+
+A button or select menu option can **reply with a tag** instead of opening a ticket. Each one needs a tag selected. If a tag was deleted, the button shows **Unknown Tag** and the panel can't be sent until you pick another one.
+
+## Tips
+
+- Put the panel in a channel every member can see, such as `#support` or `#help`.
+- Keep the message short and tell users what to expect after clicking (that the bot will DM them).
+- A panel is optional. Users can always open a ticket by DMing the bot directly.

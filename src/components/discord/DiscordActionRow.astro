@@ -1,0 +1,24 @@
+---
+// V2 Action Row: up to 5 buttons. In the bot it usually sits below the
+// Container, as its own top-level component.
+import DiscordButtonView from "./DiscordButton.astro";
+import type { DiscordButton } from "./types";
+
+interface Props {
+  buttons: DiscordButton[];
+}
+
+const { buttons } = Astro.props;
+---
+
+<div class="sm-drow">
+  {buttons.map((b) => <DiscordButtonView {...b} />)}
+</div>
+
+<style>
+  .sm-drow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+</style>

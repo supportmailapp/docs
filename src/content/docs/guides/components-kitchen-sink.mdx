@@ -1,0 +1,154 @@
+---
+title: Components kitchen sink
+description: Dev-only page that renders every docs component and content style.
+draft: true
+---
+
+import { Aside, Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
+import LinkButton from "../../../components/LinkButton.astro";
+import SlashCommand from "../../../components/SlashCommand.astro";
+import DiscordMessage from "../../../components/discord/DiscordMessage.astro";
+import DiscordContainer from "../../../components/discord/DiscordContainer.astro";
+import DiscordText from "../../../components/discord/DiscordText.astro";
+import DiscordSeparator from "../../../components/discord/DiscordSeparator.astro";
+import DiscordSection from "../../../components/discord/DiscordSection.astro";
+import DiscordActionRow from "../../../components/discord/DiscordActionRow.astro";
+import DiscordMediaGallery from "../../../components/discord/DiscordMediaGallery.astro";
+import logo from "../../../assets/logo.png";
+
+## Asides
+
+<Aside type="note">
+  A note aside with `inline code` and a [link](/overview).
+</Aside>
+
+<Aside type="tip">
+  A tip aside with **bold** text.
+</Aside>
+
+<Aside type="caution">
+  A caution aside. Something to be careful about.
+</Aside>
+
+<Aside type="danger" title="Danger title">
+  A danger aside with a custom title.
+</Aside>
+
+## Code
+
+Inline: `/ticket-create`, `close-in:1h`.
+
+```ts title="example.ts"
+export function greet(name: string): string {
+  return `Hello, ${name}!`;
+}
+```
+
+```sh
+pnpm check:content
+```
+
+## Table
+
+| Command           | Reason       | Comment  |
+| ----------------- | ------------ | -------- |
+| `/report message` | Optional     | Optional |
+| `/report user`    | **Required** | Optional |
+
+## Cards
+
+<CardGrid>
+  <Card title="First card" icon="rocket">
+    Card body text.
+  </Card>
+  <Card title="Second card" icon="setting">
+    Card body text.
+  </Card>
+</CardGrid>
+
+<LinkCard title="A link card" href="/overview" description="With a description." />
+
+## Link buttons
+
+<LinkButton href="/overview">Primary</LinkButton>
+<LinkButton href="/overview" variant="secondary">Secondary</LinkButton>
+<LinkButton href="/overview" variant="minimal">Minimal</LinkButton>
+
+## Slash commands
+
+Plain: <SlashCommand name="ticket-create" />. With options:
+<SlashCommand name="close-request create" options={["close-in:1h"]} />. Several options:
+<SlashCommand name="ticket-create" options={["server:My Server", "anonymous:True"]} />.
+
+Long, unbroken: <SlashCommand name="a-very-long-command-name-without-any-spaces-at-all-to-test-wrapping" options={["another-very-long-option-name:with-an-equally-long-value-that-must-wrap"]} />.
+
+## Discord messages
+
+Components V2, mirroring the bot's builders in `v2/src`.
+
+<DiscordMessage author="SupportMail" bot time="Today at 14:02">
+  <DiscordText>A plain text display, no container.</DiscordText>
+</DiscordMessage>
+
+<DiscordMessage author="Luke" time="Today at 14:03" avatar={logo}>
+  <DiscordText>A user message with a custom avatar and a long word: supercalifragilisticexpialidocious-and-even-longer-unbroken-text.</DiscordText>
+</DiscordMessage>
+
+{/* Mirrors createDMComponents in v2/src/commands/closeRequests.ts */}
+<DiscordMessage author="SupportMail" bot time="Today at 14:05">
+  <DiscordContainer accent="info">
+    {/* en.json: tickets.closeRequest, tickets.acceptOrDenyCloseRequest */}
+    <DiscordText heading="Close Request">
+      Accept or deny the close request in [My Server](https://discord.com).
+    </DiscordText>
+    <DiscordSeparator divider={false} spacing="large" />
+    {/* en.json: labels.comment */}
+    <DiscordText>
+      <u>**Comment**</u>
+    </DiscordText>
+    <DiscordText>
+      > Looks like everything is solved, can we close this?
+    </DiscordText>
+    <DiscordSeparator />
+    <DiscordText subtext>Today at 14:05 (just now)</DiscordText>
+  </DiscordContainer>
+  {/* en.json: labels.accept, labels.deny */}
+  <DiscordActionRow
+    buttons={[
+      { label: "Accept", style: "success", emoji: "✅" },
+      { label: "Deny", style: "danger", emoji: "❌" },
+    ]}
+  />
+</DiscordMessage>
+
+{/* Mirrors the login prompt in v2/src/commands/ticketCreate.ts */}
+<DiscordMessage author="SupportMail" bot>
+  <DiscordContainer accent="orange">
+    <DiscordSection button={{ label: "Login", style: "link" }}>
+      {/* en.json: loginRequired, loginWithDiscordDesc */}
+      <DiscordText heading="Login required!">
+        You need to log in with Discord. This is the easiest way of determining our mutual servers. Please click the login button to continue or [here](https://discord.com).
+      </DiscordText>
+    </DiscordSection>
+  </DiscordContainer>
+</DiscordMessage>
+
+<DiscordMessage author="SupportMail" bot>
+  <DiscordContainer accent="error">
+    <DiscordSection thumbnail={logo}>
+      <DiscordText heading="Section with a thumbnail" />
+      <DiscordText>Text sits left, the thumbnail right.</DiscordText>
+    </DiscordSection>
+    <DiscordSeparator spacing="large" />
+    <DiscordMediaGallery items={[logo, logo, logo]} />
+  </DiscordContainer>
+  <DiscordActionRow
+    buttons={[
+      { label: "Primary", style: "primary" },
+      { label: "Secondary", style: "secondary" },
+      { label: "Success", style: "success" },
+      { label: "Danger", style: "danger" },
+      { label: "Link", style: "link" },
+    ]}
+  />
+</DiscordMessage>

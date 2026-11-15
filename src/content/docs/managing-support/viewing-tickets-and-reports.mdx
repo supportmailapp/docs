@@ -1,0 +1,34 @@
+---
+title: Viewing Tickets and Reports
+description: Use /view to browse open tickets and unresolved reports without leaving Discord.
+sidebar:
+  order: 2
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+The `/view` command gives moderators a quick, paginated overview of everything currently open, right inside Discord. No need to jump to the dashboard just to see what's outstanding.
+
+## `/view tickets`
+
+Lists currently **open** tickets in the server, newest first. Each line shows the ticket's alias (or the user, if no alias is set) and a jump link straight to the ticket post.
+
+## `/view reports`
+
+Lists currently **open** (unresolved) reports in the server, newest first. Each line shows the report ID, the reported user, and a jump link to the alert message, if it still exists.
+
+<Aside type="note">
+  Both subcommands only show entries with **open** status. Closed tickets and
+  resolved/ignored reports won't appear here; use the
+  [dashboard](/configuration/dashboard-overview) for full history.
+</Aside>
+
+## Pagination
+
+Results are paginated at 20 entries per page, with pagination buttons to move forward and backward through the list.
+
+With only one page, they are disabled. Buttons also disable themselves automatically when there's nowhere left to go.
+
+## Permissions
+
+`/view` requires the **Moderate Members** permission by default, same as most other moderation commands. Server admins can restrict it further via command permissions in the dashboard.

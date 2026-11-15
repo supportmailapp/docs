@@ -1,0 +1,33 @@
+---
+// Legacy `/f/...` links from the old docs, still sent by older bot messages and
+// command descriptions. The fragment never reaches the server, so each page maps
+// it in the browser; without JS (or for an unknown fragment) it falls back to the
+// page-level target via meta refresh.
+import { legacyRoutes } from "../../config/legacyLinks";
+
+export function getStaticPaths() {
+  return Object.entries(legacyRoutes).map(([path, route]) => ({
+    params: { path },
+    props: { route },
+  }));
+}
+
+const { route } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>Redirecting…</title>
+    <link rel="canonical" href={route.to} />
+    <meta http-equiv="refresh" content={`0; url=${route.to}`} />
+    <script is:inline define:vars={{ to: route.to, hashes: route.hashes ?? {} }}>
+      location.replace(hashes[location.hash.slice(1)] ?? to);
+    </script>
+  </head>
+  <body>
+    <p>This page moved. <a href={route.to}>Continue to the new page</a>.</p>
+  </body>
+</html>

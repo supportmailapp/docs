@@ -1,0 +1,38 @@
+---
+title: Testimonials
+description: How to submit a testimonial for your server so it can be featured on the SupportMail homepage.
+sidebar:
+  order: 5
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
+
+<Aside type="caution" title="Temporarily disabled">
+  Testimonial submissions are currently disabled. This page describes how the
+  feature works and will apply again once it is re-enabled.
+</Aside>
+
+If your server uses SupportMail, anyone with dashboard access (server owner, admins, managers) can submit a short testimonial explaining why. Approved testimonials may be featured on the SupportMail homepage. A server can only have **one** testimonial at a time.
+
+## Submitting a testimonial
+
+Go to <DashLink route="?next=/testimonial">Testimonial</DashLink> in the dashboard and fill in:
+
+- **Your testimonial** - the main text, at least 20 characters.
+- **Source** (optional) - who you are, e.g. "Owner of X" or "Community Manager".
+
+By submitting, you agree to let SupportMail use your testimonial on its homepage and marketing materials.
+
+## Editing or revoking
+
+Once a testimonial exists for a server, only the person who submitted it can edit or revoke it - this keeps a single, consistent submission per server instead of staff overwriting each other. Everyone else with dashboard access sees a read-only view naming the submitter.
+
+While pending approval, the submitter can edit its content and source, or revoke it entirely from the same page.
+
+Once a testimonial is **approved**, it's live on the homepage and can no longer be edited or revoked from the dashboard. To make changes at that point, open a ticket on the [Support Server](https://help.supportmail.dev/) or email `contact@supportmail.dev`.
+
+<Aside type="note">
+  Anyone with dashboard access can submit a testimonial, but only its submitter
+  can edit or revoke it afterward.
+</Aside>

@@ -1,0 +1,160 @@
+---
+// One button that cycles the theme: dark, light, auto (follow the system).
+// The current mode is read from `data-theme-mode` on <html>, which
+// ThemeProvider sets before first paint, so the right icon shows at once.
+// Button size and hover colours come from the toolbar in Header.astro.
+import { Icon } from "@astrojs/starlight/components";
+---
+
+<sm-theme-select>
+  <button type="button" aria-label="Theme: dark. Switch to light." title="Theme: dark. Switch to light.">
+    <Icon name="moon" class="icon icon-dark" />
+    <Icon name="sun" class="icon icon-light" />
+    <Icon name="laptop" class="icon icon-auto" />
+  </button>
+</sm-theme-select>
+
+<style>
+  sm-theme-select {
+    display: flex;
+    align-self: center;
+  }
+
+  button {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 0;
+    border-radius: var(--sm-radius-md);
+    background: transparent;
+    color: var(--sm-text-muted);
+    cursor: pointer;
+  }
+
+  button:is(:hover, :focus-visible) {
+    background: var(--sm-surface-3);
+    color: var(--sm-text-strong);
+  }
+
+  /* All three icons share one cell; the current one turns in, the others
+     turn out. During the page reveal this plays inside the live new view. */
+  .icon {
+    grid-area: 1 / 1;
+    font-size: 1.15rem;
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.4);
+    transition:
+      opacity 0.2s ease-out,
+      transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(html:not([data-theme-mode="light"]):not([data-theme-mode="auto"])) .icon-dark,
+  :global(html[data-theme-mode="light"]) .icon-light,
+  :global(html[data-theme-mode="auto"]) .icon-auto {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .icon {
+      transition: none;
+    }
+  }
+
+  /* Theme reveal: the new theme grows as a circle from the button (see the
+     script). Turn off the default crossfade so only the circle moves. */
+  :global(::view-transition-old(root)),
+  :global(::view-transition-new(root)) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+</style>
+
+<script>
+  type Mode = "dark" | "light" | "auto";
+
+  const storageKey = "starlight-theme";
+  const order: Mode[] = ["dark", "light", "auto"];
+  const labels: Record<Mode, string> = {
+    dark: "Theme: dark. Switch to light.",
+    light: "Theme: light. Switch to follow the system.",
+    auto: "Theme: follows the system. Switch to dark.",
+  };
+
+  const systemTheme = () => (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+
+  function currentMode(): Mode {
+    const mode = document.documentElement.dataset["themeMode"];
+    return mode === "light" || mode === "auto" ? mode : "dark";
+  }
+
+  function apply(mode: Mode, store: boolean): void {
+    const root = document.documentElement;
+    root.dataset["themeMode"] = mode;
+    root.dataset["theme"] = mode === "auto" ? systemTheme() : mode;
+    if (store) {
+      try {
+        localStorage.setItem(storageKey, mode === "auto" ? "" : mode);
+      } catch {}
+    }
+    document.querySelectorAll("sm-theme-select button").forEach((button) => {
+      button.setAttribute("aria-label", labels[mode]);
+      button.setAttribute("title", labels[mode]);
+    });
+  }
+
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+
+  // Switch theme with the new one growing as a circle out of the button.
+  // Falls back to an instant switch without View Transitions or with reduced
+  // motion. Switching to auto when it resolves to the same theme just swaps
+  // the icon, so there is nothing to reveal.
+  function reveal(button: HTMLElement, mode: Mode): void {
+    const nextTheme = mode === "auto" ? systemTheme() : mode;
+    const sameTheme = document.documentElement.dataset["theme"] === nextTheme;
+    if (!document.startViewTransition || reducedMotion.matches || sameTheme) {
+      apply(mode, true);
+      return;
+    }
+
+    const rect = button.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+
+    const transition = document.startViewTransition(() => apply(mode, true));
+    transition.ready
+      .then(() => {
+        document.documentElement.animate(
+          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+          {
+            duration: 520,
+            easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+            pseudoElement: "::view-transition-new(root)",
+          },
+        );
+      })
+      .catch(() => {});
+  }
+
+  // Follow system changes only in auto mode.
+  matchMedia("(prefers-color-scheme: light)").addEventListener("change", () => {
+    if (currentMode() === "auto") apply("auto", false);
+  });
+
+  customElements.define(
+    "sm-theme-select",
+    class SmThemeSelect extends HTMLElement {
+      constructor() {
+        super();
+        // Nothing is stored on load, so a first visit stays "nothing stored".
+        apply(currentMode(), false);
+        const button = this.querySelector("button");
+        button?.addEventListener("click", () => {
+          reveal(button, order[(order.indexOf(currentMode()) + 1) % order.length]);
+        });
+      }
+    },
+  );
+</script>

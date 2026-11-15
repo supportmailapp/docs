@@ -1,0 +1,64 @@
+---
+title: Dashboard Overview
+description: Overview of the admin dashboard for SupportMail.
+sidebar:
+  order: 1
+---
+
+import { Aside, LinkButton } from "@astrojs/starlight/components";
+import DashLink from "../../../components/DashLink.astro";
+
+The dashboard is the web app where server managers configure SupportMail without touching Discord commands. Everything on this page can also be done in Discord, but the dashboard is usually faster and easier.
+
+<LinkButton href="https://dash.supportmail.dev" icon="external">
+  Open the Dashboard
+</LinkButton>
+
+## Signing in
+
+Log in with Discord and authorize the app. You'll see every server where you have the **Manage Server** permission and SupportMail is present. Select a server to open its configuration.
+
+<Aside type="note">
+  If a server is missing, make sure the bot is in it and that you have the
+  **Manage Server** permission there.
+</Aside>
+
+## Setup wizard
+
+New servers start in the [Setup Wizard](/configuration/setup-wizard), which guides you through language, tickets and reports. If you skipped it, use **Continue setup** at the bottom of the sidebar. The same wizard is also available in Discord with `/setup tickets wizard` and `/setup reports wizard`.
+
+## Navigation
+
+Once a server is selected, the sidebar groups the settings into pages:
+
+| Group      | Page                     | What you configure                                                                                   |
+| ---------- | ------------------------ | ---------------------------------------------------------------------------------------------------- |
+|            | **Home**                 | A quick summary of the server and its SupportMail status                                             |
+| Tickets    | **View Tickets**         | Browse and open individual tickets and their feedback                                                |
+| Tickets    | **Ticket Settings**      | The ticket forum, messages, forwarding, anonymity and pings                                          |
+| Tickets    | **Ticket Categories**    | The topics users choose from when opening a ticket                                                   |
+| Tickets    | **Feedback**             | Post-ticket rating and custom questions                                                              |
+| Moderation | **View Reports**         | The list of submitted reports                                                                        |
+| Moderation | **Report Settings**      | [Report system settings](/configuration/reports-configuration)                                       |
+| Moderation | **Blacklist Management** | Users and roles blocked from tickets, reports or tags                                                |
+| Other      | **Tags**                 | Reusable snippet responses. **Manage rule sets** on this page opens [tag rule sets](/configuration/tag-rule-sets) |
+| Other      | **Command Config**       | Who can use which commands, and in which channels                                                    |
+| Other      | **Panel Builder**        | The [panel](/configuration/panel) members use to create tickets                                      |
+| Other      | **Support Schedule**     | Support hours: when users are allowed to open tickets                                                |
+| Other      | **Testimonial**          | Submit a testimonial (temporarily disabled)                                                           |
+| Other      | **Whitelabel**           | Your own bot for this server. Only shown for servers in the [whitelabel beta](/configuration/whitelabel) |
+
+Above the pages, **Reload Channels & Roles** fetches your server's channels and roles again, for example after you created a new channel. You can use it once every 30 seconds.
+
+A channel the bot can't find or isn't allowed to view shows up as **Unknown or hidden channel**. See [Common Issues](/troubleshooting/common-issues#hidden-channels-and-missing-permissions).
+
+## Account menu
+
+The menu with your avatar at the bottom of the sidebar has **My Settings**, a theme toggle, links to these docs, the support server, the status page and the legal notice, and two ways to sign out:
+
+- **Logout** signs you out of the dashboard in this browser only. Everything else keeps working, including opening tickets by DMing the bot.
+- **Disconnect Discord** revokes SupportMail's access to your Discord account entirely. It signs you out on every device, and you can't open tickets by DMing the bot until you log in again.
+
+## Saving changes
+
+Most pages only apply changes after you press **Save**. When you have unsaved changes, a save bar appears - use it to save or discard. Navigating away without saving discards your edits.
