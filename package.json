@@ -9,7 +9,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "check:content": "node scripts/check-content.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.1.3",
@@ -31,7 +32,8 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
     "prettier": "^3.9.5",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier-plugin-astro": "^0.14.1",
+    "starlight-links-validator": "0.25.3"
   },
   "packageManager": "pnpm@11.15.0"
 }
