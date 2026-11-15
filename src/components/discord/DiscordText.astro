@@ -1,0 +1,73 @@
+---
+// V2 Text Display: Discord markdown as MDX children (`>` quotes, **bold**,
+// links). Discord's `#`/`##`/`###` headings go in the `heading` prop, not in
+// markdown: a real MDX heading would land in the page's table of contents.
+// `subtext` renders Discord's `-#` small grey line.
+interface Props {
+  /** Text of a Discord markdown heading shown above the content. */
+  heading?: string;
+  /** Heading size: 1 = `#`, 2 = `##`, 3 = `###` (the bot mostly uses 3). */
+  level?: 1 | 2 | 3;
+  subtext?: boolean;
+}
+
+const { heading, level = 3, subtext = false } = Astro.props;
+---
+
+<div class:list={["sm-dtext", { subtext }]}>
+  {heading && <div class={`dheading h${level}`}>{heading}</div>}
+  <slot />
+</div>
+
+<style>
+  .sm-dtext {
+    overflow-wrap: anywhere;
+  }
+
+  .sm-dtext :global(p),
+  .sm-dtext :global(blockquote) {
+    margin: 0;
+  }
+
+  .sm-dtext :global(* + *) {
+    margin-top: 0.4rem;
+  }
+
+  .dheading {
+    color: var(--sm-text-strong);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .h1 {
+    font-size: 1.5rem;
+  }
+
+  .h2 {
+    font-size: 1.25rem;
+  }
+
+  .h3 {
+    font-size: 1.05rem;
+  }
+
+  .sm-dtext :global(blockquote) {
+    padding: 0 0 0 0.75rem;
+    border-left: 4px solid var(--sm-line);
+    color: var(--sm-text);
+    font-style: normal;
+  }
+
+  .sm-dtext :global(a) {
+    color: oklch(0.7 0.14 240);
+  }
+
+  :global(:root[data-theme="light"]) .sm-dtext :global(a) {
+    color: oklch(0.48 0.16 250);
+  }
+
+  .subtext {
+    color: var(--sm-text-muted);
+    font-size: 0.8em;
+  }
+</style>

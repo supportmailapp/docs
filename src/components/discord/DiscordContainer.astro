@@ -1,0 +1,38 @@
+---
+// V2 Container: a rounded box grouping Text Displays, Sections, Separators,
+// Media Galleries and Action Rows, with Discord's optional accent colour bar on
+// the left (Discord's real look, not a docs callout style).
+import { resolveAccent } from "./types";
+
+interface Props {
+  /** A bot colour name (info, success, error, orange) or any CSS colour. */
+  accent?: string;
+}
+
+const accent = resolveAccent(Astro.props.accent);
+---
+
+<div class:list={["sm-dcontainer", { accented: accent }]} style={accent ? `--sm-accent: ${accent}` : undefined}>
+  <slot />
+</div>
+
+<style>
+  .sm-dcontainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 40rem;
+    padding: 1rem;
+    border: 1px solid var(--sm-line);
+    border-radius: var(--sm-radius-md);
+    background-color: var(--sm-surface-1);
+  }
+
+  .accented {
+    border-left: 4px solid var(--sm-accent);
+  }
+
+  :global(:root[data-theme="light"]) .sm-dcontainer {
+    background-color: var(--sm-surface-0);
+  }
+</style>

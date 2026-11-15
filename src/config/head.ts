@@ -19,7 +19,7 @@ export default [
     tag: "meta",
     attrs: {
       name: "theme-color",
-      content: "#214aff",
+      content: "#0b3b78", // blueprint oklch(0.36 0.115 257)
     },
   },
   {

@@ -8,7 +8,7 @@ export default [
   },
   {
     icon: "discord",
-    href: "https://discord.gg/CkreDcF2PU",
+    href: "https://help.supportmail.dev/",
     label: "Support Server",
   },
 ] satisfies StarlightUserConfig["social"];

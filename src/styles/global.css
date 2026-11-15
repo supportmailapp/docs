@@ -1,63 +1,31 @@
-@layer base, starlight, theme, components, utilities, rapide, rapide-overwrite;
+@layer base, starlight, theme, components, utilities;
 
 @import "@astrojs/starlight-tailwind";
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
-@import "./rapide-overwrite.css" layer(rapide-overwrite);
 
-/* Dark mode colors. */
+/* Layout sizes. Colours and fonts live in tokens.css. */
 :root {
   --sl-content-width: 60rem;
   --sl-text-5xl: 4rem;
-
-  --sl-color-accent-low: #131e4f;
-  --sl-color-accent: #3447ff;
-  --sl-color-accent-high: #6991ff;
-  --sl-color-white: #ffffff;
-  --sl-color-gray-1: #eceef2;
-  --sl-color-gray-2: #c6c8ce;
-  --sl-color-gray-3: #a0a4ae;
-  --sl-color-gray-4: #545861;
-  --sl-color-gray-5: #353841;
-  --sl-color-gray-6: #24272f;
-  --sl-color-black: #17181c;
 }
 
-/* Light mode colors. */
-:root[data-theme="light"] {
-  --sl-color-accent-low: #c7d6ff;
-  --sl-color-accent: #2827e9;
-  --sl-color-accent-high: #182775;
-  --sl-color-white: #17181c;
-  --sl-color-gray-1: #24272f;
-  --sl-color-gray-2: #353841;
-  --sl-color-gray-3: #545861;
-  --sl-color-gray-4: #888b96;
-  --sl-color-gray-5: #c0c2c7;
-  --sl-color-gray-6: #eceef2;
-  --sl-color-gray-7: #f5f6f8;
-  --sl-color-black: #ffffff;
-}
-
+/* Tailwind theme, pointed at the Console tokens so utilities match the theme. */
 @theme {
-  /* Your preferred text font. Starlight uses a system font stack by default. */
-  --font-sans: "Atkinson Hyperlegible";
-  /* Your preferred code font. Starlight uses system monospace fonts by default. */
-  --font-mono: "IBM Plex Mono";
-  /* Generated accent color palettes. */
-  --color-accent-200: #b3c7ff;
-  --color-accent-600: #2827e9;
-  --color-accent-900: #182775;
-  --color-accent-950: #131e4f;
-  /* Generated gray color palettes. */
-  --color-gray-100: #f5f6f8;
-  --color-gray-200: #eceef2;
-  --color-gray-300: #c0c2c7;
-  --color-gray-400: #888b96;
-  --color-gray-500: #545861;
-  --color-gray-700: #353841;
-  --color-gray-800: #24272f;
-  --color-gray-900: #17181c;
+  --font-sans: var(--sm-font-body);
+  --font-mono: var(--sm-font-mono);
+  --color-accent-200: oklch(0.85 0.08 250);
+  --color-accent-600: oklch(0.55 0.17 257);
+  --color-accent-900: oklch(0.36 0.115 257);
+  --color-accent-950: oklch(0.27 0.06 257);
+  --color-gray-100: oklch(0.965 0.01 255);
+  --color-gray-200: oklch(0.94 0.01 262);
+  --color-gray-300: oklch(0.88 0.015 262);
+  --color-gray-400: oklch(0.74 0.02 262);
+  --color-gray-500: oklch(0.5 0.03 262);
+  --color-gray-700: oklch(0.32 0.03 262);
+  --color-gray-800: oklch(0.24 0.03 262);
+  --color-gray-900: oklch(0.2 0.03 262);
 }
 
 .inline-block {
@@ -65,132 +33,4 @@
   vertical-align: middle;
 }
 
-hr {
-  border-bottom-color: color-mix(
-    in oklab,
-    var(--sl-color-accent) 70%,
-    transparent
-  );
-}
-
-small {
-  opacity: 0.8;
-}
-
-table thead th {
-  border-bottom: 1px solid
-    color-mix(in oklab, var(--sl-color-accent) 60%, transparent);
-}
-
-td {
-  padding-inline: 0.5rem;
-}
-
-code[dir="auto"]:hover {
-  background-color: color-mix(
-    in oklab,
-    white 20%,
-    var(--sl-color-bg-inline-code)
-  );
-  cursor: pointer;
-}
-
-/* This needs to be in here because it somehow doesn't apply when in the component */
-div[data-type="image-wrapper"] img {
-  border-radius: 0.5rem;
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-/* Footnote labels have that stupid hover-link appearance */
-a[href="#footnote-label"]::after,
-a[href="#footnote-label"] svg {
-  content: none;
-  display: none;
-}
-
-/* Image lightbox open/close transitions. */
-#image-lightbox {
-  opacity: 0;
-  scale: 0.95;
-}
-
-#image-lightbox[open] {
-  opacity: 1;
-  scale: 1;
-}
-
-#image-lightbox::backdrop {
-  background: rgba(0, 0, 0, 0);
-}
-
-#image-lightbox[open]::backdrop {
-  background: rgba(0, 0, 0, 0.85);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  #image-lightbox {
-    transition:
-      opacity 0.25s ease,
-      scale 0.25s ease,
-      overlay 0.25s ease allow-discrete,
-      display 0.25s ease allow-discrete;
-  }
-
-  #image-lightbox::backdrop {
-    transition:
-      background 0.25s ease,
-      overlay 0.25s ease allow-discrete,
-      display 0.25s ease allow-discrete;
-  }
-
-  @starting-style {
-    #image-lightbox[open] {
-      opacity: 0;
-      scale: 0.95;
-    }
-
-    #image-lightbox[open]::backdrop {
-      background: rgba(0, 0, 0, 0);
-    }
-  }
-}
-
-.table-wrapper {
-  display: flex;
-  overflow-x: auto;
-  width: 100%;
-  scrollbar-width: thin;
-  scrollbar-color: var(--sl-color-accent) var(--sl-color-gray-2);
-
-  table {
-    display: table;
-  }
-
-  table,
-  thead,
-  tbody {
-    width: 100%;
-  }
-
-  /* col 1, align text right */
-  &.c1-right {
-    th:nth-child(1),
-    td:nth-child(1) {
-      text-align: end;
-    }
-  }
-
-  /* col 2, align text right */
-  &.c2-right {
-    th:nth-child(2),
-    td:nth-child(2) {
-      text-align: end;
-    }
-  }
-}
+/* Content surfaces (asides, code, tables, images, lightbox) live in content.css. */

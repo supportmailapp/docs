@@ -1,0 +1,77 @@
+---
+// Starlight's footer (edit link, last updated, pagination) plus a links row.
+// Links come from src/config/footer.ts.
+import EditLink from "virtual:starlight/components/EditLink";
+import LastUpdated from "virtual:starlight/components/LastUpdated";
+import Pagination from "virtual:starlight/components/Pagination";
+import config from "virtual:starlight/user-config";
+import { footerLinks } from "../../config/footer";
+---
+
+<footer class="sm-footer sl-flex">
+  <div class="meta sl-flex">
+    <EditLink />
+    <LastUpdated />
+  </div>
+  <Pagination />
+
+  <nav class="sm-footer-links print:hidden" aria-label="SupportMail links">
+    {footerLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+  </nav>
+
+  {
+    config.credits && (
+      <a class="kudos" href="https://starlight.astro.build">
+        {Astro.locals.t("builtWithStarlight.label")}
+      </a>
+    )
+  }
+</footer>
+
+<style>
+  .sm-footer {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .meta {
+    gap: 0.75rem 3rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    font-size: var(--sl-text-sm);
+    color: var(--sm-text-muted);
+  }
+
+  .meta > :global(p:only-child) {
+    margin-inline-start: auto;
+  }
+
+  .sm-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.25rem;
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--sm-line);
+    font-size: var(--sl-text-sm);
+  }
+
+  .sm-footer-links a,
+  .kudos {
+    color: var(--sm-text-muted);
+    text-decoration: none;
+  }
+
+  .sm-footer-links a:is(:hover, :focus-visible),
+  .kudos:is(:hover, :focus-visible) {
+    color: var(--sm-text-strong);
+  }
+
+  .kudos {
+    align-self: center;
+    margin-bottom: 1.5rem;
+    font-size: var(--sl-text-xs);
+  }
+</style>

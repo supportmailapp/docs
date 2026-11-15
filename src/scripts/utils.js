@@ -1,17 +1,17 @@
-// Intercept and handle external links
+// Open external links in a new tab, site-wide (header, sidebar, content,
+// footer). Loaded once from src/components/overrides/Header.astro, which every
+// page renders.
 document.addEventListener(
   "click",
   function (e) {
-    if (!window) return;
-    const target = e.target;
-    if (
-      target instanceof HTMLElement &&
-      target.tagName === "A" &&
-      !target.href.includes(window.location.hostname)
-    ) {
-      e.preventDefault();
-      window.open(target.href, "_blank", "noopener");
-    }
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    // closest(): the click often lands on an icon or span inside the link.
+    const link = e.target instanceof Element ? e.target.closest("a[href]") : null;
+    if (!link) return;
+    const url = new URL(link.href, window.location.href);
+    if (!/^https?:$/.test(url.protocol) || url.hostname === window.location.hostname) return;
+    e.preventDefault();
+    window.open(url.href, "_blank", "noopener");
   },
-  true // Important, use capture phase events propagate from the window down to the target element before bubbling begins
+  true // Capture phase: runs before other handlers can stop the event.
 );
