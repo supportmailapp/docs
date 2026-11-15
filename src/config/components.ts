@@ -11,4 +11,5 @@ export default {
   PageTitle: `${overrides}/PageTitle.astro`,
   Pagination: `${overrides}/Pagination.astro`,
   Footer: `${overrides}/Footer.astro`,
+  Hero: `${overrides}/Hero.astro`,
 } satisfies StarlightUserConfig["components"];
