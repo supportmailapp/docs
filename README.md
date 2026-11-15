@@ -1,49 +1,54 @@
-# Starlight Starter Kit: Basics
+# SupportMail Docs
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+**Public documentation for the SupportMail Discord bot.**
 
+Guides for server admins, moderators and users of SupportMail, covering setup, configuration, handling tickets and reports, and troubleshooting. The site is published at [docs.supportmail.dev](https://docs.supportmail.dev).
+
+## Table of Contents
+
+- [Background](#background)
+- [Install](#install)
+- [Usage](#usage)
+- [Caveats](#caveats)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Background
+
+The bot's behavior is configured from a web dashboard and used through Discord commands, so the explanations live apart from the bot's code. This repository holds that documentation as an [Astro](https://astro.build) site using [Starlight](https://starlight.astro.build), with pages written in Markdown and MDX and deployed to Cloudflare Workers.
+
+## Install
+
+Requires Node.js 26+ and pnpm 12 (see `engines` and `packageManager` in `package.json`).
+
+```bash
+git clone git@github.com:supportmailapp/docs.git
+cd docs
+pnpm install
 ```
-pnpm create astro@latest -- --template starlight
+
+## Usage
+
+```bash
+pnpm dev            # start the local dev server
+pnpm check:content  # run the content rules
+pnpm build          # build to ./dist and prune unpublished markdown copies
+pnpm preview        # preview the build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Caveats
 
-## 🚀 Project Structure
+- Pages marked `draft: true` are not published; `scripts/prune-drafts.mjs` removes the markdown copies that `starlight-contextual-menu` still writes for them, and the build fails if any survive.
+- Old `/f/...` links from the bot and dashboard are served by a redirect route, so renaming a page can break a link that lives outside this repository.
+- Search needs Algolia credentials (`ALGOLIA_APP_ID` and related variables); without them the search box is not functional locally.
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+## Contributing
 
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
-```
+See [CONTRIBUTING.md](CONTRIBUTING.md). Contributors are expected to follow the
+[Code of Conduct](CODE_OF_CONDUCT.md).
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+## License
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+Code: [MIT](LICENSE) © SupportMail
 
-Static assets, like favicons, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `pnpm install`         | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+Documentation content: [CC BY-NC 4.0](LICENSE-CONTENT.md) © SupportMail

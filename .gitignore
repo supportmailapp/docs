@@ -24,3 +24,7 @@ pnpm-debug.log*
 
 # impeccable design-hook config and cache (local only)
 .impeccable/
+
+# Added by repo-standard-toolkit: cover the whole .env family, keep only the example file
+.env.*
+!.env.example
