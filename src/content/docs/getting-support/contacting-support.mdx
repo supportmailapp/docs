@@ -3,11 +3,6 @@ title: Contacting Support
 description: How to contact support staff of a server.
 sidebar:
   order: 1
-banner:
-  content: |
-    "Tickets" as a concept are in the process of changing. I'm sorry for any confusion this may cause
-    in the transition period.<br>In the future, tickets will be a backend concept for server staff only.
-    Users will experience support mostly as one continuous thread, rather than managing separate tickets.
 ---
 
 import { Aside } from "@astrojs/starlight/components";
@@ -31,12 +26,56 @@ You authorize with the <SlashCommand name="login" /> command and can revoke acce
 
 ## With a DM
 
-You can send a direct message to the bot to create a ticket. The bot will guide you through the whole process.
+Send a message to the bot. What happens next depends on whether you already have an open ticket.
+
+### You have no open ticket
+
+The bot answers with one card, **Open a ticket**, that shows the start of your message. The card updates in place as you go:
+
+1. **Server:** pick the server if you share more than one with the bot. With only one, it is already chosen.
+2. **Category:** pick a category if the server has more than one.
+3. **Send:** opens the ticket. If the category has a form, the form appears when you press **Send**, and the ticket opens when you submit it.
+
+If the bot needs you to log in first, the card turns into a **Log in to continue** card. Your draft is kept, and the card continues where it was once you are logged in.
+
+Press **Cancel** to throw the draft away; nothing is sent. The card shows when it expires: after 15 minutes without use the draft is dropped. If you press a button on an expired card, it tells you that nothing was sent.
+
+When you pick a server on the card (or use a panel or the command), and again on **Send**, the bot checks whether you can open a ticket in that server and tells you what is in the way: you already have an open ticket there, tickets are turned off in that server, the server paused new tickets, it is outside the [support hours](/configuration/support-schedule), or you are blacklisted.
+
+While the card is open, further messages you send join the draft (up to 5), so the first message and the ones that follow arrive together. If you send a message while a ticket is being opened, the bot waits for that to finish and then sends your message to the new ticket.
+
+When the ticket opens, the card turns into **Ticket opened** with the server, the category and the ticket ID.
+
+### You have one open ticket
+
+Just write. Your message goes straight to that ticket and the bot reacts with a checkmark. If you have not written for a while, the bot adds a small "Sent to **Server**" line so you can see where your message went.
+
+If you share more than one server with the bot, that line has a **Not for Server?** button. Press it within 10 minutes (and before your next message goes to that ticket) and the message is withdrawn from the server's ticket. Staff only see a note that a message was withdrawn. The message then becomes the start of a new draft, so you can send it to the right server.
+
+You can also use Discord's reply function on one of the bot's messages to send your message to that ticket.
+
+### You have two or more open tickets
+
+The bot asks **Which ticket is this for?** with one button per server. Press one and your message goes there. Messages you send while the question is open are sent together with the first one. The bot remembers nothing, so you are asked again for your next message. If you press a button after the card expired, it tells you that nothing was sent.
+
+### After a ticket is closed
+
+A closed ticket stays closed. Closing a ticket sends you a **Ticket closed** message that ends with "Writing again opens a new ticket." If you write to the bot afterward, you start a new ticket on the card above. Staff can reopen a ticket; you are always told when that happens.
+
+<Aside type="tip">
+  To open a ticket in another server while you already have one open, use a
+  [panel](#with-a-panel) or <SlashCommand name="ticket-create" />. A plain DM
+  never guesses a new server for you.
+</Aside>
 
 ## With a Panel
 
 Server Managers can set up a Panel in their server that users can interact with to create tickets.
-The bot will then send you a DM which you can respond to in order to create the ticket in the server.
+Pressing the panel's button (or choosing a category in its menu) checks that you can open a ticket in this server, then the bot sends you a DM: **Write your message for Server**. The server, and the category if the panel offered one, are already chosen.
+Write your message in that DM and the card shows **Send**, or the form if the category has one.
+
+If you already have an open ticket in that server, the bot tells you to DM it to continue that ticket instead.
+If you do not write within 15 minutes, the draft expires and nothing is sent.
 
 ## With a Command
 
@@ -48,4 +87,4 @@ When used in a server, the ticket will be created in that server. When used in D
 | `server`    | Yes      | The server to create the ticket in. In a server, only that server is offered. In DMs, you pick from the servers you share with the bot. Either way you need to be logged in with <SlashCommand name="login" /> first (not on whitelabel bots). |
 | `anonymous` | No       | `Yes` to open the ticket anonymously: staff see an alias chosen by the bot instead of your name. Only works if the server allows anonymous tickets. |
 
-After running the command, the bot DMs you and asks you to describe your issue. Your reply creates the ticket.
+After running the command, the bot checks that you can open a ticket in that server, then DMs you: **Write your message for Server**. Your next message in that DM goes on the card, and pressing **Send** opens the ticket. This works like a panel, with the server already chosen.

@@ -11,6 +11,32 @@ import ImageWrapper from "../../../components/ImageWrapper.astro";
 import LinkButton from "../../../components/LinkButton.astro";
 import SlashCommand from "../../../components/SlashCommand.astro";
 
+## 18.11.2026
+
+### Changed: Opening tickets and writing to support
+
+Contacting support by DM is now smoother. See [Contacting Support](/getting-support/contacting-support).
+
+- Opening a ticket happens on one card that updates in place: pick the server and category, then press **Send**. If the category has a form, it appears when you press **Send**.
+- With one open ticket, just write: your message goes straight to it, and a small "Sent to **Server**" line shows where it went.
+- With two or more open tickets, the bot asks **Which ticket is this for?** once. Messages you send meanwhile are sent along with it.
+- Sent a message to the wrong server? Press **Not for Server?** within 10 minutes to withdraw it and turn it into a new ticket.
+- Panels and <SlashCommand name="ticket-create" /> now choose the server (and category) for you. Your next DM only needs **Send**.
+- When you pick a server (or use a panel or command), the bot checks whether you can open a ticket there and tells you what is in the way.
+- "Message Sent" is now **Ticket opened**, and shows the server, category and ticket ID.
+- The close message is now **Ticket closed** and ends with "Writing again opens a new ticket."
+- <SlashCommand name="reopen" /> now always tells the user that their ticket was reopened.
+- Accepting or denying a close request no longer requires logging in.
+- Several messages sent in quick succession are now all processed, in order.
+
+### Removed: Automatic Redirect preference
+
+The **Automatic Redirect** option in [Preferences](/getting-support/preferences) is gone, along with the "Create a new Ticket?" and "Continue in Ticket?" prompts. Messages now go to your only open ticket automatically, and with several open tickets you pick one per message.
+
+### Fixed: Staff replies after a close request
+
+Staff replies could be lost after a user cancelled a close request by writing again. They now arrive as expected.
+
 ## 14.11.2026
 
 ### New: Whitelabel (beta)
