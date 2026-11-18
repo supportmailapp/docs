@@ -37,6 +37,21 @@ The **Automatic Redirect** option in [Preferences](/getting-support/preferences)
 
 Staff replies could be lost after a user cancelled a close request by writing again. They now arrive as expected.
 
+### Fixed: Messages sent while a ticket draft changes
+
+In rare cases, a DM sent at the exact moment your ticket draft was being changed or sent could disappear from the draft without notice. Every message now either joins the draft or the bot tells you it was not sent.
+
+<details>
+  <summary>For the curious - what actually changed</summary>
+
+Your ticket draft is stored in Redis. Changing it used to be "read the draft, change it, write it back". When two things happened at once (for example you pressed **Send** while a new DM arrived), both read the same draft, and whichever wrote last erased the other's change. Each window was only about a millisecond wide, so this was rare, but the message was gone silently.
+
+Now every change is a **compare-and-set**: each draft carries a revision number, and a small Lua script in Redis writes the new version only if the revision is still the one that was read. If someone else wrote in between, the change is re-applied to the fresh draft and tried again.
+
+Sending a ticket also holds a lock. That lock now belongs to the Send that took it (a random token) and is renewed every 10 seconds while the Send runs, so a slow Send can no longer lose its lock to another action halfway through. A DM that arrives during a Send waits for it to finish and then joins the draft or goes to the new ticket.
+
+</details>
+
 ## 14.11.2026
 
 ### New: Whitelabel (beta)
